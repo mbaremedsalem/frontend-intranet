@@ -43171,7 +43171,7 @@ b,strong {
     background: #fff;
     position: fixed;
     left: 0;
-    height: calc(100%-20px);
+    /* height: calc(100%-20px); */
     width: 85px;
     top: 0;
     z-index: 3;
