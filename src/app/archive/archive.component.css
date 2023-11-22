@@ -1,0 +1,80 @@
+#explorer {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.folder {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    cursor: pointer;
+}
+
+.folder img {
+    margin-right: 8px;
+}
+
+.folder:hover {
+    background-color: #f0f0f0;
+}
+
+.folder-content {
+    display: none;
+    padding-left: 20px;
+}
+
+.folder.open .folder-content {
+    display: block;
+}
+/* search */
+.flex-container {
+    display: flex;
+    align-items: center; /* Alignez les éléments verticalement au centre */
+    justify-content: space-between; /* Ajoutez un espacement entre les éléments */
+  }
+  
+  .search-bar {
+    margin-right: 10px; /* Ajoutez un espacement à droite de la barre de recherche */
+  }
+  
+  .search-input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 200px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s ease-in-out;
+  }
+  
+  .search-input:focus {
+    border-color: #4CAF50;
+  }
+  
+  .page-content {
+    padding-left: 0px;
+  }
+
+  .example-icon-sup{
+    font-size: 30px; /* Increase the font size for a larger icon */
+    border: none; /* Make the icon's container a circle for a rounded look */
+    padding: 13px;
+    background-color: transparent; 
+    cursor: pointer;
+}
+/* archive.component.css */
+
+.folder-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; /* Ajustez selon vos besoins */
+  }
+  
+  .folder {
+    /* Styles pour le dossier */
+    margin-right: 100px; /* Espace entre le dossier et le bouton de suppression, ajustez selon vos besoins */
+  }
+  
+ 
+  

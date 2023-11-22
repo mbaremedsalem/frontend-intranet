@@ -1,0 +1,34 @@
+<div class="limiter" [hidden]="user">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <div class="login100-form-title" style="background-image: url(assets/bg-01.jpg);">
+                <span class="login100-form-title-1">
+                    Verifier OTP
+                </span>
+            </div>
+
+            <form class="login100-form validate-form">
+                
+               
+
+                <div  class="container-login100-form-btn">
+                    <div *ngIf="windowRef.confirmationResult">
+                        
+                        <label for="code">Enter your Verification Code Here</label><br>
+                        
+                        <br>
+                        <div class="wrap-input100 validate-input m-b-26" data-validate="Tel est requi">
+                            <span class="label-input100">OTP</span>
+                            <input class="input100" type="text" [(ngModel)]="verificationCode" name="username" maxlength="8" placeholder="Enter OTP">
+                            <span class="focus-input100"></span>
+                        </div>
+                        <br>
+                        <button mat-raised-button color="primary" (click)="verifyLoginCode()">Verify</button>
+                      </div>
+                </div>
+               
+                
+            </form>
+        </div>
+    </div>
+</div>

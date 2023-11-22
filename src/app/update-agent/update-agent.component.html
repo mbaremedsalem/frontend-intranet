@@ -1,0 +1,88 @@
+<div mat-dialog-title>
+    <h1>update Agent</h1>
+  </div>
+
+  <form (ngSubmit)="saveChanges()">
+    <div mat-dialog-content class="content">
+        <div class="circular-container">
+            <img src="http://127.0.0.1:8000{{ agentDetails.image }}"
+              alt="Votre Image" class="avatar-image">
+              <label for="fileInput" class="edit-button">
+                <div class="edit-icon">
+                  <mat-icon style="margin: 8px;">camera_alt</mat-icon>
+                </div>
+              </label>
+              <input id="fileInput" type="file" (change)="onFileSelected($event)" style="display: none;">
+          </div>
+      <div class="row">
+        <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-label>Nom</mat-label>
+          <input matInput type="text" placeholder="Nom" [(ngModel)]="agentDetails.nom" name="nom" required>
+        </mat-form-field>
+        <mat-form-field appearance="outline" style="width: 100%;">
+            <mat-label>Prenom</mat-label>
+            <input matInput type="text" placeholder="Prenom" [(ngModel)]="agentDetails.prenom" name="prenom" required>
+          </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-label>email</mat-label>
+          <input matInput type="text" placeholder="Email" [(ngModel)]="agentDetails.email" name="email" required>
+        </mat-form-field>
+        <mat-form-field appearance="outline" style="width: 100%;">
+            <mat-label>Address</mat-label>
+            <input matInput type="text" placeholder="Address" [(ngModel)]="agentDetails.address" name="address" required>
+          </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field appearance="outline" style="width: 100%;">
+            <mat-label>Role</mat-label>
+            <mat-select placeholder="Select Role" [(ngModel)]="selectedRole" name="selectedRole">
+              <mat-option *ngFor="let role of roles" [value]="role.value">
+                {{ role.value }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>   
+          <mat-form-field appearance="outline" style="width: 100%;">
+            <mat-label>Direction_Nom</mat-label>
+            <mat-select placeholder="Select Direction" [(ngModel)]="selectedDirection" name="selectedDirection">
+              <mat-option *ngFor="let direction of directions" [value]="direction.id">
+                {{ direction.nom }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+      </div>
+
+      <div class="row">
+        <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-label>Post</mat-label>
+          <input matInput type="text" placeholder="Post" [(ngModel)]="agentDetails.post" name="role" required>
+        </mat-form-field>
+        <mat-form-field style="width: 100%;" appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Password" [(ngModel)]="agentDetails.password" name="password" required>
+          </mat-form-field>
+
+      </div>
+
+      <mat-form-field style="width: 100%;" appearance="outline">
+        <mat-label>Adress</mat-label>
+        <input matInput placeholder="address" [(ngModel)]="agentDetails.address" name="adress" required>
+      </mat-form-field>
+      
+      <section class="example-section" [formGroup]="toppings">
+        <h4>Sélectionnez les permissions et l'accès :</h4>
+        <p><mat-checkbox formControlName="is_superuser" [checked]="agentDetails.is_superuser">Is_Superuser</mat-checkbox></p>
+        <p><mat-checkbox formControlName="is_active" [checked]="agentDetails.is_active">Is_Active</mat-checkbox></p>
+        <p><mat-checkbox formControlName="is_blocked" [checked]="agentDetails.is_blocked">Is_Blocked</mat-checkbox></p>      
+      </section>
+      
+    </div>
+    <div mat-dialog-actions class="action">
+      <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
+      <button mat-raised-button color="primary" type="submit">Enregistrer</button>
+    </div>
+  </form>
+
+  

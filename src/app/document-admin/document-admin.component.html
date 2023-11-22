@@ -1,0 +1,88 @@
+<div class="flex-container">
+    <div class="search-bar">
+      <input type="text" placeholder="Rechercher" class="search-input" [(ngModel)]="searchTerm" (input)="applyFilter()"/>
+    </div>
+    <div class="page-content" style="padding-left: 0px; padding-bottom: 10px;">
+      <button style="color: white; background-color: #5538D9; border-radius: 10px; width: 200px; height: 50px;" mat-raised-button class="example-icon" (click)="openAddDocumentDialog()">
+        <mat-icon>add_circle</mat-icon>
+      </button>
+    </div>
+  </div>
+  
+    <div *ngIf="useTraditionalTable; else materialTable">
+      <table>
+        <thead>
+          <tr>
+            <th>Sujet</th>
+            <th>Code</th>
+            <th>Description</th>
+            <th>File</th>
+            <th>Date_ajout</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr  *ngFor="let document of dataSource.filteredData">
+            <td>{{ document.sujet }}</td>
+            <td>{{ document.code }}</td>
+            <td>{{ document.description }}</td>
+            <td>{{ document.file || 'N/A' }}</td>
+            <td>{{document.date_ajout}}</td>
+            <td>
+              <button >Modifier</button>
+              <button >Supprimer</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <ng-template #materialTable>
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="sujet">
+          <th mat-header-cell *matHeaderCellDef> Sujet </th>
+          <td mat-cell *matCellDef="let document"> {{ document.sujet }} </td>
+        </ng-container>
+        <ng-container matColumnDef="code">
+          <th mat-header-cell *matHeaderCellDef> Code </th>
+          <td mat-cell *matCellDef="let document"> {{ document.code }} </td>
+        </ng-container>
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef> Description </th>
+          <td mat-cell *matCellDef="let document"> {{ document.description }} </td>
+        </ng-container>
+        <ng-container matColumnDef="direction_nom">
+          <th mat-header-cell *matHeaderCellDef> direction_nom </th>
+          <td mat-cell *matCellDef="let document"> {{ document.direction_nom }} </td>
+        </ng-container>
+        <ng-container matColumnDef="file">
+          <th mat-header-cell *matHeaderCellDef> File </th>
+          <td mat-cell *matCellDef="let document">
+            <a href="http://127.0.0.1:8000{{ document.file }}" target="_blank">{{ document.file || 'N/A' }}</a>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="date_ajout">
+            <th mat-header-cell *matHeaderCellDef> date_ajout </th>
+            <td mat-cell *matCellDef="let document"> {{ document.date_ajout }} </td>
+          </ng-container>
+        date_ajout
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let document">
+            <button mat-icon-button class="example-icon-sup" (click)="openUpdateDialog(document.id)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button class="example-icon-up" (click)="openConfirmationDialog(document.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </ng-template>
+    
+    

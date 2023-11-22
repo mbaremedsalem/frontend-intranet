@@ -1,0 +1,26 @@
+<div mat-dialog-title>
+    <h1>update direction</h1>
+  </div>
+
+  <form (ngSubmit)="saveChanges()">
+    <div mat-dialog-content class="content">
+     
+      <div class="row">
+        <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-label>Nom</mat-label>
+          <input matInput type="text" placeholder="nom" [(ngModel)]="directionDetails.nom" name="nom" required>
+        </mat-form-field>
+        <mat-form-field appearance="outline" style="width: 100%;">
+            <mat-label>Code</mat-label>
+            <input matInput type="text" placeholder="code" [(ngModel)]="directionDetails.code" name="code" required>
+          </mat-form-field>
+      </div>
+     
+    </div>
+    <div mat-dialog-actions class="action">
+      <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
+      <button mat-raised-button color="primary" type="submit">Enregistrer</button>
+    </div>
+  </form>
+
+  

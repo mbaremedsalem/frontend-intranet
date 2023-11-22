@@ -1,0 +1,140 @@
+<div class="flex-container">
+    <div class="search-bar">
+      <input type="text" placeholder="Rechercher" class="search-input" [(ngModel)]="searchTerm" (input)="applyFilter()"/>
+    </div>
+    <div class="page-content" style="padding-left: 0px; padding-bottom: 10px;">
+      <button style="color: white; background-color: #5538D9; border-radius: 10px; width: 200px; height: 50px;" mat-raised-button class="example-icon">
+        <mat-icon>add_circle</mat-icon>
+      </button>
+    </div>
+  </div>
+<div *ngIf="useTraditionalTable; else materialTable">
+    <table>
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Prenom</th>
+          <th>Phone</th>
+          <th>Email</th>
+          <th>Address</th>
+          <th>Post</th>
+          <th>Role</th>
+          <th>Password</th>
+          <th>Is_Superuser</th>
+          <th>Is_Active</th>
+          <th>Is_Blocked</th>
+          <th>image</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let gerant of dataSource.filteredData">
+          <td>{{ gerant.nom }}</td>
+          <td>{{ gerant.prenom }}</td>
+          <td>{{ gerant.phone }}</td>
+          <td>{{ gerant.email }}</td>
+          <td>{{ gerant.address }}</td>
+          <td>{{ gerant.post }}</td>
+          <td>{{ gerant.role }}</td>
+          <td>{{ gerant.password }}</td>
+          <td>{{ gerant.is_superuser }}</td>
+          <td>{{ gerant.is_active }}</td>
+          <td>{{ gerant.is_isblocked }}</td>
+          <td>{{ gerant.image }}</td>
+          <td>
+            <button >Modifier</button>
+            <button >Supprimer</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <ng-template #materialTable>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="nom">
+        <th mat-header-cell *matHeaderCellDef> Nom </th>
+        <td mat-cell *matCellDef="let gerant"> {{ gerant.nom }} </td>
+      </ng-container>
+      <ng-container matColumnDef="prenom">
+        <th mat-header-cell *matHeaderCellDef> Prenom </th>
+        <td mat-cell *matCellDef="let gerant"> {{ gerant.prenom }} </td>
+      </ng-container>
+      <ng-container matColumnDef="phone">
+        <th mat-header-cell *matHeaderCellDef> Phone </th>
+        <td mat-cell *matCellDef="let gerant"> {{ gerant.phone }} </td>
+      </ng-container>
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef> Email </th>
+        <td mat-cell *matCellDef="let gerant"> {{ gerant.email }} </td>
+      </ng-container>
+      <ng-container matColumnDef="address">
+        <th mat-header-cell *matHeaderCellDef> Address </th>
+        <td mat-cell *matCellDef="let gerant"> {{ gerant.address }} </td>
+      </ng-container>     
+       <ng-container matColumnDef="post">
+        <th mat-header-cell *matHeaderCellDef> Post </th>
+        <td mat-cell *matCellDef="let gerant"> {{ gerant.post }} </td>
+      </ng-container>     
+       <ng-container matColumnDef="role">
+        <th mat-header-cell *matHeaderCellDef> Role </th>
+        <td mat-cell *matCellDef="let gerant"> {{ gerant.role }} </td>
+      </ng-container>          
+      <ng-container matColumnDef="password">
+        <th mat-header-cell *matHeaderCellDef> Password </th>
+        <td mat-cell *matCellDef="let gerant"> {{ gerant.password }} </td>
+      </ng-container>      
+      <ng-container matColumnDef="is_superuser">
+        <th mat-header-cell *matHeaderCellDef> Is_Supperuser </th>
+        <td mat-cell *matCellDef="let gerant" [ngClass]="{'active-cell': gerant.is_superuser, 'inactive-cell': !gerant.is_superuser}">
+          <mat-icon *ngIf="gerant.is_superuser" style="color: #5538D9;">check_circle_outline</mat-icon>
+          <mat-icon *ngIf="!gerant.is_superuser" style="color: #fd5e70;">cancel</mat-icon>
+      </td>
+
+      </ng-container>
+      <ng-container matColumnDef="is_active">
+        <th mat-header-cell *matHeaderCellDef> Is_Active </th>
+        
+        <td mat-cell *matCellDef="let gerant" [ngClass]="{'active-cell': gerant.is_active, 'inactive-cell': !gerant.is_active}">
+          <mat-icon *ngIf="gerant.is_active" style="color: #5538D9;">check_circle_outline</mat-icon>
+          <mat-icon *ngIf="!gerant.is_active" style="color: #fd5e70;">cancel</mat-icon>
+      </td>
+
+        
+      </ng-container>
+      <ng-container matColumnDef="is_blocked">
+        <th mat-header-cell *matHeaderCellDef> Is_Blocked </th>
+        <td mat-cell *matCellDef="let gerant" [ngClass]="{'active-cell': gerant.is_blocked, 'inactive-cell': !gerant.is_active}">
+          <mat-icon *ngIf="gerant.is_blocked" style="color: #5538D9;">check_circle_outline</mat-icon>
+          <mat-icon *ngIf="!gerant.is_blocked" style="color: #fd5e70;">cancel</mat-icon>
+      </td>
+        <!-- <td mat-cell *matCellDef="let agent"> {{ agent.is_blocked }} </td> -->
+      </ng-container>
+      <ng-container matColumnDef="image">
+        <th mat-header-cell *matHeaderCellDef> Image </th>
+        <td mat-cell *matCellDef="let gerant">
+          <a href="http://127.0.0.1:8000{{ gerant.image }}" target="_blank">{{ gerant.image || 'N/A' }}</a>
+        </td>
+      </ng-container>
+      
+      
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let gerant">
+          <button mat-icon-button class="example-icon-sup" (click)="openUpdateDialog(gerant.id)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button class="example-icon-up" (click)="openConfirmationDialog(gerant.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </ng-template>
+  
+  

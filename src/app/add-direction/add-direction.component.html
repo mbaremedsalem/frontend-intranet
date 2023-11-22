@@ -1,0 +1,23 @@
+<div mat-dialog-title>
+    <h1>Ajouter Direction</h1>
+  </div>
+  <form  (ngSubmit)="onSubmit()">
+    <div mat-dialog-content class="content">
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>Sujet</mat-label>
+                <input matInput type="text" placeholder="Nom" [(ngModel)]="nom" name="sujet" required >
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Code"</mat-label>
+                <input matInput placeholder="Code" [(ngModel)]="code" name="Code" required >
+            </mat-form-field>
+        </div>
+   
+    </div>
+    <div mat-dialog-actions class="action">
+      <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
+      <button mat-raised-button color="primary" type="submit">Save</button>
+  </div>
+  </form>
+  <div *ngIf="showErrorMessage"></div> 

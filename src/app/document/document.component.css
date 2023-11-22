@@ -1,0 +1,67 @@
+.page-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 96.8%;
+    padding-bottom: 6px;
+  }
+  
+  .example-icon {
+    margin-top: auto; /* Push the button to the end of the container (bottom) */
+    /* Optional: Add styles for the button, such as background color or margin */
+  }
+.example-icon-sup{
+    font-size: 30px; /* Increase the font size for a larger icon */
+    border: none; /* Make the icon's container a circle for a rounded look */
+    padding: 13px;
+    background-color: transparent; 
+    cursor: pointer;
+}
+
+.example-icon-up{
+    font-size: 30px; /* Increase the font size for a larger icon */
+    border: none; /* Make the icon's container a circle for a rounded look */
+    padding: 13px;
+    background-color: transparent; 
+    cursor: pointer;
+}
+td, th {
+  border: 0.5px solid #ddd; /* Ajoute une bordure d'un pixel solide avec une couleur grise */
+  padding: 8px; /* Ajoute un espace intérieur pour le contenu */
+}
+
+table {
+  width: 100%;
+  table-layout: fixed;
+  
+}
+/* Ajoutez ces styles à votre fichier CSS ou dans votre balise style dans le composant */
+
+.flex-container {
+  display: flex;
+  align-items: center; /* Alignez les éléments verticalement au centre */
+  justify-content: space-between; /* Ajoutez un espacement entre les éléments */
+}
+
+.search-bar {
+  margin-right: 10px;
+  margin-bottom: 10px; /* Ajoutez un espacement à droite de la barre de recherche */
+}
+
+.search-input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 200px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.search-input:focus {
+  border-color: #4CAF50;
+}
+
+.page-content {
+  padding-left: 0px;
+}

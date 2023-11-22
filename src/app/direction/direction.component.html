@@ -1,0 +1,62 @@
+  <div class="flex-container">
+    <div class="search-bar">
+      <input type="text" placeholder="Rechercher" class="search-input" [(ngModel)]="searchTerm" (input)="applyFilter()"/>
+    </div>
+    <div class="page-content" style="padding-left: 0px; padding-bottom: 10px;">
+      <button style="color: white; background-color: #5538D9; border-radius: 10px; width: 200px; height: 50px;" mat-raised-button class="example-icon" (click)="openAddDirectionDialog()">
+        <mat-icon>add_circle</mat-icon>
+      </button>
+    </div>
+  </div>
+  
+  <div *ngIf="useTraditionalTable; else materialTable">
+    <table>
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Code</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let direction of dataSource.filteredData">
+          <td>{{ direction.nom }}</td>
+          <td>{{ direction.code }}</td>
+          <td>
+            <button>Modifier</button>
+            <button>Supprimer</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <ng-template #materialTable>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="nom">
+        <th mat-header-cell *matHeaderCellDef> Nom </th>
+        <td mat-cell *matCellDef="let direction"> {{ direction.nom }} </td>
+      </ng-container>
+      <ng-container matColumnDef="code">
+        <th mat-header-cell *matHeaderCellDef> Code </th>
+        <td mat-cell *matCellDef="let direction"> {{ direction.code }} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let direction">
+          <button mat-icon-button class="example-icon-sup" (click)="openUpdateDialog(direction.id)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button class="example-icon-up" (click)="openConfirmationDialog(direction.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </ng-template>
+  

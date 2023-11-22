@@ -1,0 +1,226 @@
+       <mat-sidenav-container class="sidenav-container">
+        <mat-sidenav #sidenav mode="side" opened >
+            <mat-nav-list>
+                <div class="navigation-menu">
+                  <a mat-list-item (click)="reloadPage('/home-agent')" [routerLink]="['/home-agent']">
+                    <mat-icon class="mat-iconleft">home</mat-icon>Home
+                  </a>
+                  <a mat-list-item [routerLink]="['/home-agent/document']">
+                    <mat-icon class="mat-iconleft">book</mat-icon>documents
+                  </a>
+                  <a mat-list-item [routerLink]="['/home-agent/archive-agent']">
+                    <mat-icon class="mat-iconleft">archive</mat-icon>Archive
+                  </a>
+                  <a mat-list-item [routerLink]="['/home-agent/profile']">
+                    <mat-icon class="mat-iconleft">account_circle</mat-icon>Profile
+                  </a>
+                  <a mat-list-item (click)="logout()">
+                    <mat-icon class="mat-iconleft">logout</mat-icon>Logout
+                  </a>
+                </div>
+              </mat-nav-list> 
+          
+        </mat-sidenav>
+      
+        <mat-sidenav-content color="primary">
+            <mat-toolbar color="primary">
+                <button mat-icon-button (click)="sidenav.toggle()" class="example-icon" aria-label="Example icon-button with menu icon">
+                  <mat-icon class="mat-icontop">menu</mat-icon>
+                </button>
+                <span>Intranet</span>
+                <span class="example-spacer"></span>
+    
+                  <!-- Barre de recherche -->
+                  
+    
+              <mat-form-field class="search-input" appearance="outline">
+                <input matInput placeholder="Search" [(ngModel)]="searchTerm">
+                <button class="example-icon" mat-button matSuffix (click)="searchDocuments()">
+                  <mat-icon class="mat-icontop">search</mat-icon>
+                </button>
+              </mat-form-field>
+    
+      <!-- Bouton de déconnexion -->
+                <button mat-icon-button class="example-icon-share favorite-icon" aria-label="Example icon-button with heart icon" (click)="logout()">
+                    <mat-icon class="mat-icontop">logout</mat-icon> 
+                </button>
+                <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+                  <mat-icon class="mat-icontop" matBadge="15" matBadgeColor="warn" [attr.aria-hidden]="false">notifications_none</mat-icon>
+                </button>
+              </mat-toolbar>
+    
+              <div *ngIf="searchResults">
+                <ul>
+                  <li *ngFor="let result of searchResults">
+                    {{ result.sujet }} - {{ result.code }} - {{ result.description }}
+                    
+                  </li>
+                </ul>
+    
+                  <div *ngIf="useTraditionalTable; else materialTable">
+        <table>
+          <thead>
+            <tr>
+              <th>Sujet</th>
+              <th>Code</th>
+              <th>Description</th>
+              <th>File</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let document of documents">
+              <td>{{ document.sujet }}</td>
+              <td>{{ document.code }}</td>
+              <td>{{ document.description }}</td>
+              <td>{{ document.file || 'N/A' }}</td>
+              <td>
+                <button >Modifier</button>
+                <button >Supprimer</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <ng-template #materialTable>
+        <table *ngFor="let result of searchResults" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+          <ng-container matColumnDef="sujet">
+            <th mat-header-cell *matHeaderCellDef> Sujet </th>
+            <td mat-cell *matCellDef="let document"> {{ result.sujet }} </td>
+          </ng-container>
+          <ng-container matColumnDef="code">
+            <th mat-header-cell *matHeaderCellDef> Code </th>
+            <td mat-cell *matCellDef="let document"> {{ result.code }} </td>
+          </ng-container>
+          <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef> Description </th>
+            <td mat-cell *matCellDef="let document"> {{ result.description }} </td>
+          </ng-container>
+          <ng-container matColumnDef="file">
+            <th mat-header-cell *matHeaderCellDef> File </th>
+            <td mat-cell *matCellDef="let document">
+              <a [routerLink]="['/your-route', document.file]">{{ result.file || 'N/A' }}</a>
+            </td>
+          </ng-container>
+          
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let document">
+              <button mat-icon-button class="example-icon-sup" (click)="openUpdateDialog(document.id)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button class="example-icon-up" (click)="openConfirmationDialog(document.id)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+      
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      </ng-template>
+      
+    
+              </div>
+           
+    
+          <div class="content">
+            <div *ngIf="isHomePage">
+              <h1>Bien venu En Page D'acueile</h1>
+              <div class="home-container">
+           
+                <div class="daily-documents">
+                  <h2>Documents ajoutés aujourd'hui</h2>
+                  <div class="document-container">
+                    <div class="document-icon">
+                      <mat-icon>insert_drive_file</mat-icon>
+                    </div>
+                    <div class="document-details">
+                      <p>Nom du document : Formation CBS</p>
+                      <p>Date d'ajout : 01/11/2023</p>
+                    </div>
+                  </div>
+                 
+                </div>
+              
+                
+                <div class="inbox">
+                  <h2>Boîte de réception</h2>
+                  <div class="message-container">
+                    <div class="message-icon">
+                      <mat-icon>email</mat-icon>
+                    </div>
+                    <div class="message-details">
+                      <p>Expéditeur : M'baré Mohamed Salem</p>
+                      <p>Objet : Réunion importante</p>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+              <div class="charts">
+                <div class="pie" [chart]="pieChart">
+              
+                </div>
+                <div class="line"[chart]="lineChart">
+              
+                </div>
+              </div>
+              
+            </div>
+      
+              <router-outlet *ngIf="!isHomePage"></router-outlet> <!-- Contenu de la page enfant si ce n'est pas la page "home" -->
+            
+          
+            
+          </div>
+        
+        </mat-sidenav-content>
+      </mat-sidenav-container>
+      
+      <footer>
+        <div class="container">
+          <div class="footer-content">
+            <div class="footer-logo">
+              <img src="assets/intranet.png" class="rounded-image" alt="Logo de votre site" />
+            </div>
+      
+            <div class="footer-contact">
+              <h4>Contactez-nous</h4>
+              <input class="sed-mail" type="email" placeholder="Envoyez-nous un e-mail ..." />
+            </div>
+      
+            <div class="footer-links">
+              <h4>Liens utiles</h4>
+              <ul>
+                <li><a href="#">Accueil</a></li>
+                <li><a href="#">À propos</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Contact</a></li>
+              </ul>
+            </div>
+      
+            <div class="footer-location">
+              <h4>Notre emplacement</h4>
+              <p>Votre adresse ici</p>
+              <p>Votre ville, code postal</p>
+            </div>
+      
+            <div class="footer-social">
+              <h4>Restons connectés</h4>
+              <ul>
+                <li><a href="#"><i class="fa fa-facebook"></i> Facebook</a></li>
+                <li><a href="#"><i class="fa fa-twitter"></i> Twitter</a></li>
+                <li><a href="#"><i class="fa fa-linkedin"></i> LinkedIn</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </footer>
+      
+      
+    
+  
