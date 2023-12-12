@@ -11,9 +11,7 @@
           <a mat-list-item [routerLink]="['/home-admin/direction-admin']" [ngClass]="'primary-list-item'">
             <mat-icon class="mat-iconleft">laptop_chromebook</mat-icon>Direction
           </a>
-          <a mat-list-item [routerLink]="['/home-admin/profile-admin']" [ngClass]="'primary-list-item'">
-            <mat-icon class="mat-iconleft">account_circle</mat-icon>Profile
-          </a>
+
           <a mat-list-item [routerLink]="['/home-admin/agents']" [ngClass]="'primary-list-item'">
             <mat-icon class="mat-iconleft">perm_identity</mat-icon>Agent
           </a>
@@ -24,7 +22,9 @@
             <mat-icon class="mat-iconleft">archive</mat-icon>Archive
           </a>
 
-        
+          <a mat-list-item [routerLink]="['/home-admin/profile-admin']" [ngClass]="'primary-list-item'">
+            <mat-icon class="mat-iconleft">account_circle</mat-icon>Profile
+          </a>
 
           <a mat-list-item (click)="logout()" [ngClass]="'primary-list-item'">
             <mat-icon class="mat-iconleft">logout</mat-icon>Logout

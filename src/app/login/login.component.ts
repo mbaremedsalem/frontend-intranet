@@ -13,7 +13,7 @@ export class LoginComponent {
   loginInProgress = false;
   hide = true; 
   isCorrect: boolean = false;
-  credentials = { phone: '', password: '' };
+  credentials = { username: '', password: '' };
   message: string | undefined;
   token: string | null | undefined;
   errorMessage: string | undefined;
@@ -32,6 +32,7 @@ export class LoginComponent {
           this.message = response.message;
           // Store the access token in local storage or a cookie
           if(response.role==='Admin'){
+            localStorage.setItem('username', response.username);   
             localStorage.setItem('access', response.access);   
             localStorage.setItem('access', response.access);
             localStorage.setItem('nom', response.nom);
@@ -51,6 +52,7 @@ export class LoginComponent {
            localStorage.setItem('access_token_agent', response.access);
            localStorage.setItem('nom', response.nom);
            localStorage.setItem('prenom', response.prenom);
+           localStorage.setItem('username', response.username);   
            localStorage.setItem('email', response.email);
            localStorage.setItem('address', response.adress);
            localStorage.setItem('image', response.image);
@@ -65,6 +67,7 @@ export class LoginComponent {
               localStorage.setItem('access', response.access);   
               localStorage.setItem('access', response.access);
               localStorage.setItem('nom', response.nom);
+              localStorage.setItem('username', response.username);   
               localStorage.setItem('prenom', response.prenom);
               localStorage.setItem('email', response.email);
               localStorage.setItem('address', response.adress);
@@ -111,7 +114,6 @@ export class LoginComponent {
   logout() {
     // Appel de la méthode de déconnexion du service d'authentification
     this.removeToken();
-    
     // Redirigez l'utilisateur vers la page de connexion ou toute autre page appropriée après la déconnexion.
     // Vous pouvez utiliser le routeur Angular pour cela.
   }

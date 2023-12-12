@@ -6,6 +6,7 @@ export class LoginResponse {
     email!: string ;
     nom!: string ;
     prenom!: string ;
+    username!: string;
     adress!: string ;
     phone!: string ;
     access!: string ;
