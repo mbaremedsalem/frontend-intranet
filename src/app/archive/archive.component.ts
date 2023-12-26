@@ -53,7 +53,7 @@ loadDocuments() {
   console.log('Loading documents...');
   const apiUrl = `${API_BASE_URL}archives/${this.selectedArchiveId}/documents/`;
   const headers = new HttpHeaders({
-    Authorization: 'JWT ' + localStorage.getItem('access_token')
+    Authorization: 'JWT ' + localStorage.getItem('access')
   });
 
   this.http.get<any[]>(apiUrl, { headers }).subscribe(
@@ -78,6 +78,7 @@ loadDocuments() {
     // Apply the filter directly to the MatTableDataSource
     this.dataSource.filter = this.searchTerm.trim().toLowerCase();
   }
+  
   openAddArchiveDialog() {
     const dialogRef = this.dialog.open(AddArchiveComponent, {
       width: '1200px',

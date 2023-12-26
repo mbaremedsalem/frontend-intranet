@@ -4,7 +4,8 @@
     </div>
     <div class="page-content" style="padding-left: 0px; padding-bottom: 10px;">
       <button style="color: white; background-color: #5538D9; border-radius: 10px; width: 200px; height: 50px;" mat-raised-button class="example-icon" (click)="openAddDocumentDialog()">
-        <mat-icon>add_circle</mat-icon>
+        <img src="assets/icons/add.png" class="mat-iconleft" width="20px" height="20px" alt="">
+
       </button>
     </div>
   </div>
@@ -41,41 +42,50 @@
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
         <ng-container matColumnDef="sujet">
           <th mat-header-cell *matHeaderCellDef> Sujet </th>
-          <td mat-cell *matCellDef="let document"> {{ document.sujet }} </td>
+          <th mat-cell *matCellDef="let document"> {{ document.sujet }} </th>
         </ng-container>
         <ng-container matColumnDef="code">
           <th mat-header-cell *matHeaderCellDef> Code </th>
-          <td mat-cell *matCellDef="let document"> {{ document.code }} </td>
+          <th mat-cell *matCellDef="let document"> {{ document.code }} </th>
         </ng-container>
         <ng-container matColumnDef="description">
           <th mat-header-cell *matHeaderCellDef> Description </th>
-          <td mat-cell *matCellDef="let document"> {{ document.description }} </td>
+          <th mat-cell *matCellDef="let document"> {{ document.description }} </th>
         </ng-container>
         <ng-container matColumnDef="direction_nom">
           <th mat-header-cell *matHeaderCellDef> direction_nom </th>
-          <td mat-cell *matCellDef="let document"> {{ document.direction_nom }} </td>
+          <th mat-cell *matCellDef="let document"> {{ document.direction_nom }} </th>
         </ng-container>
         <ng-container matColumnDef="file">
           <th mat-header-cell *matHeaderCellDef> File </th>
-          <td mat-cell *matCellDef="let document">
+          <!-- <td mat-cell *matCellDef="let document">
+            <iframe src="http://127.0.0.1:8000{{ document.file }}" width="800" height="300"></iframe>
             <a href="http://127.0.0.1:8000{{ document.file }}" target="_blank">{{ document.file || 'N/A' }}</a>
-          </td>
+          </td> -->
+          <th mat-cell *matCellDef="let document">
+            <iframe [src]="document.safeUrl" width="300" height="200"></iframe>
+            <a href="http://127.0.0.1:8000{{ document.file }}" target="_blank">{{ document.file || 'N/A' }}</a>
+        </th>
         </ng-container>
         <ng-container matColumnDef="date_ajout">
             <th mat-header-cell *matHeaderCellDef> date_ajout </th>
-            <td mat-cell *matCellDef="let document"> {{ document.date_ajout }} </td>
+            <!-- <th mat-cell *matCellDef="let document"> {{ document.date_ajout }} </th> -->
+            <th mat-cell *matCellDef="let document"> {{ document.date_ajout | date:'yyyy/MM/dd' }} </th>
+
           </ng-container>
         date_ajout
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef> Actions </th>
-          <td mat-cell *matCellDef="let document">
+          <th mat-cell *matCellDef="let document">
             <button mat-icon-button class="example-icon-sup" (click)="openUpdateDialog(document.id)">
-              <mat-icon>edit</mat-icon>
+              <!-- <mat-icon>edit</mat-icon> -->
+              <img src="assets/icons/edit.png" class="mat-iconleft" width="30px" height="30px" alt="">
             </button>
             <button mat-icon-button class="example-icon-up" (click)="openConfirmationDialog(document.id)">
-              <mat-icon>delete</mat-icon>
+              <!-- <mat-icon>delete</mat-icon> -->
+              <img src="assets/icons/delete.png" class="mat-iconleft" width="30px" height="30px" alt="">
             </button>
-          </td>
+          </th>
         </ng-container>
     
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -3,31 +3,48 @@
       <mat-nav-list>
         <div class="navigation-menu">
           <a mat-list-item (click)="reloadPage('/home-admin')" [routerLink]="['/home-admin']" [ngClass]="'primary-list-item'">
-            <mat-icon class="mat-iconleft">home</mat-icon>Home
+            <!-- <mat-icon class="mat-iconleft">home</mat-icon>Home -->
+            
+            <img src="assets/icons/home.png" class="mat-iconleft" width="30px" height="30px" alt=""> home
           </a>
           <a mat-list-item [routerLink]="['/home-admin/document-admin']" [ngClass]="'primary-list-item'">
-            <mat-icon class="mat-iconleft">book</mat-icon>Documents
+            <!-- <mat-icon class="mat-iconleft">book</mat-icon>Documents -->
+            <img src="assets/icons/paper.png" class="mat-iconleft" width="30px" height="30px" alt=""> Documents
           </a>
           <a mat-list-item [routerLink]="['/home-admin/direction-admin']" [ngClass]="'primary-list-item'">
-            <mat-icon class="mat-iconleft">laptop_chromebook</mat-icon>Direction
+            <!-- <mat-icon class="mat-iconleft">laptop_chromebook</mat-icon>Direction -->
+            <img src="assets/icons/notebook-computer.png" class="mat-iconleft" width="30px" height="30px" alt=""> Direction
+            
           </a>
 
           <a mat-list-item [routerLink]="['/home-admin/agents']" [ngClass]="'primary-list-item'">
-            <mat-icon class="mat-iconleft">perm_identity</mat-icon>Agent
+            <!-- <mat-icon class="mat-iconleft">perm_identity</mat-icon>Agent -->
+            <img src="assets/icons/programmer.png" class="mat-iconleft" width="30px" height="30px" alt=""> Agent
           </a>
           <a mat-list-item [routerLink]="['/home-admin/gerants']" [ngClass]="'primary-list-item'">
-            <mat-icon class="mat-iconleft">people</mat-icon>Gerant
+            <!-- <mat-icon class="mat-iconleft">people</mat-icon>Gerant -->
+            <img src="assets/icons/businessman.png" class="mat-iconleft" width="30px" height="30px" alt=""> Gerant
+
+            
           </a>
-          <a mat-list-item [routerLink]="['/home-admin/archive-admin']" [ngClass]="'primary-list-item'">
-            <mat-icon class="mat-iconleft">archive</mat-icon>Archive
+          <a mat-list-item [routerLink]="['/home-admin/Archive-admin']" [ngClass]="'primary-list-item'">
+            <!-- <mat-icon class="mat-iconleft">archive</mat-icon>Archive -->
+            <img src="assets/icons/archive.png" class="mat-iconleft" width="30px" height="30px" alt=""> Archive
+
+            
           </a>
 
           <a mat-list-item [routerLink]="['/home-admin/profile-admin']" [ngClass]="'primary-list-item'">
-            <mat-icon class="mat-iconleft">account_circle</mat-icon>Profile
+            <!-- <mat-icon class="mat-iconleft">account_circle</mat-icon>Profile -->
+            <img src="assets/icons/user.png" class="mat-iconleft" width="30px" height="30px" alt=""> Profile
+
+            
           </a>
 
           <a mat-list-item (click)="logout()" [ngClass]="'primary-list-item'">
-            <mat-icon class="mat-iconleft">logout</mat-icon>Logout
+           
+            <img src="assets/icons/logout.png" class="mat-iconleft" width="30px" height="30px" alt=""> Logout
+            
           </a>
         </div>
         
@@ -38,7 +55,9 @@
     <mat-sidenav-content >
         <mat-toolbar style="color: white; background-color: #5538D9;" >
             <button mat-icon-button (click)="sidenav.toggle()" class="example-icon" aria-label="Example icon-button with menu icon">
-              <mat-icon class="mat-icontop">menu</mat-icon>
+
+            <img src="assets/icons/main-menu.png" class="mat-icontop" width="30px" height="30px" alt=""> 
+
             </button>
             <span>Intranet</span>
             <span class="example-spacer"></span>
@@ -49,16 +68,23 @@
           <mat-form-field class="search-input" appearance="outline">
             <input matInput placeholder="Search" [(ngModel)]="searchTerm">
             <button class="example-icon" mat-button matSuffix (click)="searchDocuments()">
-              <mat-icon class="mat-icontop">search</mat-icon>
+              <!-- <mat-icon class="mat-icontop">search</mat-icon> -->
+            <img src="assets/icons/search.png" class="mat-icontop" width="30px" height="30px" alt=""> 
+
+              
             </button>
           </mat-form-field>
 
   <!-- Bouton de déconnexion -->
             <button mat-icon-button class="example-icon-share favorite-icon" aria-label="Example icon-button with heart icon" (click)="logout()">
-                <mat-icon class="mat-icontop">logout</mat-icon> 
+               
+            <img src="assets/icons/logout-white.png" class="mat-icontop" width="30px" height="30px" alt=""> 
+
+                
             </button>
             <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-              <mat-icon class="mat-icontop" matBadge="15" matBadgeColor="warn" [attr.aria-hidden]="false">notifications_none</mat-icon>
+            <img src="assets/icons/notification.png" class="mat-icontop" width="30px" height="30px" alt=""> 
+
             </button>
           </mat-toolbar>
 
@@ -146,10 +172,12 @@
           <div class="home-container">
        
             <div class="daily-documents">
-              <h2>Documents ajoutés aujourd'hui</h2>
+              <h2>Les  Avis Ajouter </h2>
               <div class="document-container">
                 <div class="document-icon">
-                  <mat-icon>insert_drive_file</mat-icon>
+                  <a mat-list-item [routerLink]="['/home-admin/Avis']" [ngClass]="'primary-list-item'">
+                  <img src="assets/icons/avi.png" class="mat-iconleft" width="30px" height="30px" alt="">
+                  </a>
                 </div>
                 <div class="document-details">
                   <p>Nom du document : Formation CBS</p>
@@ -159,12 +187,13 @@
              
             </div>
           
-            
             <div class="inbox">
-              <h2>Boîte de réception</h2>
+              <h2>Les Procedures </h2>
               <div class="message-container">
                 <div class="message-icon">
-                  <mat-icon>email</mat-icon>
+                  <a mat-list-item [routerLink]="['/home-admin/Procedure']" [ngClass]="'primary-list-item'">
+                  <img src="assets/icons/automation.png" class="mat-iconleft" width="30px" height="30px" alt="">
+                </a>
                 </div>
                 <div class="message-details">
                   <p>Expéditeur : M'baré Mohamed Salem</p>
@@ -225,9 +254,16 @@
         <div class="footer-social">
           <h4>Restons connectés</h4>
           <ul>
-            <li><a href="#"><i class="fa fa-facebook"></i> Facebook</a></li>
-            <li><a href="#"><i class="fa fa-twitter"></i> Twitter</a></li>
-            <li><a href="#"><i class="fa fa-linkedin"></i> LinkedIn</a></li>
+            <li><a href="#">
+            <img src="assets/icons/facebook-logo.png" class="mat-icontop" width="30px" height="30px" alt=""> 
+              
+              Facebook</a></li>
+            <li><a href="#">
+            <img src="assets/icons/twitter.png" class="mat-icontop" width="30px" height="30px" alt=""> 
+              Twitter</a></li>
+            <li><a href="#">
+            <img src="assets/icons/linkedin.png" class="mat-icontop" width="30px" height="30px" alt=""> 
+              LinkedIn</a></li>
           </ul>
         </div>
       </div>

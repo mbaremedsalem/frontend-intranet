@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-document-admin',
@@ -27,12 +28,23 @@ export class DocumentAdminComponent {
   searchTerm: string = '';
   filteredDocuments: any[] = [];
 
-  constructor(private documentService: DocumentService,private documentSelectionService: DocumentSelectionService,public dialog: MatDialog,private http: HttpClient, private router: Router) { }
+  constructor(private documentService: DocumentService,private documentSelectionService: DocumentSelectionService,public dialog: MatDialog,private sanitizer: DomSanitizer,private http: HttpClient, private router: Router) { }
 
+  // ngOnInit(): void {
+  //   this.documentService.getAllDocuments().subscribe((data: any[]) => {
+  //     this.documents = data;
+  //     this.dataSource.data = this.documents; // Set the data for the Material table
+  //   });
+  // }
   ngOnInit(): void {
     this.documentService.getAllDocuments().subscribe((data: any[]) => {
       this.documents = data;
       this.dataSource.data = this.documents; // Set the data for the Material table
+  
+      // Désinfecter les URLs
+      this.documents.forEach(document => {
+        document.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`http://127.0.0.1:8000${document.file}`);
+      });
     });
   }
 

@@ -18,6 +18,8 @@ import { UpdateAgentComponent } from './update-agent/update-agent.component';
 import { UpdateGerantComponent } from './update-gerant/update-gerant.component';
 import { HomeManagerComponent } from './home-manager/home-manager.component';
 import { ArchiveComponent } from './archive/archive.component';
+import { AvisComponent } from './avis/avis.component';
+import { ProcedurComponent } from './procedur/procedur.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -39,6 +41,11 @@ const routes: Routes = [
       { path: 'agents', component: AgentComponent },
       { path: 'gerants', component: GerantComponent },
       { path: 'Archive-admin', component: ArchiveComponent },
+      { path: 'Avis', component: AvisComponent },
+      { path: 'Procedure', component: ProcedurComponent },
+
+      
+
     ],
   },
   {

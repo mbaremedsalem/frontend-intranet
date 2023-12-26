@@ -1,0 +1,42 @@
+<div class="flex-container">
+  <div class="search-bar">
+    <input type="text" placeholder="Rechercher" class="search-input" [(ngModel)]="searchTerm" (input)="applyFilter()"/>
+  </div>
+  <div class="page-content" style="padding-left: 0px; padding-bottom: 10px;">
+    <button style="color: white; background-color: #5538D9; border-radius: 10px; width: 200px; height: 50px;" mat-raised-button (click)="openAddDocumentDialog()">
+      <img src="assets/icons/add.png" class="mat-iconleft" width="20px" height="20px" alt="">
+    </button>
+  </div>
+</div>
+
+<h1>Liste des Avis</h1>
+
+<div class="avis" *ngFor="let avis of avisList">
+  <div class="actions" *ngIf="avis.isSelected">
+    <button mat-icon-button class="example-icon-up" (click)="openConfirmationDialog(avis.id)">
+    <span (click)="deleteAvis(avis)"><img src="assets/icons/delete.png" width="20px" height="20px" alt="Supprimer"></span>
+    <!-- Ajoutez d'autres icônes et leurs fonctionnalités ici -->
+  </button>
+  </div>
+  <div class="avis">
+    <h2>{{ avis.titre }}</h2>
+    <input type="checkbox"  [checked]="avis.isSelected" (change)="toggleSelection(avis)" class="select-checkbox">
+    
+    <div class="pdf-card">
+      <iframe [src]="avis.safeUrl" width="1000" height="250"></iframe>
+    </div>
+    <div class="user-info">
+      <img [src]="'http://127.0.0.1:8000' + avis.admin_image" alt="Nom de l'utilisateur">
+      <span>{{ avis.admin_nom }} {{ avis.admin_prenom }}</span>
+      <span class="meta">Date du post: {{ avis.date | date:'yyyy/MM/dd'}}</span>
+    </div>
+    <input type="text" class="comment-input" placeholder="Ajouter un commentaire...">
+    <span class="like-btn"><img src="assets/icons/send.png" class="mat-iconleft" width="30px" height="30px" alt=""></span>
+  </div>
+</div>
+<!-- Section de pagination -->
+<div class="pagination">
+  <button (click)="prevPage()">Précédent</button>
+  <span>Page {{ currentPage }} sur {{ totalPages }}</span>
+  <button (click)="nextPage()">Suivant</button>
+</div>

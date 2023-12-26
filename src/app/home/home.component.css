@@ -257,3 +257,19 @@ a:hover {
 .example-tree div[role=group] > .mat-tree-node {
   padding-left: 40px;
 }
+
+.notification-icon {
+  position: relative;
+}
+
+.notification-icon::after {
+  content: attr(data-badge);
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: red; /* Couleur du badge */
+  color: white; /* Couleur du texte du badge */
+  border-radius: 50%; /* Pour rendre le badge circulaire */
+  padding: 5px 8px; /* Espace à l'intérieur du badge */
+  font-size: 12px; /* Taille de la police du badge */
+}

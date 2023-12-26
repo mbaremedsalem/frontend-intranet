@@ -33,7 +33,8 @@ export class LoginComponent {
           // Store the access token in local storage or a cookie
           if(response.role==='Admin'){
             localStorage.setItem('username', response.username);   
-            localStorage.setItem('access', response.access);   
+            localStorage.setItem('access', response.access);  
+            localStorage.setItem('id', response.id.toString());   
             localStorage.setItem('access', response.access);
             localStorage.setItem('nom', response.nom);
             localStorage.setItem('prenom', response.prenom);

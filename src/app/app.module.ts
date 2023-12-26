@@ -61,6 +61,9 @@ import { HomeManagerComponent } from './home-manager/home-manager.component';
 import { ArchiveComponent } from './archive/archive.component';
 import { CommonModule } from '@angular/common';
 import { AddArchiveComponent } from './add-archive/add-archive.component';
+import { AvisComponent } from './avis/avis.component';
+import { AddAvisComponent } from './add-avis/add-avis.component';
+import { ProcedurComponent } from './procedur/procedur.component';
 
 @NgModule({
   declarations: [
@@ -92,6 +95,9 @@ import { AddArchiveComponent } from './add-archive/add-archive.component';
     HomeManagerComponent,
     ArchiveComponent,
     AddArchiveComponent,
+    AvisComponent,
+    AddAvisComponent,
+    ProcedurComponent,
   ],
   imports: [
     BrowserModule,

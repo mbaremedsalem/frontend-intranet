@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Table sans bordures</title>
+<style>
+    /* Suppression des bordures de la table, des cellules et des en-têtes */
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        padding: 8px 12px;
+        text-align: left;
+    }
+
+    /* Style pour les cellules paires */
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+</style>
+</head>
+<body>
+<div class="flex-container">
+        <div class="search-bar">
+          <input type="text" placeholder="Rechercher" class="search-input" />
+        </div>
+        <div class="page-content" style="padding-left: 0px; padding-bottom: 10px;">
+          <button style="color: white; background-color: #5538D9; border-radius: 10px; border: none; width: 200px; height: 50px;" >
+            <img src="assets/icons/add.png" class="mat-iconleft" width="20px" height="20px" alt="">
+          </button>
+        </div>
+</div>
+<table>
+    <thead>
+        <tr>
+            <th></th>
+            <th>intitule</th>
+            <th>description</th>
+            <th>date</th>
+            <th>File</th>
+            <th>Action</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let avis of avisList">
+           <td><input type="checkbox" class="select-checkbox"></td>
+            <td>{{ avis.intitule }}</td>
+            <td>{{ avis.description }}</td>
+            <td>{{ avis.date | date:'yyyy/MM/dd' }}</td>
+            <td><a [href]="avis.safeUrl" target="_blank">Voir le fichier</a></td>
+            <img src="assets/icons/edit.png" class="mat-iconleft" width="22px" height="24px" alt="">
+            <img src="assets/icons/delete.png" class="mat-iconleft" width="30px" height="30px" alt="">
+        </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
+  
+
+

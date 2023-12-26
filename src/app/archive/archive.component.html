@@ -16,7 +16,8 @@
     <div class="folder" (click)="toggleFolder(archive.id)">
       <img src="assets/folder.png" width="100px" height="90px" alt="Folder Icon">
       {{ archive.nom }}<br>
-      {{ formatArchiveDate(archive.date_ajout) }}
+  
+      {{ archive.date_ajout | date:'yyyy/MM/dd' }} 
       <div class="folder-content">
         <div *ngFor="let document of documents" class="folder">
           {{ document.sujet }}

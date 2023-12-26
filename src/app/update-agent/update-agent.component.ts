@@ -25,6 +25,7 @@ export class UpdateAgentComponent {
     is_active: false,
     is_blocked: false,
   });
+  
   constructor(private _formBuilder: FormBuilder,
     private apiService:DocumentService,
     private route: ActivatedRoute,
