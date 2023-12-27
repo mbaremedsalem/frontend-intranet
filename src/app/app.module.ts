@@ -64,6 +64,7 @@ import { AddArchiveComponent } from './add-archive/add-archive.component';
 import { AvisComponent } from './avis/avis.component';
 import { AddAvisComponent } from './add-avis/add-avis.component';
 import { ProcedurComponent } from './procedur/procedur.component';
+import { AddProcedureComponent } from './add-procedure/add-procedure.component';
 
 @NgModule({
   declarations: [
@@ -98,6 +99,7 @@ import { ProcedurComponent } from './procedur/procedur.component';
     AvisComponent,
     AddAvisComponent,
     ProcedurComponent,
+    AddProcedureComponent,
   ],
   imports: [
     BrowserModule,

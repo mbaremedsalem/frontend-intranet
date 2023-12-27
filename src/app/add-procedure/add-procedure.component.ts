@@ -1,21 +1,20 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatTableDataSource } from '@angular/material/table';
 import { DocumentService } from '../document.service';
 import { ActivatedRoute } from '@angular/router';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialogRef } from '@angular/material/dialog';
 import { AddDocumentDialogComponent } from '../add-document-dialog/add-document-dialog.component';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { API_BASE_URL } from '../base/base_url';
 
 @Component({
-  selector: 'app-add-avis',
-  templateUrl: './add-avis.component.html',
-  styleUrls: ['./add-avis.component.css']
+  selector: 'app-add-procedure',
+  templateUrl: './add-procedure.component.html',
+  styleUrls: ['./add-procedure.component.css']
 })
-export class AddAvisComponent {
-
+export class AddProcedureComponent {
   titre: string = '';
   description: string = '';
   selectedFile: File | null = null;
@@ -32,7 +31,7 @@ export class AddAvisComponent {
   dataSource = new MatTableDataSource<any>();
   dataSourcegerant = new MatTableDataSource<any>();
   selectAll: boolean = false;
-  
+
   constructor(
     private http: HttpClient,
     private _formBuilder: FormBuilder,
@@ -98,7 +97,7 @@ export class AddAvisComponent {
 
       this.loginInProgress = true; 
       // Make a POST request to your API to create the document
-      this.agetService.createAvis(formData).subscribe(response => {
+      this.agetService.createProcedur(formData).subscribe(response => {
         console.log('Response:', response);
         
         this.message = response.message;
@@ -128,9 +127,10 @@ export class AddAvisComponent {
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
   }
+
+
   onSelectAllChange(): void {
     this.selectAll = !this.selectAll;
   }
-  
 
 }

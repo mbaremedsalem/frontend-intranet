@@ -1,0 +1,90 @@
+
+.page-container {
+    max-height: calc(100vh - 40px); /* Hauteur maximale égale à la hauteur de la fenêtre moins un peu d'espace */
+    overflow-y: auto; /* Active le défilement vertical si le contenu dépasse la hauteur */
+}
+.list-user{
+    padding: 20px;
+}
+
+h2 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 24px;
+    color: #333;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    padding: 8px 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+.scrollable-table {
+    max-height: 300px; /* Ajustez cette valeur selon vos besoins */
+    overflow-y: auto;
+    display: block;
+}
+
+.content {
+    padding: 20px; /* Ajout d'un padding pour toute la section de contenu */
+}
+
+/* .row {
+    display: flex;
+    gap: 10px;
+} */
+
+input[type="file"] {
+    display: none; /* Cachez le champ de texte */
+}
+
+/* Styles pour personnaliser le bouton "Parcourir" */
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    width: 93%;
+}
+
+.custom-file-upload:hover {
+    background-color: #e0e0e0;
+}
+
+.list-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.list-item {
+    flex: 0 0 calc(25% - 10px);
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.new-line {
+    flex-basis: 100%;
+}
+
+.action {
+    padding: 20px; /* Ajout d'un padding pour l'espace autour des boutons d'action */
+    display: flex;
+}
+.mat-icon{
+   padding-left:500px;
+}

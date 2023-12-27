@@ -26,4 +26,17 @@
   .page-content {
     padding-left: 0px;
   }
-  
+  table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    padding: 8px 12px;
+    text-align: left;
+}
+
+/* Style pour les cellules paires */
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}

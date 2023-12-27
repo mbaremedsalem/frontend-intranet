@@ -1,0 +1,69 @@
+<!-- Pour les agents -->
+<div class="page-container">
+    <div mat-dialog-title>
+      <h1>Ajouter une procedure</h1>
+    </div>
+    <form  (ngSubmit)="onSubmit()">
+      <div mat-dialog-content class="content">
+         
+              <mat-form-field appearance="outline" style="width: 100%;">
+                  <mat-label>Intitule</mat-label>
+                  <input matInput type="text" placeholder="titre" [(ngModel)]="titre" name="sujet" required >
+              </mat-form-field>
+              
+              <mat-form-field style="width: 100%;" appearance="outline">
+                  <mat-label>Description</mat-label>
+                  <input matInput placeholder="Description" [(ngModel)]="description" name="description" required>
+              </mat-form-field>
+    
+              <mat-form-field style="width: 100%;" appearance="outline">
+                <mat-label>Direction</mat-label>
+                <mat-select [(ngModel)]="selectedDirection" name="direction" required>
+                  <mat-option *ngFor="let direction of directions" [value]="direction">
+                    {{ direction.nom }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+    
+              <label class="custom-file-upload" style="width: 97.5%;">
+                <div class="mat-icon">
+                <span>
+                  <img src="assets/icons/download.png" class="mat-iconleft" width="30px" height="30px" alt="">
+                  Upload File</span>
+                <input type="file" (change)="onFileSelected($event)" accept=".pdf, .doc, .docx">
+              </div>
+              </label>
+      </div>
+
+    <div class="list-user">
+      <h2>Tous</h2>
+      <input type="checkbox" class="select-checkbox">
+      <br>
+      Afficher tous les utilistateurs
+      <input type="checkbox"  (change)="onSelectAllChange()"class="select-checkbox">
+
+      <h2 *ngIf="selectAll">Agents</h2>
+    <div class="list-container" *ngIf="selectAll">
+      <div *ngFor="let agent of agents">
+        <input type="checkbox" (change)="onCheckboxChange(agent.id)" class="select-checkbox">
+        {{ agent.nom }}
+      </div>
+    </div>
+    
+    <h2 *ngIf="selectAll">Gérants</h2>
+    <div class="list-container" *ngIf="selectAll">
+      <div *ngFor="let gerant of gerants">
+        <!-- <mat-checkbox (change)="onCheckboxChange(gerant.id)"></mat-checkbox> -->
+        <input type="checkbox" (change)="onCheckboxChange(gerant.id)" class="select-checkbox">
+        {{ gerant.nom }}
+      </div>
+    </div>
+    </div>
+    
+    <div mat-dialog-actions class="action">
+      <button mat-raised-button type="button" [mat-dialog-close]="false">Annuler</button>
+      <button mat-raised-button color="primary" type="submit">Enregitrer</button>
+    </div>
+    </form>
+    <div *ngIf="showErrorMessage"></div> 
+    </div>

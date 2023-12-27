@@ -76,6 +76,7 @@ export class AvisComponent {
   toggleSelection(avis: any) {
     avis.isSelected = !avis.isSelected;
   }
+  
   deleteAvis(avis: number) {
     const url = `${API_BASE_URL}delete-avis/${avis}/`;
 

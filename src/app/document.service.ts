@@ -70,6 +70,13 @@ export class DocumentService {
 
     return this.http.get<any[]>(`${API_BASE_URL}get_all_document/`, { headers });
   }
+
+  getAllProcedure(): Observable<any[]> {
+    // Vous devez ajouter le jeton d'authentification ici si nécessaire
+    const headers = new HttpHeaders().set('Authorization', 'JWT '+localStorage.getItem('access'));
+    
+    return this.http.get<any[]>(`${API_BASE_URL}procedure-by-admin/${localStorage.getItem('id')}/`, { headers });
+  }
   
   getAllAget(): Observable<any[]> {
     // Vous devez ajouter le jeton d'authentification ici si nécessaire
@@ -97,7 +104,7 @@ export class DocumentService {
       headers: headers
     });
   }
-/////create avis 
+  /////create avis 
   createAvis(formData: FormData): Observable<any> {
     // You can add an authorization token to the headers if required
     // Replace 'your-auth-token' with your actual authorization token
@@ -107,6 +114,19 @@ export class DocumentService {
 
     // Make a POST request to create the document
     return this.http.post(`${API_BASE_URL}create-avis/`, formData, {
+      headers: headers
+    });
+  }
+  /////create procedur 
+  createProcedur(formData: FormData): Observable<any> {
+    // You can add an authorization token to the headers if required
+    // Replace 'your-auth-token' with your actual authorization token
+    const headers = new HttpHeaders({
+      Authorization: 'JWT '+localStorage.getItem('access')
+    });
+
+    // Make a POST request to create the document
+    return this.http.post(`${API_BASE_URL}create-procedure/`, formData, {
       headers: headers
     });
   }

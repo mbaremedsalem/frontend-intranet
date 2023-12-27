@@ -17,7 +17,7 @@
     <span (click)="deleteAvis(avis)"><img src="assets/icons/delete.png" width="20px" height="20px" alt="Supprimer"></span>
     <!-- Ajoutez d'autres icônes et leurs fonctionnalités ici -->
   </button>
-  </div>
+</div>
   <div class="avis">
     <h2>{{ avis.titre }}</h2>
     <input type="checkbox"  [checked]="avis.isSelected" (change)="toggleSelection(avis)" class="select-checkbox">
