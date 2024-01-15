@@ -152,6 +152,14 @@ font-weight: bold;
   margin: 10px;
 }
 
+.daily-document{
+  width: 260px; /* Ajustez la largeur selon vos besoins */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  
+}
+
 .document-container,
 .message-container {
   display: flex;
@@ -273,3 +281,6 @@ a:hover {
   padding: 5px 8px; /* Espace à l'intérieur du badge */
   font-size: 12px; /* Taille de la police du badge */
 }
+
+
+

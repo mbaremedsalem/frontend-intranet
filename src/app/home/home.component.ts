@@ -10,6 +10,57 @@ import { MatDialog } from '@angular/material/dialog';
 import { UpdateDialogComponent } from '../update-dialog/update-dialog.component';
 import { MatTableDataSource } from '@angular/material/table';
 
+const TREE_DATA: ExampleFlatNode[] = [
+  {
+    name: 'Document',
+    expandable: true,
+    level: 0,
+  },
+  {
+    name: 'Chartes de la Banque',
+    expandable: false,
+    level: 1,
+  },
+  {
+    name: 'Notes DG',
+    expandable: false,
+    level: 1,
+  },
+  {
+    name: 'Décisions',
+    expandable: false,
+    level: 1,
+  },
+  {
+    name: 'Procédures de Gestion',
+    expandable: true,
+    level: 0,
+  },
+  {
+    name: 'Texte de Gouvernance',
+    expandable: true,
+    level: 1,
+  },
+  {
+    name: 'Plotique de la Banque',
+    expandable: false,
+    level: 2,
+  },
+ 
+ 
+];
+
+/** Flat node with expandable and level information */
+interface ExampleFlatNode {
+  expandable: boolean;
+  name: string;
+  level: number;
+  isExpanded?: boolean;
+}
+
+/**
+ * @title Tree with flat nodes
+ */
 
 @Component({
   selector: 'app-home',
@@ -25,7 +76,7 @@ export class HomeComponent {
   isSearching: boolean = false;
   documents: any[] = [];
   useTraditionalTable = false;
-
+  showDocuments = false;
   displayedColumns: string[] = ['sujet', 'code', 'description', 'file', 'actions'];
   dataSource = new MatTableDataSource<any>();
 
@@ -198,6 +249,10 @@ export class HomeComponent {
     dialogRef.afterClosed().subscribe((result) => {
       // Handle any actions after the dialog is closed (if needed).
     });
+  }
+
+  toggleDocuments() {
+    this.showDocuments = !this.showDocuments;
   }
 
 }

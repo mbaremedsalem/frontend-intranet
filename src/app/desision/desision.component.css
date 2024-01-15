@@ -1,0 +1,72 @@
+
+.flex-container {
+    display: flex;
+    align-items: center; /* Alignez les éléments verticalement au centre */
+    justify-content: space-between; /* Ajoutez un espacement entre les éléments */
+  }
+  
+  .search-bar {
+    margin-right: 10px; /* Ajoutez un espacement à droite de la barre de recherche */
+  }
+  
+  .search-input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 200px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s ease-in-out;
+  }
+  
+  .search-input:focus {
+    border-color: #4CAF50;
+  }
+  
+  .page-content {
+    padding-left: 0px;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  th, td {
+    padding: 8px 12px;
+    text-align: left;
+  }
+  
+  /* Style pour les cellules paires */
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  /* Ajoutez ces styles à votre fichier CSS ou dans votre balise style dans le composant */
+  
+  .flex-container {
+    display: flex;
+    align-items: center; /* Alignez les éléments verticalement au centre */
+    justify-content: space-between; /* Ajoutez un espacement entre les éléments */
+  }
+  
+  .search-bar {
+    margin-right: 10px; /* Ajoutez un espacement à droite de la barre de recherche */
+  }
+  
+  .search-input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 200px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s ease-in-out;
+  }
+  
+  .search-input:focus {
+    border-color: #4CAF50;
+  }
+  
+  .page-content {
+    padding-left: 0px;
+  }
+  

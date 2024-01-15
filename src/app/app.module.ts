@@ -65,6 +65,12 @@ import { AvisComponent } from './avis/avis.component';
 import { AddAvisComponent } from './add-avis/add-avis.component';
 import { ProcedurComponent } from './procedur/procedur.component';
 import { AddProcedureComponent } from './add-procedure/add-procedure.component';
+import {CdkTreeModule} from '@angular/cdk/tree';
+import { NoteComponent } from './note/note.component';
+import { DesisionComponent } from './desision/desision.component';
+import { TexteGouvernanceComponent } from './texte-gouvernance/texte-gouvernance.component';
+import { PolitiqueBanqueComponent } from './politique-banque/politique-banque.component';
+
 
 @NgModule({
   declarations: [
@@ -100,6 +106,11 @@ import { AddProcedureComponent } from './add-procedure/add-procedure.component';
     AddAvisComponent,
     ProcedurComponent,
     AddProcedureComponent,
+    NoteComponent,
+    DesisionComponent,
+    TexteGouvernanceComponent,
+    PolitiqueBanqueComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -134,6 +145,8 @@ import { AddProcedureComponent } from './add-procedure/add-procedure.component';
     MatDatepickerModule,
     MatNativeDateModule,
     CommonModule,
+    CdkTreeModule,
+   
   ],
   providers: [
 

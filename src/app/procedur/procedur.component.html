@@ -17,8 +17,6 @@
             <th>description</th>
             <th>date</th>
             <th>File</th>
-            
-
         </tr>
     </thead>
     <tbody>
@@ -26,12 +24,12 @@
             
                 <div class="actions" *ngIf="avis.isSelected">
                   <button mat-icon-button class="example-icon-up" (click)="openConfirmationDialog(avis.id)">
-                  <span (click)="deleteAvis(avis)"><img src="assets/icons/delete.png" width="20px" height="20px" alt="Supprimer"></span>
+                  <span><img src="assets/icons/delete.png" width="20px" height="20px" alt="Supprimer"></span>
                   <!-- Ajoutez d'autres icônes et leurs fonctionnalités ici -->
                 </button>
 
                 <button mat-icon-button class="example-icon-up" (click)="openConfirmationDialog(avis.id)">
-                <span (click)="deleteAvis(avis)"><img src="assets/icons/edit.png" class="mat-iconleft" width="22px" height="24px" alt=""></span>
+                <span><img src="assets/icons/edit.png" class="mat-iconleft" width="22px" height="24px" alt=""></span>
                   <!-- Ajoutez d'autres icônes et leurs fonctionnalités ici -->
                 </button>
               </div>

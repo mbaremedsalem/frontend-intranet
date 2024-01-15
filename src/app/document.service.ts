@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { API_BASE_URL } from './base/base_url';
 
@@ -70,6 +70,30 @@ export class DocumentService {
 
     return this.http.get<any[]>(`${API_BASE_URL}get_all_document/`, { headers });
   }
+
+  // getAllNotes(): Observable<any[]> {
+  //   // Vous devez ajouter le jeton d'authentification ici si nécessaire
+  //   const headers = new HttpHeaders().set('Authorization', 'JWT '+localStorage.getItem('access'));
+
+  //   return this.http.get<any[]>(`${API_BASE_URL}note-by-admin/${localStorage.getItem('id')}/`, { headers });
+  // }
+  getAllNotes(page: number, pageSize: number): Observable<any[]> {
+    const headers = new HttpHeaders().set('Authorization', 'JWT ' + localStorage.getItem('access'));
+    const params = new HttpParams()
+    .set('page', page.toString())
+    .set('pageSize', pageSize.toString());
+
+    return this.http.get<any[]>(`${API_BASE_URL}note-by-admin/${localStorage.getItem('id')}/`, { headers, params });
+}
+
+getAllDecision(page: number, pageSize: number): Observable<any[]> {
+  const headers = new HttpHeaders().set('Authorization', 'JWT ' + localStorage.getItem('access'));
+  const params = new HttpParams()
+  .set('page', page.toString())
+  .set('pageSize', pageSize.toString());
+
+  return this.http.get<any[]>(`${API_BASE_URL}decision-by-admin/${localStorage.getItem('id')}/`, { headers, params });
+}
 
   getAllProcedure(): Observable<any[]> {
     // Vous devez ajouter le jeton d'authentification ici si nécessaire

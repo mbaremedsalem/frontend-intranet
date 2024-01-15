@@ -22,30 +22,32 @@
       </tr>
   </thead>
   <tbody>
-      <tr *ngFor="let document of dataSource.filteredData">
+      <tr *ngFor="let note of dataSource.filteredData">
           
-              <div class="actions" *ngIf="document.isSelected">
-                <button mat-icon-button class="example-icon-up" (click)="openConfirmationDialog(document.id)">
+              <div class="actions" *ngIf="note.isSelected">
+                <button mat-icon-button class="example-icon-up" (click)="openConfirmationDialog(note.id)">
                 <span><img src="assets/icons/delete.png" width="20px" height="20px" alt="Supprimer"></span>
               </button>
 
-              <button mat-icon-button class="example-icon-up" (click)="openUpdateDialog(document.id)">
+              <button mat-icon-button class="example-icon-up" (click)="openUpdateDialog(note.id)">
               <span><img src="assets/icons/edit.png" class="mat-iconleft" width="22px" height="24px" alt=""></span>
               </button>
             </div>
           
           <td>
-              <input type="checkbox"  [checked]="document.isSelected" (change)="(document)" (change)="toggleSelection(document)"class="select-checkbox">
+              <input type="checkbox"  [checked]="note.isSelected" (change)="(note)" (change)="toggleSelection(note)"class="select-checkbox">
           </td>
-          <td>{{ document.sujet }}</td>
-          <td>{{ document.code }}</td>
-          <td>{{ document.description }}</td>
-          <td>{{ document.date_ajout | date:'yyyy/MM/dd' }}</td>
-          <td><iframe [src]="document.safeUrl" width="600px" height="200"></iframe>
-            <a href="http://127.0.0.1:8000{{ document.file }}" target="_blank">{{ document.file || 'N/A' }}</a>
+          <td>{{ note.titre }}</td>
+          <td>{{ note.code }}</td>
+          <td>{{ note.description }}</td>
+          <td>{{ note.date | date:'yyyy/MM/dd' }}</td>
+          <td><iframe [src]="note.safeUrl" width="600px" height="200"></iframe>
+            <a href="http://127.0.0.1:8000{{ note.file }}" target="_blank">{{ note.file || 'N/A' }}</a>
             </td>
       </tr>
   </tbody>
 </table>
 
+
+<mat-paginator [pageSizeOptions]="[3, 5, 10]" (page)="onPageChange($event)" showFirstLastButtons></mat-paginator>
 

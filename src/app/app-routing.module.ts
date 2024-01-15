@@ -20,6 +20,10 @@ import { HomeManagerComponent } from './home-manager/home-manager.component';
 import { ArchiveComponent } from './archive/archive.component';
 import { AvisComponent } from './avis/avis.component';
 import { ProcedurComponent } from './procedur/procedur.component';
+import { NoteComponent } from './note/note.component';
+import { DesisionComponent } from './desision/desision.component';
+import { TexteGouvernanceComponent } from './texte-gouvernance/texte-gouvernance.component';
+import { PolitiqueBanqueComponent } from './politique-banque/politique-banque.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -36,15 +40,17 @@ const routes: Routes = [
     component: HomeComponent,
     children: [
       { path: 'direction-admin', component: DirectionComponent },
-      { path: 'document-admin', component: DocumentAdminComponent },
+      { path: 'chart-banque-admin', component: DocumentAdminComponent },
+      { path: 'note-admin', component: NoteComponent },
+      { path: 'decision-admin', component: DesisionComponent },
+      { path: 'Texte-gouvernance-admin', component: TexteGouvernanceComponent },
+      { path: 'politique-banque-admin', component: PolitiqueBanqueComponent },
       { path: 'profile-admin', component: ProfileComponent },
       { path: 'agents', component: AgentComponent },
       { path: 'gerants', component: GerantComponent },
       { path: 'Archive-admin', component: ArchiveComponent },
       { path: 'Avis', component: AvisComponent },
       { path: 'Procedure', component: ProcedurComponent },
-
-      
 
     ],
   },

@@ -1,24 +1,24 @@
-import { Component } from '@angular/core';
-import { UpdateDialogComponent } from '../update-dialog/update-dialog.component';
-import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { API_BASE_URL } from '../base/base_url';
-import { AddDocumentDialogComponent } from '../add-document-dialog/add-document-dialog.component';
+import { Component, ViewChild } from '@angular/core';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { DocumentService } from '../document.service';
 import { DocumentSelectionService } from '../document-selection.service';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
-import { MatTableDataSource } from '@angular/material/table';
-import { Observable } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { AddDocumentDialogComponent } from '../add-document-dialog/add-document-dialog.component';
+import { API_BASE_URL } from '../base/base_url';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
+import { UpdateDialogComponent } from '../update-dialog/update-dialog.component';
 
 @Component({
-  selector: 'app-document-admin',
-  templateUrl: './document-admin.component.html',
-  styleUrls: ['./document-admin.component.css']
+  selector: 'app-politique-banque',
+  templateUrl: './politique-banque.component.html',
+  styleUrls: ['./politique-banque.component.css']
 })
-export class DocumentAdminComponent {
-  documents: any[] = [];
+export class PolitiqueBanqueComponent {
+  politiques: any[] = [];
   useTraditionalTable = false;
 
   displayedColumns: string[] = ['sujet', 'code', 'description', 'file', 'direction_nom','date_ajout','actions'];
@@ -27,23 +27,34 @@ export class DocumentAdminComponent {
   dataSource = new MatTableDataSource<any>();
   searchTerm: string = '';
   filteredDocuments: any[] = [];
-
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   constructor(private documentService: DocumentService,private documentSelectionService: DocumentSelectionService,public dialog: MatDialog,private sanitizer: DomSanitizer,private http: HttpClient, private router: Router) { }
 
-  // ngOnInit(): void {
-  //   this.documentService.getAllDocuments().subscribe((data: any[]) => {
-  //     this.documents = data;
-  //     this.dataSource.data = this.documents; // Set the data for the Material table
-  //   });
-  // }
-  ngOnInit(): void {
-    this.documentService.getAllDocuments().subscribe((data: any[]) => {
-      this.documents = data;
-      this.dataSource.data = this.documents; // Set the data for the Material table
+  onPageChange(event: PageEvent): void {
+    const page = event.pageIndex + 1;
+    const pageSize = event.pageSize;
+  
+    this.documentService.getAllNotes(page, pageSize).subscribe((data: any[]) => {
+      this.politiques = data;
+      this.dataSource.data = this.politiques;
   
       // Désinfecter les URLs
-      this.documents.forEach(document => {
-        document.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`http://127.0.0.1:8000${document.file}`);
+      this.politiques.forEach(politique => {
+        politique.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`http://127.0.0.1:8000${politique.file}`);
+      });
+    });
+  }
+  ngOnInit(): void {
+    const page = 1;        // Commencez par la première page
+    const pageSize = 3;    // Nombre d'éléments par page
+  
+    this.documentService.getAllDecision(page, pageSize).subscribe((data: any[]) => {
+      this.politiques = data;
+      this.dataSource.data = this.politiques;
+  
+      // Désinfecter les URLs
+      this.politiques.forEach(politique => {
+        politique.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`http://127.0.0.1:8000${politique.file}`);
       });
     });
   }
@@ -65,8 +76,8 @@ export class DocumentAdminComponent {
 
 
 
-  deleteDocument(documentId: number) {
-    const url = `${API_BASE_URL}delete-document/${documentId}`;
+  deleteDocument(decisionId: number) {
+    const url = `${API_BASE_URL}delete-decision/${decisionId}`;
 
     // Set up headers with the authorization token
     const headers = new HttpHeaders({
@@ -92,13 +103,13 @@ export class DocumentAdminComponent {
 
 
   
-  openConfirmationDialog(documentId: number) {
+  openConfirmationDialog(noteId: number) {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent);
 
     dialogRef.afterClosed().subscribe((result: boolean) => {
       if (result === true) {
         // Call the API to delete the document when the user confirms
-        this.deleteDocument(documentId);
+        this.deleteDocument(noteId);
       }
     });
   }
@@ -106,9 +117,9 @@ export class DocumentAdminComponent {
 
 
   // -------
-  openUpdateDialog(documentId: number) {
+  openUpdateDialog(decisionId: number) {
     const dialogRef = this.dialog.open(UpdateDialogComponent, {
-      data: { documentId: documentId },
+      data: { decisionId: decisionId },
       width: '1200px',
       panelClass: 'custom-dialog-container',
       position: {
@@ -119,7 +130,7 @@ export class DocumentAdminComponent {
   
     dialogRef.afterClosed().subscribe((formData: FormData) => {
       if (formData) {
-        this.updateDocument(documentId, formData);
+        this.updateDocument(decisionId, formData);
       }
     });
   }
@@ -145,7 +156,7 @@ export class DocumentAdminComponent {
     this.dataSource.filter = this.searchTerm.trim().toLowerCase();
   }
  
-  toggleSelection(avis: any) {
-    avis.isSelected = !avis.isSelected;
+  toggleSelection(decision: any) {
+    decision.isSelected = !decision.isSelected;
   }
 }

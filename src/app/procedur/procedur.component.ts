@@ -53,9 +53,8 @@ export class ProcedurComponent {
     avis.isSelected = !avis.isSelected;
   }
 
-  deleteAvis(avis: number) {
-    const url = `${API_BASE_URL}delete-avis/${avis}/`;
-
+  deleteprocedure(pro: number) {
+    const url = `${API_BASE_URL}delete-procedure/${pro}/`;
     // Set up headers with the authorization token
     const headers = new HttpHeaders({
       'Authorization': `JWT ${localStorage.getItem('access')}`
@@ -86,7 +85,7 @@ export class ProcedurComponent {
     dialogRef.afterClosed().subscribe((result: boolean) => {
       if (result === true) {
         // Call the API to delete the document when the user confirms
-        this.deleteAvis(documentId);
+        this.deleteprocedure(documentId);
       }
     });
   }

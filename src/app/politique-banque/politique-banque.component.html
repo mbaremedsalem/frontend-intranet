@@ -22,30 +22,32 @@
       </tr>
   </thead>
   <tbody>
-      <tr *ngFor="let document of dataSource.filteredData">
+      <tr *ngFor="let decision of dataSource.filteredData">
           
-              <div class="actions" *ngIf="document.isSelected">
-                <button mat-icon-button class="example-icon-up" (click)="openConfirmationDialog(document.id)">
+              <div class="actions" *ngIf="decision.isSelected">
+                <button mat-icon-button class="example-icon-up" (click)="openConfirmationDialog(decision.id)">
                 <span><img src="assets/icons/delete.png" width="20px" height="20px" alt="Supprimer"></span>
               </button>
 
-              <button mat-icon-button class="example-icon-up" (click)="openUpdateDialog(document.id)">
+              <button mat-icon-button class="example-icon-up" (click)="openUpdateDialog(decision.id)">
               <span><img src="assets/icons/edit.png" class="mat-iconleft" width="22px" height="24px" alt=""></span>
               </button>
             </div>
           
           <td>
-              <input type="checkbox"  [checked]="document.isSelected" (change)="(document)" (change)="toggleSelection(document)"class="select-checkbox">
+              <input type="checkbox"  [checked]="decision.isSelected" (change)="(decision)" (change)="toggleSelection(decision)"class="select-checkbox">
           </td>
-          <td>{{ document.sujet }}</td>
-          <td>{{ document.code }}</td>
-          <td>{{ document.description }}</td>
-          <td>{{ document.date_ajout | date:'yyyy/MM/dd' }}</td>
-          <td><iframe [src]="document.safeUrl" width="600px" height="200"></iframe>
-            <a href="http://127.0.0.1:8000{{ document.file }}" target="_blank">{{ document.file || 'N/A' }}</a>
+          <td>{{ decision.titre }}</td>
+          <td>{{ decision.code }}</td>
+          <td>{{ decision.description }}</td>
+          <td>{{ decision.date | date:'yyyy/MM/dd' }}</td>
+          <td><iframe [src]="decision.safeUrl" width="600px" height="200"></iframe>
+            <a href="http://127.0.0.1:8000{{ decision.file }}" target="_blank">{{ decision.file || 'N/A' }}</a>
             </td>
       </tr>
   </tbody>
 </table>
+<mat-paginator [pageSizeOptions]="[3, 5, 10]" (page)="onPageChange($event)" showFirstLastButtons></mat-paginator>
+
 
 

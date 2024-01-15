@@ -1,41 +1,56 @@
 <mat-sidenav-container class="sidenav-container">
     <mat-sidenav #sidenav mode="side" opened >
       <mat-nav-list>
+        <div class="daily-document">
+          
+          <div class="document-container">
+            <div class="document-icon">
+              <img src="assets/intranet.png" class="mat-iconleft" width="60px" height="90px" alt=""> 
+            </div>
+            <div class="document-details">
+              <p>ALGERIAN UNION BANQUE</p>
+              <p>البنك الاتحاد الجزاري</p>
+            </div>
+          </div>
+         
+        </div>
         <div class="navigation-menu">
           <a mat-list-item (click)="reloadPage('/home-admin')" [routerLink]="['/home-admin']" [ngClass]="'primary-list-item'">
-            <!-- <mat-icon class="mat-iconleft">home</mat-icon>Home -->
             
             <img src="assets/icons/home.png" class="mat-iconleft" width="30px" height="30px" alt=""> home
           </a>
-          <a mat-list-item [routerLink]="['/home-admin/document-admin']" [ngClass]="'primary-list-item'">
-            <!-- <mat-icon class="mat-iconleft">book</mat-icon>Documents -->
+          <a mat-list-item [ngClass]="{'primary-list-item': !showDocuments}" (click)="toggleDocuments()">
             <img src="assets/icons/paper.png" class="mat-iconleft" width="30px" height="30px" alt=""> Documents
-          </a>
+        </a>
+        
+        <div *ngIf="showDocuments" class="document-tree">
+            <ul>
+                <li><a [routerLink]="['/home-admin/chart-banque-admin']">Chartes de la Banque</a></li>
+                <li><a [routerLink]="['/home-admin/note-admin']">Notes DG</a></li>
+                <li><a [routerLink]="['/home-admin/decision-admin']">Décisions </a></li>
+                <li><a [routerLink]="['/home-admin/Texte-gouvernance-admin']">Texte de Gouvernance </a></li>
+                <li><a [routerLink]="['/home-admin/politique-banque-admin']">Plotique de la Banque </a></li>               
+            </ul>
+        </div>
           <a mat-list-item [routerLink]="['/home-admin/direction-admin']" [ngClass]="'primary-list-item'">
-            <!-- <mat-icon class="mat-iconleft">laptop_chromebook</mat-icon>Direction -->
             <img src="assets/icons/notebook-computer.png" class="mat-iconleft" width="30px" height="30px" alt=""> Direction
-            
           </a>
 
           <a mat-list-item [routerLink]="['/home-admin/agents']" [ngClass]="'primary-list-item'">
-            <!-- <mat-icon class="mat-iconleft">perm_identity</mat-icon>Agent -->
             <img src="assets/icons/programmer.png" class="mat-iconleft" width="30px" height="30px" alt=""> Agent
           </a>
           <a mat-list-item [routerLink]="['/home-admin/gerants']" [ngClass]="'primary-list-item'">
-            <!-- <mat-icon class="mat-iconleft">people</mat-icon>Gerant -->
             <img src="assets/icons/businessman.png" class="mat-iconleft" width="30px" height="30px" alt=""> Gerant
 
             
           </a>
           <a mat-list-item [routerLink]="['/home-admin/Archive-admin']" [ngClass]="'primary-list-item'">
-            <!-- <mat-icon class="mat-iconleft">archive</mat-icon>Archive -->
             <img src="assets/icons/archive.png" class="mat-iconleft" width="30px" height="30px" alt=""> Archive
 
             
           </a>
 
           <a mat-list-item [routerLink]="['/home-admin/profile-admin']" [ngClass]="'primary-list-item'">
-            <!-- <mat-icon class="mat-iconleft">account_circle</mat-icon>Profile -->
             <img src="assets/icons/user.png" class="mat-iconleft" width="30px" height="30px" alt=""> Profile
 
             
@@ -62,20 +77,15 @@
             <span>Intranet</span>
             <span class="example-spacer"></span>
 
-              <!-- Barre de recherche -->
-              
-
           <mat-form-field class="search-input" appearance="outline">
             <input matInput placeholder="Search" [(ngModel)]="searchTerm">
             <button class="example-icon" mat-button matSuffix (click)="searchDocuments()">
-              <!-- <mat-icon class="mat-icontop">search</mat-icon> -->
             <img src="assets/icons/search.png" class="mat-icontop" width="30px" height="30px" alt=""> 
 
               
             </button>
           </mat-form-field>
 
-  <!-- Bouton de déconnexion -->
             <button mat-icon-button class="example-icon-share favorite-icon" aria-label="Example icon-button with heart icon" (click)="logout()">
                
             <img src="assets/icons/logout-white.png" class="mat-icontop" width="30px" height="30px" alt=""> 
