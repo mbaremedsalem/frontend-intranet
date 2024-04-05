@@ -146,9 +146,9 @@ export class HomeComponent {
       {
         type: 'pie',
         data: [
-          { name: 'FORMATION/CBS', y: 1, color: '#eeeeee' },
+          { name: 'Procedur/BCM', y: 1, color: '#eeeeee' },
   
-          { name: 'AVIS/PROTECTION', y: 2, color: '#393e46' },
+          { name: 'AVIS/NOTE', y: 2, color: '#393e46' },
 
           { name: 'FETE INTER', y: 3, color: '#00adb5' },
           { name: 'MEET AUB', y: 4, color: '#eeeeee' },
@@ -180,7 +180,6 @@ export class HomeComponent {
     }
   }
 
- 
  
   searchDocuments() {
     this.isSearching = true; // Définissez à true avant la requête
@@ -254,5 +253,5 @@ export class HomeComponent {
   toggleDocuments() {
     this.showDocuments = !this.showDocuments;
   }
-
+  
 }

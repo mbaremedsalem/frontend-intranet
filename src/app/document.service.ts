@@ -86,6 +86,15 @@ export class DocumentService {
     return this.http.get<any[]>(`${API_BASE_URL}note-by-admin/${localStorage.getItem('id')}/`, { headers, params });
 }
 
+getAllplotique(page: number, pageSize: number): Observable<any[]> {
+  const headers = new HttpHeaders().set('Authorization', 'JWT ' + localStorage.getItem('access'));
+  const params = new HttpParams()
+  .set('page', page.toString())
+  .set('pageSize', pageSize.toString());
+
+  return this.http.get<any[]>(`${API_BASE_URL}plotique-by-admin/${localStorage.getItem('id')}/`, { headers, params });
+}
+
 getAllDecision(page: number, pageSize: number): Observable<any[]> {
   const headers = new HttpHeaders().set('Authorization', 'JWT ' + localStorage.getItem('access'));
   const params = new HttpParams()

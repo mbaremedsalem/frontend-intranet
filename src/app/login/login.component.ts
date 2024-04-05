@@ -24,8 +24,8 @@ export class LoginComponent {
     
   }
   login() {
-    this.loginInProgress = true; 
-    this.apiService.login(this.credentials).subscribe(
+     this.loginInProgress = true; 
+     this.apiService.login(this.credentials).subscribe(
       (response: LoginResponse) => {
         if (response.status === 200) {
           // Login success

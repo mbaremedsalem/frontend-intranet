@@ -32,6 +32,8 @@ export class ProfileComponent implements AfterViewInit{
     this.prenom = localStorage.getItem('prenom') || '';
     this.image = localStorage.getItem('image') || '';
     this.post = localStorage.getItem('post') || '';
+
+
     // this.username = localStorage.getItem('username') || ''; 
 
     if (nameInput) {

@@ -6,44 +6,9 @@
   padding: 16px;
 }
 
-.video-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-}
-
-.video-card {
-  width: 300px;
-  margin: 16px;
-}
-
 .example-spacer {
   flex: 1 1 auto;
 }
-
-/* 
-bar de recherche 
-*/
-/* Style de la barre de recherche */
-
-.search-input{
-  padding-left: 20px;
-  padding-top: 20px;
-  width: 100%;
-  height: 60px;
-  border-radius: 30px;
-}
-.search-input {
-  height: 80px; /* Ajustez la hauteur à votre préférence */
-}
-
-/*==========  */
-
-/* Style de la barre de recherche */
-/* Style de la barre de recherche */
-
-/* Style de la barre de recherche */
-
 
 footer {
 background-color: #333;
@@ -115,8 +80,6 @@ color: #fff;
 margin: 0;
 font-weight: bold;
 }
-
-/* ----------- */
 
 .example-icon{
   font-size: 30px; /* Increase the font size for a larger icon */
