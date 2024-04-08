@@ -48,7 +48,7 @@
           <td>{{ decision.description }}</td>
           <td>{{ decision.date | date:'yyyy/MM/dd' }}</td>
           <td><iframe [src]="decision.safeUrl" width="600px" height="200"></iframe>
-            <a href="http://127.0.0.1:8000{{ decision.file }}" target="_blank">{{ decision.file || 'N/A' }}</a>
+            <a href="{{my_url}}{{ decision.file }}" target="_blank">{{ decision.file || 'N/A' }}</a>
             </td>
       </tr>
   </tbody>

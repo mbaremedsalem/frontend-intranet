@@ -4,7 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { API_BASE_URL } from '../base/base_url';
+import { API_BASE_URL, url } from '../base/base_url';
 
 import { UpdateGerantComponent } from '../update-gerant/update-gerant.component';
 import { ConfirmAgentComponent } from '../confirm-agent/confirm-agent.component';
@@ -23,8 +23,9 @@ export class GerantComponent {
   dataSource = new MatTableDataSource<any>();
   useTraditionalTable = false;
   isAdmin: boolean = false;
-
+  my_url!:string;
   ngOnInit() {
+    this.my_url = url;
     const role = window.localStorage.getItem('role');
     this.isAdmin = role === 'Admin';
     

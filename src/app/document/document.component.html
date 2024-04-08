@@ -52,7 +52,7 @@
       <ng-container matColumnDef="file">
         <th mat-header-cell *matHeaderCellDef> File </th>
         <td mat-cell *matCellDef="let document">
-          <a href="http://127.0.0.1:8000{{ document.file }}" target="_blank">{{ document.file || 'N/A' }}</a>
+          <a href="{{my_url}}{{ document.file }}" target="_blank">{{ document.file || 'N/A' }}</a>
         </td>
       </ng-container>
       <ng-container matColumnDef="date_ajout">

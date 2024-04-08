@@ -6,7 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatTableDataSource } from '@angular/material/table';
-import { API_BASE_URL } from '../base/base_url';
+import { API_BASE_URL, url } from '../base/base_url';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 
 @Component({
@@ -24,7 +24,7 @@ export class AvisComponent {
   currentPage: number = 1;  // Page actuelle
   itemsPerPage: number = 2;  // Nombre d'éléments par page
   totalPages: number = 0; 
-
+  my_url!: string ;
   isAdmin: boolean = false;
   dataSource = new MatTableDataSource<any>();
   constructor(private cdRef: ChangeDetectorRef,private documentService: DocumentService,private sanitizer: DomSanitizer,public dialog: MatDialog,private http: HttpClient, private router: Router) { }
@@ -34,6 +34,7 @@ export class AvisComponent {
     //   this.avisList = data;
     //   this.dataSource.data = this.avisList; 
     // });
+    this.my_url = url;
     const role = localStorage.getItem('role');
     this.isAdmin = role === 'Admin';
     this.fetchAvis();
@@ -42,8 +43,9 @@ export class AvisComponent {
 
 
   fetchAvis(searchTerm: string = '') {
+    const apiUrl = `${API_BASE_URL}avis-by-admin/`;
     // Utilisez l'URL de votre API avec le token d'authentification
-    this.http.get<any[]>('http://127.0.0.1:8000/api/avis-by-admin/'+localStorage.getItem('id')+'/' + searchTerm, {
+    this.http.get<any[]>(apiUrl+localStorage.getItem('id')+'/' + searchTerm, {
       headers: {
         'Authorization': 'JWT '+localStorage.getItem('access')
       }
@@ -52,7 +54,7 @@ export class AvisComponent {
         this.avisList = data;
         // Désinfecter les URLs
         this.avisList.forEach(avis => {
-          avis.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`http://127.0.0.1:8000${avis.file}`);
+          avis.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${url}${avis.file}`);
         });
         console.log(data);
       },

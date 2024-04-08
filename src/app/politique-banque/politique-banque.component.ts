@@ -8,7 +8,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AddDocumentDialogComponent } from '../add-document-dialog/add-document-dialog.component';
-import { API_BASE_URL } from '../base/base_url';
+import { API_BASE_URL, url } from '../base/base_url';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { UpdateDialogComponent } from '../update-dialog/update-dialog.component';
 
@@ -27,6 +27,7 @@ export class PolitiqueBanqueComponent {
   dataSource = new MatTableDataSource<any>();
   searchTerm: string = '';
   filteredDocuments: any[] = [];
+  my_url!:string;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   constructor(private documentService: DocumentService,private documentSelectionService: DocumentSelectionService,public dialog: MatDialog,private sanitizer: DomSanitizer,private http: HttpClient, private router: Router) { }
 
@@ -40,11 +41,12 @@ export class PolitiqueBanqueComponent {
   
       // Désinfecter les URLs
       this.politiques.forEach(politique => {
-        politique.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`http://127.0.0.1:8000${politique.file}`);
+        politique.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${url}${politique.file}`);
       });
     });
   }
   ngOnInit(): void {
+    this.my_url = url;
     const role = window.localStorage.getItem('role');
     this.isAdmin = role === 'Admin';
     const page = 1;        // Commencez par la première page
@@ -56,7 +58,7 @@ export class PolitiqueBanqueComponent {
   
       // Désinfecter les URLs
       this.politiques.forEach(politique => {
-        politique.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`http://127.0.0.1:8000${politique.file}`);
+        politique.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${url}${politique.file}`);
       });
     });
   }

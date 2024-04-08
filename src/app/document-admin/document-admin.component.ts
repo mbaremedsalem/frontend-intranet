@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { UpdateDialogComponent } from '../update-dialog/update-dialog.component';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { API_BASE_URL } from '../base/base_url';
+import { API_BASE_URL, url } from '../base/base_url';
 import { AddDocumentDialogComponent } from '../add-document-dialog/add-document-dialog.component';
 import { DocumentService } from '../document.service';
 import { DocumentSelectionService } from '../document-selection.service';
@@ -27,7 +27,7 @@ export class DocumentAdminComponent {
   dataSource = new MatTableDataSource<any>();
   searchTerm: string = '';
   filteredDocuments: any[] = [];
-
+  my_url!:string;
   constructor(private documentService: DocumentService,private documentSelectionService: DocumentSelectionService,public dialog: MatDialog,private sanitizer: DomSanitizer,private http: HttpClient, private router: Router) { }
 
   // ngOnInit(): void {
@@ -37,6 +37,7 @@ export class DocumentAdminComponent {
   //   });
   // }
   ngOnInit(): void {
+    this.my_url = url;
     const role = window.localStorage.getItem('role');
     this.isAdmin = role === 'Admin';
     this.documentService.getAllDocuments().subscribe((data: any[]) => {
@@ -45,7 +46,7 @@ export class DocumentAdminComponent {
   
       // Désinfecter les URLs
       this.documents.forEach(document => {
-        document.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`http://127.0.0.1:8000${document.file}`);
+        document.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${url}${document.file}`);
       });
     });
   }

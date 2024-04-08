@@ -4,7 +4,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { MatDialog } from '@angular/material/dialog';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { API_BASE_URL } from '../base/base_url';
+import { API_BASE_URL, url } from '../base/base_url';
 import { AddProcedureComponent } from '../add-procedure/add-procedure.component';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { MatTableDataSource } from '@angular/material/table';
@@ -21,8 +21,10 @@ export class ProcedurComponent {
   dataSource = new MatTableDataSource<any>();
   searchTerm: string = '';
   isAdmin: boolean = false;
+  my_url!:string;
   constructor(private documentService: DocumentService,private sanitizer: DomSanitizer,public dialog: MatDialog,private http: HttpClient, private router: Router) { }
   ngOnInit(): void {
+    this.my_url = url;
     const role = window.localStorage.getItem('role');
     this.isAdmin = role === 'Admin';
     // this.fetchProcedur();
@@ -31,7 +33,7 @@ export class ProcedurComponent {
       this.dataSource.data = this.ProcedureList; // Set the data for the Material table
       // Désinfecter les URLs
       this.ProcedureList.forEach(pro => {
-        pro.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`http://127.0.0.1:8000${pro.file}`);
+        pro.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${url}${pro.file}`);
       });
     });
   }

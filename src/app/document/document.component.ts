@@ -5,7 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddDocumentDialogComponent } from '../add-document-dialog/add-document-dialog.component';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { API_BASE_URL } from '../base/base_url';
+import { API_BASE_URL, url } from '../base/base_url';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { UpdateDialogComponent } from '../update-dialog/update-dialog.component';
 import { DocumentSelectionService } from '../document-selection.service';
@@ -18,7 +18,7 @@ import { DocumentSelectionService } from '../document-selection.service';
 export class DocumentComponent implements OnInit{
   documents: any[] = [];
   useTraditionalTable = false;
-
+  my_url!: string ;
   displayedColumns: string[] = ['sujet', 'code', 'description', 'file', 'direction_nom','date_ajout','actions'];
   isAdmin: boolean = false;
   // Define the MatTableDataSource for the Material table
@@ -28,6 +28,7 @@ export class DocumentComponent implements OnInit{
   constructor(private documentService: DocumentService,private documentSelectionService: DocumentSelectionService,public dialog: MatDialog,private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
+    this.my_url = url;
     const role = window.localStorage.getItem('role');
     this.isAdmin = role === 'Admin';
 
@@ -55,7 +56,7 @@ export class DocumentComponent implements OnInit{
 
     // Set up headers with the authorization token
     const headers = new HttpHeaders({
-      'Authorization': `JWT ${localStorage.getItem('access_token_agent')}`
+      'Authorization': `JWT ${localStorage.getItem('access')}`
     });
 
     // Send a DELETE request to the API
@@ -101,7 +102,7 @@ export class DocumentComponent implements OnInit{
   
   updateDocument(id: number, formData: FormData): void {
     const headers = new HttpHeaders({
-      'Authorization': `JWT ${localStorage.getItem('access_token_agent')}`,
+      'Authorization': `JWT ${localStorage.getItem('access')}`,
     });
   
     this.http.put(`${API_BASE_URL}update-document/${id}`, formData, { headers }).subscribe(

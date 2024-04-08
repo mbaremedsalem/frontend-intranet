@@ -27,7 +27,7 @@
       <iframe [src]="avis.safeUrl" width="1000" height="250"></iframe>
     </div>
     <div class="user-info">
-      <img [src]="'http://127.0.0.1:8000' + avis.admin_image" alt="Nom de l'utilisateur">
+      <img [src]="my_url + avis.admin_image" alt="Nom de l'utilisateur">
       <span>{{ avis.admin_nom }} {{ avis.admin_prenom }}</span>
       <span class="meta">Date du post: {{ avis.date | date:'yyyy/MM/dd'}}</span>
     </div>

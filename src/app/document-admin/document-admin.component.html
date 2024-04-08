@@ -48,7 +48,7 @@
           <td>{{ document.description }}</td>
           <td>{{ document.date_ajout | date:'yyyy/MM/dd' }}</td>
           <td><iframe [src]="document.safeUrl" width="600px" height="200"></iframe>
-            <a href="http://127.0.0.1:8000{{ document.file }}" target="_blank">{{ document.file || 'N/A' }}</a>
+            <a href="{{my_url}}{{ document.file }}" target="_blank">{{ document.file || 'N/A' }}</a>
             </td>
       </tr>
   </tbody>

@@ -8,7 +8,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AddDocumentDialogComponent } from '../add-document-dialog/add-document-dialog.component';
-import { API_BASE_URL } from '../base/base_url';
+import { API_BASE_URL, url } from '../base/base_url';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { UpdateDialogComponent } from '../update-dialog/update-dialog.component';
 
@@ -41,7 +41,7 @@ export class DesisionComponent {
   
       // Désinfecter les URLs
       this.decisions.forEach(decision => {
-        decision.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`http://127.0.0.1:8000${decision.file}`);
+        decision.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${url}${decision.file}`);
       });
     });
   }
@@ -58,7 +58,7 @@ export class DesisionComponent {
   
       // Désinfecter les URLs
       this.decisions.forEach(decision => {
-        decision.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`http://127.0.0.1:8000${decision.file}`);
+        decision.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${url}${decision.file}`);
       });
     });
   }

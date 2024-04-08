@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { API_BASE_URL } from '../base/base_url';
+import { API_BASE_URL, url } from '../base/base_url';
 import { DocumentService } from '../document.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { ConfirmAgentComponent } from '../confirm-agent/confirm-agent.component';
@@ -22,7 +22,10 @@ export class AgentComponent {
   displayedColumns: string[] = ['nom', 'prenom', 'phone', 'email', 'address','post','role','direction_nom','password','is_superuser','is_blocked','is_active','image','actions'];
   dataSource = new MatTableDataSource<any>();
   useTraditionalTable = false;
+  my_url!: string ;
+
   ngOnInit() {
+    this.my_url = url;
     this.agetService.getAllAget().subscribe((data: any[]) => {
       this.agents = data;
       this.dataSource.data = this.agents; // Set the data for the Material table
