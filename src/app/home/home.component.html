@@ -16,7 +16,7 @@
         </div>
         <div class="navigation-menu">
           <a mat-list-item (click)="reloadPage('/home-admin')" [routerLink]="['/home-admin']" [ngClass]="'primary-list-item'">
-            
+            <!-- reloadPage('/home-admin') -->
             <img src="assets/icons/home.png" class="mat-iconleft" width="30px" height="30px" alt=""> home
           </a>
           <a mat-list-item [ngClass]="{'primary-list-item': !showDocuments}" (click)="toggleDocuments()">
@@ -156,10 +156,10 @@
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef> Actions </th>
         <td mat-cell *matCellDef="let document">
-          <button mat-icon-button class="example-icon-sup" (click)="openUpdateDialog(document.id)">
+          <button mat-icon-button class="example-icon-sup">
             <mat-icon>edit</mat-icon>
           </button>
-          <button mat-icon-button class="example-icon-up" (click)="openConfirmationDialog(document.id)">
+          <button mat-icon-button class="example-icon-up">
             <mat-icon>delete</mat-icon>
           </button>
         </td>
