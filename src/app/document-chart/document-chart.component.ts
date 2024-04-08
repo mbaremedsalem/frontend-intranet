@@ -7,6 +7,10 @@ import { Chart } from 'angular-highcharts';
   styleUrls: ['./document-chart.component.css']
 })
 export class DocumentChartComponent {
+
+  ngOnInit(): void {
+    
+  }
   lineChart=new Chart({
     chart: {
       type: 'line'

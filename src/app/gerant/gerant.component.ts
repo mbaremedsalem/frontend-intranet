@@ -22,7 +22,12 @@ export class GerantComponent {
   displayedColumns: string[] = ['nom', 'prenom', 'phone', 'email', 'address','post','role','password','is_superuser','is_blocked','is_active','image','actions'];
   dataSource = new MatTableDataSource<any>();
   useTraditionalTable = false;
+  isAdmin: boolean = false;
+
   ngOnInit() {
+    const role = window.localStorage.getItem('role');
+    this.isAdmin = role === 'Admin';
+    
     this.agetService.getAllgerant().subscribe((data: any[]) => {
       this.gerants = data;
       this.dataSource.data = this.gerants; // Set the data for the Material table

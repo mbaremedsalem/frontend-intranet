@@ -20,7 +20,7 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 export class NoteComponent {
   notes: any[] = [];
   useTraditionalTable = false;
-
+  isAdmin: boolean = false;
   displayedColumns: string[] = ['sujet', 'code', 'description', 'file', 'direction_nom','date_ajout','actions'];
 
   // Define the MatTableDataSource for the Material table
@@ -45,6 +45,10 @@ export class NoteComponent {
     });
   }
   ngOnInit(): void {
+    const role = window.localStorage.getItem('role');
+    this.isAdmin = role === 'Admin';
+
+
     const page = 1;        // Commencez par la première page
     const pageSize = 3;    // Nombre d'éléments par page
   

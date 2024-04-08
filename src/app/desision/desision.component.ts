@@ -27,6 +27,7 @@ export class DesisionComponent {
   dataSource = new MatTableDataSource<any>();
   searchTerm: string = '';
   filteredDocuments: any[] = [];
+  isAdmin: boolean = false;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   constructor(private documentService: DocumentService,private documentSelectionService: DocumentSelectionService,public dialog: MatDialog,private sanitizer: DomSanitizer,private http: HttpClient, private router: Router) { }
 
@@ -45,6 +46,9 @@ export class DesisionComponent {
     });
   }
   ngOnInit(): void {
+    const role = window.localStorage.getItem('role');
+    this.isAdmin = role === 'Admin';
+
     const page = 1;        // Commencez par la première page
     const pageSize = 3;    // Nombre d'éléments par page
   

@@ -20,8 +20,11 @@ export class ProcedurComponent {
   ];
   dataSource = new MatTableDataSource<any>();
   searchTerm: string = '';
+  isAdmin: boolean = false;
   constructor(private documentService: DocumentService,private sanitizer: DomSanitizer,public dialog: MatDialog,private http: HttpClient, private router: Router) { }
   ngOnInit(): void {
+    const role = window.localStorage.getItem('role');
+    this.isAdmin = role === 'Admin';
     // this.fetchProcedur();
     this.documentService.getAllProcedure().subscribe((data: any[]) => {
       this.ProcedureList = data;

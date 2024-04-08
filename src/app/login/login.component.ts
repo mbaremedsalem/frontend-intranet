@@ -34,8 +34,8 @@ export class LoginComponent {
           if(response.role==='Admin'){
             localStorage.setItem('username', response.username);   
             localStorage.setItem('access', response.access);  
+            localStorage.setItem('role', response.role);  
             localStorage.setItem('id', response.id.toString());   
-            localStorage.setItem('access', response.access);
             localStorage.setItem('nom', response.nom);
             localStorage.setItem('prenom', response.prenom);
             localStorage.setItem('email', response.email);
@@ -43,30 +43,30 @@ export class LoginComponent {
             localStorage.setItem('image', response.image);
             localStorage.setItem('post', response.post);
             this.token = localStorage.getItem('access');
-            
-            // Redirect to the home page
             this.router.navigate(['/home-admin']);
           }
           else if(response.role==='Agent')
           {
            // Redirect to the home manager page
-           localStorage.setItem('access_token_agent', response.access);
+           localStorage.setItem('access', response.access);
            localStorage.setItem('nom', response.nom);
+           localStorage.setItem('role', response.role);  
            localStorage.setItem('prenom', response.prenom);
            localStorage.setItem('username', response.username);   
            localStorage.setItem('email', response.email);
            localStorage.setItem('address', response.adress);
            localStorage.setItem('image', response.image);
            localStorage.setItem('post', response.post);
-           this.token = localStorage.getItem('access_token_agent');
-           this.router.navigate(['/home-agent']);
+           this.token = localStorage.getItem('access');
+           this.router.navigate(['/home-admin']);
+          //  this.router.navigate(['/home-agent']);
         }
           else if(response.role==='Gerant')
            {
             // Redirect to the home manager page
-            
+              localStorage.setItem('role', response.role);  
               localStorage.setItem('access', response.access);   
-              localStorage.setItem('access', response.access);
+
               localStorage.setItem('nom', response.nom);
               localStorage.setItem('username', response.username);   
               localStorage.setItem('prenom', response.prenom);
@@ -74,10 +74,10 @@ export class LoginComponent {
               localStorage.setItem('address', response.adress);
               localStorage.setItem('image', response.image);
               localStorage.setItem('post', response.post);
-              localStorage.setItem('access_token', response.access);
-              this.token = localStorage.getItem('access_token');
+
+              this.token = localStorage.getItem('access');
             
-            this.router.navigate(['/home-gerant']);
+              this.router.navigate(['/home-admin']);
             }
           else 
           {

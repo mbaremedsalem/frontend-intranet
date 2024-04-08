@@ -22,7 +22,7 @@ export class DocumentAdminComponent {
   useTraditionalTable = false;
 
   displayedColumns: string[] = ['sujet', 'code', 'description', 'file', 'direction_nom','date_ajout','actions'];
-
+  isAdmin: boolean = false;
   // Define the MatTableDataSource for the Material table
   dataSource = new MatTableDataSource<any>();
   searchTerm: string = '';
@@ -37,6 +37,8 @@ export class DocumentAdminComponent {
   //   });
   // }
   ngOnInit(): void {
+    const role = window.localStorage.getItem('role');
+    this.isAdmin = role === 'Admin';
     this.documentService.getAllDocuments().subscribe((data: any[]) => {
       this.documents = data;
       this.dataSource.data = this.documents; // Set the data for the Material table

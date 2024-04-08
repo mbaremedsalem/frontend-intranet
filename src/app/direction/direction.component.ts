@@ -22,13 +22,15 @@ export class DirectionComponent {
   useTraditionalTable = false;
   searchTerm: string = ''; // Property to store the search term
   displayedColumns: string[] = ['nom', 'code', 'actions'];
-
+  isAdmin: boolean = false;
   // Define the MatTableDataSource for the Material table
   dataSource = new MatTableDataSource<any>();
 
   constructor(private documentService: DocumentService,private documentSelectionService: DocumentSelectionService,public dialog: MatDialog,private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
+    const role = window.localStorage.getItem('role');
+    this.isAdmin = role === 'Admin';
     this.documentService.getDirection().subscribe((data: any[]) => {
       this.direction = data;
       this.dataSource.data = this.direction; // Set the data for the Material table

@@ -23,7 +23,9 @@ export class AvisComponent {
   avisListJson: string = '';
   currentPage: number = 1;  // Page actuelle
   itemsPerPage: number = 2;  // Nombre d'éléments par page
-  totalPages: number = 0;  
+  totalPages: number = 0; 
+
+  isAdmin: boolean = false;
   dataSource = new MatTableDataSource<any>();
   constructor(private cdRef: ChangeDetectorRef,private documentService: DocumentService,private sanitizer: DomSanitizer,public dialog: MatDialog,private http: HttpClient, private router: Router) { }
 
@@ -32,6 +34,8 @@ export class AvisComponent {
     //   this.avisList = data;
     //   this.dataSource.data = this.avisList; 
     // });
+    const role = localStorage.getItem('role');
+    this.isAdmin = role === 'Admin';
     this.fetchAvis();
     
   }
