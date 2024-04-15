@@ -11,6 +11,7 @@ import { AddDocumentDialogComponent } from '../add-document-dialog/add-document-
 import { API_BASE_URL, url } from '../base/base_url';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { UpdateDialogComponent } from '../update-dialog/update-dialog.component';
+import { AddPolitiqueComponent } from '../add-politique/add-politique.component';
 
 @Component({
   selector: 'app-politique-banque',
@@ -52,7 +53,7 @@ export class PolitiqueBanqueComponent {
     const page = 1;        // Commencez par la première page
     const pageSize = 3;    // Nombre d'éléments par page
   
-    this.documentService.getAllDecision(page, pageSize).subscribe((data: any[]) => {
+    this.documentService.getAllplotique(page, pageSize).subscribe((data: any[]) => {
       this.politiques = data;
       this.dataSource.data = this.politiques;
   
@@ -64,7 +65,7 @@ export class PolitiqueBanqueComponent {
   }
 
   openAddDocumentDialog() {
-    const dialogRef = this.dialog.open(AddDocumentDialogComponent, {
+    const dialogRef = this.dialog.open(AddPolitiqueComponent, {
       width: '1200px',
       panelClass: 'custom-dialog-container',
       position: {
@@ -81,7 +82,7 @@ export class PolitiqueBanqueComponent {
 
 
   deleteDocument(decisionId: number) {
-    const url = `${API_BASE_URL}delete-decision/${decisionId}`;
+    const url = `${API_BASE_URL}delete-plotique/${decisionId}`;
 
     // Set up headers with the authorization token
     const headers = new HttpHeaders({

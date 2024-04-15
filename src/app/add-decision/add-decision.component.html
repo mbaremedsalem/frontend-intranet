@@ -1,0 +1,74 @@
+<!-- <h2>Add Document</h2>
+<form (ngSubmit)="onSubmit()">
+  <mat-form-field>
+    <input matInput placeholder="Sujet" [(ngModel)]="sujet" name="sujet" required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Code" [(ngModel)]="code" name="code" required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <textarea matInput placeholder="Description" [(ngModel)]="description" name="description" required></textarea>
+  </mat-form-field>
+
+  <input type="file" (change)="onFileSelected($event)" accept=".pdf, .doc, .docx">
+  
+
+  <div class="dialog-actions">
+    <button mat-button (click)="onCancel()">Cancel</button>
+    <button mat-raised-button type="submit">Add</button>
+  </div>
+</form>
+<div *ngIf="showErrorMessage"></div> -->
+<div mat-dialog-title>
+    <h1>Ajouter Une Decision</h1>
+  </div>
+  <form  (ngSubmit)="onSubmit()">
+    <div mat-dialog-content class="content">
+       
+            <mat-form-field appearance="outline" style="width: 100%;">
+                <mat-label>Sujet</mat-label>
+                <input matInput type="text" placeholder="Sujet" [(ngModel)]="sujet" name="sujet" required >
+            </mat-form-field>
+            
+  
+  
+  
+            <mat-form-field style="width: 100%;" appearance="outline">
+                <mat-label>Description</mat-label>
+                <input matInput placeholder="Description" [(ngModel)]="description" name="description" required>
+            </mat-form-field>
+  
+            Afficher tous les dicrections
+            <input type="checkbox"  (change)="onSelectAllChange()"class="select-checkbox">
+            <div class="list-container" *ngIf="selectAll">
+              <mat-form-field style="width: 100%;" appearance="outline">
+                <mat-label>Direction</mat-label>
+                <mat-select [(ngModel)]="selectedDirection" name="direction" required>
+                  <mat-option *ngFor="let direction of directions" [value]="direction">
+                    {{ direction.nom }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+        
+            </div>
+            
+  
+          
+  
+            <label class="custom-file-upload" style="width: 98%;">
+              <span><mat-icon>cloud_upload</mat-icon> Upload File</span>
+              <input type="file" (change)="onFileSelected($event)" accept=".pdf, .doc, .docx">
+            </label>
+            
+        
+  
+     
+    </div>
+    <div mat-dialog-actions class="action">
+      <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
+      <button mat-raised-button color="primary" type="submit">Save</button>
+  </div>
+  </form>
+  <div *ngIf="showErrorMessage"></div> 

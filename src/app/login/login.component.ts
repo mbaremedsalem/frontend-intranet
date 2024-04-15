@@ -48,6 +48,7 @@ export class LoginComponent {
           else if(response.role==='Agent')
           {
            // Redirect to the home manager page
+           localStorage.setItem('id', response.id.toString());  
            localStorage.setItem('access', response.access);
            localStorage.setItem('nom', response.nom);
            localStorage.setItem('role', response.role);  
@@ -66,7 +67,7 @@ export class LoginComponent {
             // Redirect to the home manager page
               localStorage.setItem('role', response.role);  
               localStorage.setItem('access', response.access);   
-
+              localStorage.setItem('id', response.id.toString());  
               localStorage.setItem('nom', response.nom);
               localStorage.setItem('username', response.username);   
               localStorage.setItem('prenom', response.prenom);

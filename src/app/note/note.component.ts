@@ -11,6 +11,7 @@ import { API_BASE_URL } from '../base/base_url';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { UpdateDialogComponent } from '../update-dialog/update-dialog.component';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { AddNoteComponent } from '../add-note/add-note.component';
 
 @Component({
   selector: 'app-note',
@@ -64,7 +65,7 @@ export class NoteComponent {
   }
 
   openAddDocumentDialog() {
-    const dialogRef = this.dialog.open(AddDocumentDialogComponent, {
+    const dialogRef = this.dialog.open(AddNoteComponent, {
       width: '1200px',
       panelClass: 'custom-dialog-container',
       position: {

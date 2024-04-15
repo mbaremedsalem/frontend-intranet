@@ -36,6 +36,7 @@ export class DocumentAdminComponent {
   //     this.dataSource.data = this.documents; // Set the data for the Material table
   //   });
   // }
+  
   ngOnInit(): void {
     this.my_url = url;
     const role = window.localStorage.getItem('role');
@@ -69,7 +70,7 @@ export class DocumentAdminComponent {
 
 
   deleteDocument(documentId: number) {
-    const url = `${API_BASE_URL}delete-document/${documentId}`;
+    const url = `${API_BASE_URL}delete-chart/${documentId}`;
 
     // Set up headers with the authorization token
     const headers = new HttpHeaders({

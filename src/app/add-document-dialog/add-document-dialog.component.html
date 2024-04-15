@@ -39,17 +39,22 @@
               <mat-label>Description</mat-label>
               <input matInput placeholder="Description" [(ngModel)]="description" name="description" required>
           </mat-form-field>
+
+          Afficher tous les dicrections
+          <input type="checkbox"  (change)="onSelectAllChange()"class="select-checkbox">
+          <div class="list-container" *ngIf="selectAll">
+            <mat-form-field style="width: 100%;" appearance="outline">
+              <mat-label>Direction</mat-label>
+              <mat-select [(ngModel)]="selectedDirection" name="direction" required>
+                <mat-option *ngFor="let direction of directions" [value]="direction">
+                  {{ direction.nom }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+      
+          </div>
           
-          
-          <mat-form-field style="width: 100%;" appearance="outline">
-            <mat-label>Direction</mat-label>
-            <mat-select [(ngModel)]="selectedDirection" name="direction" required>
-              <mat-option *ngFor="let direction of directions" [value]="direction">
-                {{ direction.nom }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-    
+
         
 
           <label class="custom-file-upload" style="width: 98%;">

@@ -43,6 +43,7 @@ export class AvisComponent {
 
 
   fetchAvis(searchTerm: string = '') {
+    
     const apiUrl = `${API_BASE_URL}avis-by-admin/`;
     // Utilisez l'URL de votre API avec le token d'authentification
     this.http.get<any[]>(apiUrl+localStorage.getItem('id')+'/' + searchTerm, {

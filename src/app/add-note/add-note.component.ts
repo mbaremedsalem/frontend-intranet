@@ -6,11 +6,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { API_BASE_URL } from '../base/base_url';
 
 @Component({
-  selector: 'app-add-document-dialog',
-  templateUrl: './add-document-dialog.component.html',
-  styleUrls: ['./add-document-dialog.component.css']
+  selector: 'app-add-note',
+  templateUrl: './add-note.component.html',
+  styleUrls: ['./add-note.component.css']
 })
-export class AddDocumentDialogComponent {
+export class AddNoteComponent {
   sujet: string = '';
 
   description: string = '';
@@ -27,7 +27,7 @@ export class AddDocumentDialogComponent {
   constructor(
     private http: HttpClient,
     private _snackBar: MatSnackBar,
-    public dialogRef: MatDialogRef<AddDocumentDialogComponent>,
+    public dialogRef: MatDialogRef<AddNoteComponent>,
     private documentService: DocumentService
   ) {}
 
@@ -58,7 +58,7 @@ export class AddDocumentDialogComponent {
       formData.append('admin', localStorage.getItem('id')!);
       this.loginInProgress = true; 
       // Make a POST request to your API to create the document
-      this.documentService.createDocument(formData).subscribe(response => {
+      this.documentService.createNote(formData).subscribe(response => {
         console.log('Response:', response);
         
         this.message = response.message;

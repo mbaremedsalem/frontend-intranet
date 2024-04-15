@@ -70,6 +70,9 @@ import { NoteComponent } from './note/note.component';
 import { DesisionComponent } from './desision/desision.component';
 import { TexteGouvernanceComponent } from './texte-gouvernance/texte-gouvernance.component';
 import { PolitiqueBanqueComponent } from './politique-banque/politique-banque.component';
+import { AddNoteComponent } from './add-note/add-note.component';
+import { AddDecisionComponent } from './add-decision/add-decision.component';
+import { AddPolitiqueComponent } from './add-politique/add-politique.component';
 
 
 @NgModule({
@@ -110,6 +113,9 @@ import { PolitiqueBanqueComponent } from './politique-banque/politique-banque.co
     DesisionComponent,
     TexteGouvernanceComponent,
     PolitiqueBanqueComponent,
+    AddNoteComponent,
+    AddDecisionComponent,
+    AddPolitiqueComponent,
     
   ],
   imports: [

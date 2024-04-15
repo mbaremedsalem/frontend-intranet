@@ -7,10 +7,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { AddDocumentDialogComponent } from '../add-document-dialog/add-document-dialog.component';
 import { API_BASE_URL, url } from '../base/base_url';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { UpdateDialogComponent } from '../update-dialog/update-dialog.component';
+import { AddDecisionComponent } from '../add-decision/add-decision.component';
 
 @Component({
   selector: 'app-desision',
@@ -64,7 +64,7 @@ export class DesisionComponent {
   }
 
   openAddDocumentDialog() {
-    const dialogRef = this.dialog.open(AddDocumentDialogComponent, {
+    const dialogRef = this.dialog.open(AddDecisionComponent, {
       width: '1200px',
       panelClass: 'custom-dialog-container',
       position: {
