@@ -49,12 +49,11 @@
           <td>{{ note.description }}</td>
           <td>{{ note.date | date:'yyyy/MM/dd' }}</td>
           <td><iframe [src]="note.safeUrl" width="600px" height="200"></iframe>
-            <a href="http://127.0.0.1:8000{{ note.file }}" target="_blank">{{ note.file || 'N/A' }}</a>
-            </td>
+            <a href="{{my_url}}{{ note.file }}" target="_blank">{{ note.file || 'N/A' }}</a>
+          </td>
       </tr>
   </tbody>
 </table>
-
 
 <mat-paginator [pageSizeOptions]="[3, 5, 10]" (page)="onPageChange($event)" showFirstLastButtons></mat-paginator>
 

@@ -95,8 +95,6 @@ export class AgentComponent {
         // Gérer la réponse de l'API ici
         console.log('Update success:', response);
         window.location.reload();
-        
-        
       },
       (error) => {
         // Gérer les erreurs ici

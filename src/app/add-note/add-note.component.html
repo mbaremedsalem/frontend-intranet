@@ -8,9 +8,6 @@
                 <mat-label>Sujet</mat-label>
                 <input matInput type="text" placeholder="Sujet" [(ngModel)]="sujet" name="sujet" required >
             </mat-form-field>
-            
-  
-  
   
             <mat-form-field style="width: 100%;" appearance="outline">
                 <mat-label>Description</mat-label>
@@ -28,20 +25,11 @@
                   </mat-option>
                 </mat-select>
               </mat-form-field>
-        
             </div>
-            
-  
-          
-  
             <label class="custom-file-upload" style="width: 98%;">
               <span><mat-icon>cloud_upload</mat-icon> Upload File</span>
               <input type="file" (change)="onFileSelected($event)" accept=".pdf, .doc, .docx">
             </label>
-            
-        
-  
-     
     </div>
     <div mat-dialog-actions class="action">
       <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
