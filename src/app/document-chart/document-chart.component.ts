@@ -1,5 +1,11 @@
-import { Component } from '@angular/core';
-import { Chart } from 'angular-highcharts';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {Component, ElementRef, ViewChild, inject} from '@angular/core';
+import {FormControl} from '@angular/forms';
+import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
+import {MatChipInputEvent} from '@angular/material/chips';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
+import {LiveAnnouncer} from '@angular/cdk/a11y';
 
 @Component({
   selector: 'app-document-chart',
@@ -7,74 +13,61 @@ import { Chart } from 'angular-highcharts';
   styleUrls: ['./document-chart.component.css']
 })
 export class DocumentChartComponent {
+  separatorKeysCodes: number[] = [ENTER, COMMA];
+  fruitCtrl = new FormControl('');
+  filteredFruits: Observable<string[]>;
+  fruits: string[] = ['Lemon'];
+  allFruits: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
 
-  ngOnInit(): void {
-    
+  @ViewChild('fruitInput') fruitInput!: ElementRef<HTMLInputElement>;
+
+  announcer = inject(LiveAnnouncer);
+
+  constructor() {
+    this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
+      startWith(null),
+      map((fruit: string | null) => (fruit ? this._filter(fruit) : this.allFruits.slice())),
+    );
   }
-  lineChart=new Chart({
-    chart: {
-      type: 'line'
-    },
-    title: {
-      text: 'Document'
-    },
-    credits: {
-      enabled: false
-    },
-    series: [
-      {
-        name: 'Document admitted',
-        data: [10, 2, 3,6,9,17,20,10,5,2,16]
-      } as any
-    ]
 
-  })
+  track(index: number, item: any): any {
+    return index; // or unique identifier of the item if available
+  }
 
-  pieChart=new Chart({
-    chart: {
-      type: 'pie',
-      plotShadow: false,
-    },
-  
-    credits: {
-      enabled: false,
-    },
-  
-    plotOptions: {
-      pie: {
-        innerSize: '99%',
-        borderWidth: 10,
-        borderColor: '',
-        slicedOffset: 10,
-        dataLabels: {
-          connectorWidth: 0,
-        },
-      },
-    },
-  
-    title: {
-      verticalAlign: 'middle',
-      floating: true,
-      text: 'AUB',
-    },
-  
-    legend: {
-      enabled: false,
-    },
-  
-    series: [
-      {
-        type: 'pie',
-        data: [
-          { name: 'FORMATION/CBS', y: 1, color: '#eeeeee' },
-  
-          { name: 'AVIS/PROTECTION', y: 2, color: '#393e46' },
+  add(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
 
-          { name: 'FETE INTER', y: 3, color: '#00adb5' },
-          { name: 'MEET AUB', y: 4, color: '#eeeeee' },
-          { name: 'AUB', y: 5, color: '#506ef9' },
-        ],
-      },
-    ],
-  })
+    // Add our fruit
+    if (value) {
+      this.fruits.push(value);
+    }
+
+    // Clear the input value
+    event.chipInput!.clear();
+
+    this.fruitCtrl.setValue(null);
+  }
+
+  remove(fruit: string): void {
+    const index = this.fruits.indexOf(fruit);
+
+    if (index >= 0) {
+      this.fruits.splice(index, 1);
+
+      this.announcer.announce(`Removed ${fruit}`);
+    }
+  }
+
+  selected(event: MatAutocompleteSelectedEvent): void {
+    this.fruits.push(event.option.viewValue);
+    this.fruitInput.nativeElement.value = '';
+    this.fruitCtrl.setValue(null);
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.allFruits.filter(fruit => fruit.toLowerCase().includes(filterValue));
+  }
+ 
 }

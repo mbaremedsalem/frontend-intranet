@@ -1,8 +1,24 @@
-<div class="charts">
-  <div class="pie" [chart]="pieChart">
-
-  </div>
-  <div class="line"[chart]="lineChart">
-
-  </div>
-</div>
+<form>
+  <mat-form-field class="example-chip-list">
+    <mat-label>Favorite Fruits</mat-label>
+    <mat-chip-grid #chipGrid aria-label="Fruit selection">
+      <ng-container *ngFor="let fruit of fruits; trackBy: track">
+        <mat-chip-row (removed)="remove(fruit)">
+          {{fruit}}
+          <button matChipRemove [attr.aria-label]="'remove ' + fruit">
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip-row>
+      </ng-container>
+    </mat-chip-grid>
+    <input placeholder="New Fruit..." #fruitInput [formControl]="fruitCtrl"
+      [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
+      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+      (matChipInputTokenEnd)="add($event)"/>
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+      <ng-container *ngFor="let fruit of filteredFruits | async; trackBy: track">
+        <mat-option [value]="fruit">{{fruit}}</mat-option>
+      </ng-container>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>

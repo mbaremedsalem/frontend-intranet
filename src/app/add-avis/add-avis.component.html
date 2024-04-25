@@ -1,7 +1,7 @@
 <!-- Pour les agents -->
 <div class="page-container">
 <div mat-dialog-title>
-  <h1>Ajouter un Avis</h1>
+  <h1>Ajouter une procedure</h1>
 </div>
 <form  (ngSubmit)="onSubmit()">
   <div mat-dialog-content class="content">
@@ -11,58 +11,111 @@
               <input matInput type="text" placeholder="titre" [(ngModel)]="titre" name="sujet" required >
           </mat-form-field>
           
-          <mat-form-field style="width: 100%;" appearance="outline">
+           <mat-form-field style="width: 100%;" appearance="outline">
               <mat-label>Description</mat-label>
               <input matInput placeholder="Description" [(ngModel)]="description" name="description" required>
           </mat-form-field>
 
-          <!-- <mat-form-field style="width: 100%;" appearance="outline">
-            <mat-label>Direction</mat-label>
-            <mat-select [(ngModel)]="selectedDirection" name="direction" required>
-              <mat-option *ngFor="let direction of directions" [value]="direction">
-                {{ direction.nom }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field> -->
+            <mat-form-field class="example-chip-list">
+              <mat-label>Tous Les Directions</mat-label>
+              <mat-chip-grid #chipGrid aria-label="Fruit selection">
+                <ng-container *ngFor="let direction of directions; trackBy: track">
+                  <mat-chip-row (removed)="remove(direction)" (click)="getUsersInDirection(direction.code)">
+                    {{direction.nom }}
+                    <button matChipRemove [attr.aria-label]="'remove ' + direction.nom">
+                      <mat-icon>cancel</mat-icon>
+                    </button>
+                  </mat-chip-row>
+                </ng-container>
+              </mat-chip-grid>
+              <input placeholder="New Direction ..." #fruitInput [formControl]="fruitCtrl"
+                [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                (matChipInputTokenEnd)="add($event)"/>
+              <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                <ng-container *ngFor="let fruit of filteredFruits | async; trackBy: track">
+                  <mat-option [value]="fruit">{{fruit}}</mat-option>
+                </ng-container>
+              </mat-autocomplete>
+            </mat-form-field>
+         
+
+         <!-- <mat-form-field class="example-chip-list">
+          <mat-label>Tous Les Directions</mat-label>
+          <mat-chip-grid #chipGrid aria-label="Direction selection">
+            <mat-chip *ngFor="let direction of directions; let i = index; trackBy: track" 
+                      [class.selected]="isSelected(direction)"
+                      (click)="toggleSelection(direction)">
+              {{direction.nom}}
+            </mat-chip>
+          </mat-chip-grid>
+          <input placeholder="New Direction ..." #fruitInput [formControl]="fruitCtrl"
+                 [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
+                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                 (matChipInputTokenEnd)="add($event)"/>
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+            <ng-container *ngFor="let fruit of filteredFruits | async; trackBy: track">
+              <mat-option [value]="fruit">{{fruit}}</mat-option>
+            </ng-container>
+          </mat-autocomplete>
+        </mat-form-field> -->
+        
+        
+        
+            <!-- start -->
+            <div *ngIf="usersInDirection.length > 0">
+              <h2>Liste des utilisateurs dans la direction sélectionnée :</h2>
+              <ul>
+                <li *ngFor="let user of usersInDirection">
+                  <label>
+                    <input type="checkbox" (change)="onCheckboxChange(user.id)"> {{ user.nom }} 
+                  </label>
+                </li>
+              </ul>
+            </div>
+            <!-- end  -->
+
 
           <label class="custom-file-upload" style="width: 97.5%;">
             <div class="mat-icon">
             <span>
               <img src="assets/icons/download.png" class="mat-iconleft" width="30px" height="30px" alt="">
-              Upload File</span>
-            <input type="file" (change)="onFileSelected($event)" accept=".pdf, .doc, .docx">
+              Upload File </span>
+            <input type="file" (change)="onFileSelected($event)" accept=".pdf, .xlxs,.doc, .docx">
           </div>
           </label>
   </div>
-  <div class="list-user">
-    <h2>Tous</h2>
-    <input type="checkbox" class="select-checkbox">
-    <br>
-    Afficher tous les utilistateurs
-    <input type="checkbox"  (change)="onSelectAllChange()"class="select-checkbox">
 
-    <h2 *ngIf="selectAll">Agents</h2>
+<!-- start -->
+<!-- <div class="list-user">
+  <h2>Tous</h2>
+  <input type="checkbox" class="select-checkbox">
+  <br>
+  Afficher tous les utilistateurs
+  <input type="checkbox"  (change)="onSelectAllChange()"class="select-checkbox">
+
+  <h2 *ngIf="selectAll">Agents</h2>
+  <div class="list-container" *ngIf="selectAll">
+    <div *ngFor="let agent of agents">
+      <input type="checkbox" (change)="onCheckboxChange(agent.id)" class="select-checkbox">
+      {{ agent.nom }}
+    </div>
+  </div>
+
+    <h2 *ngIf="selectAll">Gérants</h2>
     <div class="list-container" *ngIf="selectAll">
-      <div *ngFor="let agent of agents">
-        <input type="checkbox" (change)="onCheckboxChange(agent.id)" class="select-checkbox">
-        {{ agent.nom }}
+      <div *ngFor="let gerant of gerants">
+        <input type="checkbox" (change)="onCheckboxChange(gerant.id)" class="select-checkbox">
+        {{ gerant.nom }}
       </div>
     </div>
-  
-  <h2 *ngIf="selectAll">Gérants</h2>
-  <div class="list-container" *ngIf="selectAll">
-    <div *ngFor="let gerant of gerants">
-      <!-- <mat-checkbox (change)="onCheckboxChange(gerant.id)"></mat-checkbox> -->
-      <input type="checkbox" (change)="onCheckboxChange(gerant.id)" class="select-checkbox">
-      {{ gerant.nom }}
-    </div>
-  </div>
-  </div>
-
+</div> -->
+<!-- end  -->
 <div mat-dialog-actions class="action">
   <button mat-raised-button type="button" [mat-dialog-close]="false">Annuler</button>
   <button mat-raised-button color="primary" type="submit">Enregitrer</button>
 </div>
 </form>
+
 <div *ngIf="showErrorMessage"></div> 
 </div>

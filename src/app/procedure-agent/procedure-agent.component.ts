@@ -1,21 +1,19 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
-import { AddAvisComponent } from '../add-avis/add-avis.component';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ChangeDetectorRef, Component } from '@angular/core';
+import { API_BASE_URL, url } from '../base/base_url';
+import { MatTableDataSource } from '@angular/material/table';
 import { DocumentService } from '../document.service';
+import { DomSanitizer } from '@angular/platform-browser';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { DomSanitizer } from '@angular/platform-browser';
-import { MatTableDataSource } from '@angular/material/table';
-import { API_BASE_URL, url } from '../base/base_url';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 
 @Component({
-  selector: 'app-avis',
-  templateUrl: './avis.component.html',
-  styleUrls: ['./avis.component.css']
+  selector: 'app-procedure-agent',
+  templateUrl: './procedure-agent.component.html',
+  styleUrls: ['./procedure-agent.component.css']
 })
-export class AvisComponent {
-
+export class ProcedureAgentComponent {
   avisList: any[] = [
     {  isSelected: false },
   ];
@@ -44,7 +42,7 @@ export class AvisComponent {
 
   fetchAvis(searchTerm: string = '') {
     
-    const apiUrl = `${API_BASE_URL}avis-by-admin/`;
+    const apiUrl = `${API_BASE_URL}avis/user/`;
     // Utilisez l'URL de votre API avec le token d'authentification
     this.http.get<any[]>(apiUrl+localStorage.getItem('id')+'/' + searchTerm, {
       headers: {
@@ -65,20 +63,7 @@ export class AvisComponent {
     );
   }
   
-  openAddDocumentDialog() {
-    const dialogRef = this.dialog.open(AddAvisComponent, {
-      width: '1200px',
-      panelClass: 'custom-dialog-container',
-      position: {
-        left: '227px', // Ajoutez la valeur de padding-left que vous souhaitez
-      },
-      disableClose: true // To prevent closing by clicking outside the dialog
-    });
-  
-    dialogRef.afterClosed().subscribe((result: any) => {
-      // Handle any result or perform actions after the dialog is closed
-    });
-  }
+
 
   toggleSelection(avis: any) {
     avis.isSelected = !avis.isSelected;
@@ -158,10 +143,4 @@ export class AvisComponent {
         this.fetchAvis();
       }
     }
-
-    // start
-
-
-    
-    // end 
 }

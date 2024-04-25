@@ -68,6 +68,8 @@ interface ExampleFlatNode {
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  nom: string | null = null;
+  prenom: string | null = null;
   tiles: any;
   token: string | null | undefined;
   isHomePage: boolean = true; // Par défaut, la page est la page d'accueil
@@ -81,6 +83,9 @@ export class HomeComponent implements OnInit {
   dataSource = new MatTableDataSource<any>();
   lineChart: Chart | undefined;
   pieChart: Chart | undefined;
+  isAgent: boolean = false;
+  isAdmin: boolean = false;
+
   constructor(private router: Router, private route: ActivatedRoute,private http: HttpClient,private documentService: DocumentService,private documentSelectionService: DocumentSelectionService,public dialog: MatDialog,) {
     // Utilisez le routeur pour surveiller les modifications de l'URL
  
@@ -91,6 +96,9 @@ export class HomeComponent implements OnInit {
     });
   }
   ngOnInit(): void {
+    const role = window.localStorage.getItem('role');
+    this.isAgent = role === 'Agent';
+    this.isAdmin = role === 'Admin';
     this.updateCharts();
 
   }
@@ -274,6 +282,17 @@ export class HomeComponent implements OnInit {
 
   toggleDocuments() {
     this.showDocuments = !this.showDocuments;
+  }
+
+  ngAfterViewInit(): void {
+    // Votre code à l'intérieur de l'événement
+    const nameInput = document.getElementById('nameInput') as HTMLInputElement;
+    const emailInput = document.getElementById('emailInput') as HTMLInputElement;
+    const passInput =  document.getElementById('passInput') as HTMLInputElement;
+
+    this.nom = localStorage.getItem('nom') || '';
+    this.prenom = localStorage.getItem('prenom') || '';
+
   }
   
 }

@@ -54,10 +54,7 @@ export class AddProcedureComponent {
       this.dataSource.data = this.agents; // Set the data for the Material table
     });
 
-    this.agetService.getAllgerant().subscribe((data: any[]) => {
-      this.gerants = data;
-      this.dataSourcegerant.data = this.gerants; // Set the data for the Material table
-    });
+
   }
 
   onCheckboxChange(id: number) {

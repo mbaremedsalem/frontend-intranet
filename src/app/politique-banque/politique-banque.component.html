@@ -46,7 +46,7 @@
           <td>{{ decision.titre }}</td>
           <td>{{ decision.code }}</td>
           <td>{{ decision.description }}</td>
-          <td>{{ decision.date | date:'yyyy/MM/dd' }}</td>
+          <td>{{ decision.date | date:'dd/MM/yyyy' }}</td>
           <td><iframe [src]="decision.safeUrl" width="600px" height="200"></iframe>
             <a href="{{my_url}}{{ decision.file }}" target="_blank">{{ decision.file || 'N/A' }}</a>
             </td>

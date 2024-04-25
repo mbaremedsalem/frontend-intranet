@@ -4,6 +4,7 @@ import { WindowService } from '../window.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { initializeApp } from 'firebase/app';
 import { RecaptchaVerifier, getAuth } from 'firebase/auth';
+
 @Component({
   selector: 'app-verify-otp',
   templateUrl: './verify-otp.component.html',

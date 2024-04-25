@@ -51,16 +51,31 @@ export class DesisionComponent {
 
     const page = 1;        // Commencez par la première page
     const pageSize = 3;    // Nombre d'éléments par page
-  
-    this.documentService.getAllDecision(page, pageSize).subscribe((data: any[]) => {
-      this.decisions = data;
-      this.dataSource.data = this.decisions;
-  
-      // Désinfecter les URLs
-      this.decisions.forEach(decision => {
-        decision.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${url}${decision.file}`);
+    // getAllDecisionByAgent
+
+    if (this.isAdmin) {
+      this.documentService.getAllDecision(page, pageSize).subscribe((data: any[]) => {
+        this.decisions = data;
+        this.dataSource.data = this.decisions;
+    
+        // Désinfecter les URLs
+        this.decisions.forEach(decision => {
+          decision.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${url}${decision.file}`);
+        });
       });
-    });
+    }
+    else{
+      this.documentService.getAllDecisionByAgent(page, pageSize).subscribe((data: any[]) => {
+        this.decisions = data;
+        this.dataSource.data = this.decisions;
+    
+        // Désinfecter les URLs
+        this.decisions.forEach(decision => {
+          decision.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${url}${decision.file}`);
+        });
+      });
+    }
+
   }
 
   openAddDocumentDialog() {

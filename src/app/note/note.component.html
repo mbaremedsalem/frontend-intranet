@@ -47,7 +47,7 @@
           <td>{{ note.titre }}</td>
           <td>{{ note.code }}</td>
           <td>{{ note.description }}</td>
-          <td>{{ note.date | date:'yyyy/MM/dd' }}</td>
+          <td>{{ note.date | date:'dd/MM/yyyy' }}</td>
           <td><iframe [src]="note.safeUrl" width="600px" height="200"></iframe>
             <a href="{{my_url}}{{ note.file }}" target="_blank">{{ note.file || 'N/A' }}</a>
           </td>

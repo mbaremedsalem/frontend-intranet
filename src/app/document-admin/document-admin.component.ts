@@ -23,6 +23,7 @@ export class DocumentAdminComponent {
 
   displayedColumns: string[] = ['sujet', 'code', 'description', 'file', 'direction_nom','date_ajout','actions'];
   isAdmin: boolean = false;
+  isAgent: boolean = false;
   // Define the MatTableDataSource for the Material table
   dataSource = new MatTableDataSource<any>();
   searchTerm: string = '';
@@ -41,15 +42,29 @@ export class DocumentAdminComponent {
     this.my_url = url;
     const role = window.localStorage.getItem('role');
     this.isAdmin = role === 'Admin';
-    this.documentService.getAllDocuments().subscribe((data: any[]) => {
-      this.documents = data;
-      this.dataSource.data = this.documents; // Set the data for the Material table
-  
-      // Désinfecter les URLs
-      this.documents.forEach(document => {
-        document.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${url}${document.file}`);
+    this.isAgent = role === 'Agent';
+    // getAllDocumentsUser
+    if (this.isAdmin) {
+      this.documentService.getAllDocuments().subscribe((data: any[]) => {
+        this.documents = data;
+        this.dataSource.data = this.documents; // Set the data for the Material table
+    
+        // Désinfecter les URLs
+        this.documents.forEach(document => {
+          document.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${url}${document.file}`);
+        });
       });
-    });
+    } else {
+      this.documentService.getAllDocumentsUser().subscribe((data: any[]) => {
+        this.documents = data;
+        this.dataSource.data = this.documents; // Set the data for the Material table
+    
+        // Désinfecter les URLs
+        this.documents.forEach(document => {
+          document.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${url}${document.file}`);
+        });
+      });
+    }
   }
 
   openAddDocumentDialog() {
@@ -127,6 +142,7 @@ export class DocumentAdminComponent {
       }
     });
   }
+
   updateDocument(id: number, formData: FormData): void {
     const headers = new HttpHeaders({
       'Authorization': `JWT ${localStorage.getItem('access')}`,
@@ -144,6 +160,7 @@ export class DocumentAdminComponent {
       }
     );
   }
+
   applyFilter() {
     // Apply the filter directly to the MatTableDataSource
     this.dataSource.filter = this.searchTerm.trim().toLowerCase();

@@ -54,16 +54,29 @@ export class NoteComponent {
 
     const page = 1;        // Commencez par la première page
     const pageSize = 3;    // Nombre d'éléments par page
-  
-    this.documentService.getAllNotes(page, pageSize).subscribe((data: any[]) => {
-      this.notes = data;
-      this.dataSource.data = this.notes;
-  
-      // Désinfecter les URLs
-      this.notes.forEach(note => {
-        note.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${url}${note.file}`);
+    // getAllNotesByAgent
+    if (this.isAdmin) {
+      this.documentService.getAllNotes(page, pageSize).subscribe((data: any[]) => {
+        this.notes = data;
+        this.dataSource.data = this.notes;
+    
+        // Désinfecter les URLs
+        this.notes.forEach(note => {
+          note.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${url}${note.file}`);
+        });
       });
-    });
+    }else{
+      this.documentService.getAllNotesByAgent(page, pageSize).subscribe((data: any[]) => {
+        this.notes = data;
+        this.dataSource.data = this.notes;
+    
+        // Désinfecter les URLs
+        this.notes.forEach(note => {
+          note.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${url}${note.file}`);
+        });
+      });
+    }    
+
   }
 
   openAddDocumentDialog() {

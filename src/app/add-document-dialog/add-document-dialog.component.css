@@ -37,3 +37,7 @@
   .custom-file-upload:hover {
     background-color: #e0e0e0;
   }
+
+  .example-chip-list {
+    width: 100%;
+  }

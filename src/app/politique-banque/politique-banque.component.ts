@@ -52,16 +52,29 @@ export class PolitiqueBanqueComponent {
     this.isAdmin = role === 'Admin';
     const page = 1;        // Commencez par la première page
     const pageSize = 3;    // Nombre d'éléments par page
-  
-    this.documentService.getAllplotique(page, pageSize).subscribe((data: any[]) => {
-      this.politiques = data;
-      this.dataSource.data = this.politiques;
-  
-      // Désinfecter les URLs
-      this.politiques.forEach(politique => {
-        politique.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${url}${politique.file}`);
+    // getAllplotiqueByAgent
+    if (this.isAdmin) {
+      this.documentService.getAllplotique(page, pageSize).subscribe((data: any[]) => {
+        this.politiques = data;
+        this.dataSource.data = this.politiques;
+    
+        // Désinfecter les URLs
+        this.politiques.forEach(politique => {
+          politique.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${url}${politique.file}`);
+        });
       });
-    });
+    }else{
+      this.documentService.getAllplotiqueByAgent(page, pageSize).subscribe((data: any[]) => {
+        this.politiques = data;
+        this.dataSource.data = this.politiques;
+    
+        // Désinfecter les URLs
+        this.politiques.forEach(politique => {
+          politique.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${url}${politique.file}`);
+        });
+      });
+    }
+
   }
 
   openAddDocumentDialog() {

@@ -43,10 +43,10 @@
           <td>
               <input type="checkbox"  [checked]="document.isSelected" (change)="(document)" (change)="toggleSelection(document)"class="select-checkbox">
           </td>
-          <td>{{ document.sujet }}</td>
+          <td>{{ document.titre }}</td>
           <td>{{ document.code }}</td>
           <td>{{ document.description }}</td>
-          <td>{{ document.date_ajout | date:'yyyy/MM/dd' }}</td>
+          <td>{{ document.date | date:'dd/MM/yyyy' }}</td>
           <td><iframe [src]="document.safeUrl" width="600px" height="200"></iframe>
             <a href="{{my_url}}{{ document.file }}" target="_blank">{{ document.file || 'N/A' }}</a>
             </td>

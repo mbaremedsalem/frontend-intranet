@@ -40,7 +40,7 @@
                 <input matInput placeholder="Description" [(ngModel)]="description" name="description" required>
             </mat-form-field>
   
-            Afficher tous les dicrections
+            <!-- Afficher tous les dicrections
             <input type="checkbox"  (change)="onSelectAllChange()"class="select-checkbox">
             <div class="list-container" *ngIf="selectAll">
               <mat-form-field style="width: 100%;" appearance="outline">
@@ -52,9 +52,44 @@
                 </mat-select>
               </mat-form-field>
         
-            </div>
+            </div> -->
             
-  
+            <mat-form-field class="example-chip-list">
+              <mat-label>Tous Les Directions</mat-label>
+              <mat-chip-grid #chipGrid aria-label="Fruit selection">
+                <ng-container *ngFor="let direction of directions; trackBy: track">
+                  <mat-chip-row (removed)="remove(direction)" (click)="getUsersInDirection(direction.code)">
+                    {{direction.nom }}
+                    <button matChipRemove [attr.aria-label]="'remove ' + direction.nom">
+                      <mat-icon>cancel</mat-icon>
+                    </button>
+                  </mat-chip-row>
+                </ng-container>
+              </mat-chip-grid>
+              <input placeholder="New Direction ..." #fruitInput [formControl]="fruitCtrl"
+                [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                (matChipInputTokenEnd)="add($event)"/>
+              <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                <ng-container *ngFor="let fruit of filteredFruits | async; trackBy: track">
+                  <mat-option [value]="fruit">{{fruit}}</mat-option>
+                </ng-container>
+              </mat-autocomplete>
+            </mat-form-field>
+        
+          
+            <!-- start -->
+            <div *ngIf="usersInDirection.length > 0">
+              <h2>Liste des utilisateurs dans la direction sélectionnée :</h2>
+              <ul>
+                <li *ngFor="let user of usersInDirection">
+                  <label>
+                    <input type="checkbox" (change)="onCheckboxChange(user.id)"> {{ user.nom }} 
+                  </label>
+                </li>
+              </ul>
+            </div>
+            <!-- end  -->
           
   
             <label class="custom-file-upload" style="width: 98%;">
@@ -72,3 +107,8 @@
   </div>
   </form>
   <div *ngIf="showErrorMessage"></div> 
+
+
+
+
+

@@ -36,16 +36,11 @@
             <img src="assets/icons/notebook-computer.png" class="mat-iconleft" width="30px" height="30px" alt=""> Direction
           </a>
 
-          <a mat-list-item [routerLink]="['/home-admin/agents']" [ngClass]="'primary-list-item'">
-            <img src="assets/icons/programmer.png" class="mat-iconleft" width="30px" height="30px" alt=""> Agent
+          <a mat-list-item [routerLink]="['/home-admin/agents']" [ngClass]="'primary-list-item'" *ngIf="!isAgent">
+            <img src="assets/icons/programmer.png" class="mat-iconleft" width="30px" height="30px" *ngIf="!isAgent" alt=""> Agent
           </a>
-          <a mat-list-item [routerLink]="['/home-admin/gerants']" [ngClass]="'primary-list-item'">
+          <!-- <a mat-list-item [routerLink]="['/home-admin/gerants']" [ngClass]="'primary-list-item'">
             <img src="assets/icons/businessman.png" class="mat-iconleft" width="30px" height="30px" alt=""> Gerant
-
-            
-          </a>
-          <!-- <a mat-list-item [routerLink]="['/home-admin/Archive-admin']" [ngClass]="'primary-list-item'">
-            <img src="assets/icons/archive.png" class="mat-iconleft" width="30px" height="30px" alt=""> Archive
 
             
           </a> -->
@@ -178,11 +173,11 @@
 
       <div class="content">
         <div *ngIf="isHomePage">
-          <h1> Acueile</h1>
-          <div class="home-container">
+          <h1> Accueille</h1>
+          <div class="home-container" >
        
-            <div class="daily-documents">
-              <h2>Ajouter d'un Procedure</h2>
+            <div class="daily-documents" style="width: 100%;" *ngIf="isAdmin">
+              <h2>Ajout d'une Procédure</h2>
               <div class="document-container">
                 <div class="document-icon">
                   <a mat-list-item [routerLink]="['/home-admin/Avis']" [ngClass]="'primary-list-item'">
@@ -190,23 +185,28 @@
                   </a>
                 </div>
                 <div class="document-details">
-                  <p>Nom du Procedure: Precedure BCM</p>
+                  <p>Nombre du Procédure: </p>
                   <p>Date d'ajout : 01/11/2023</p>
                 </div>
               </div>
              
             </div>
           
-            <div class="inbox">
-              <h2>Les Procedures </h2>
+            <div class="inbox" style="width: 100%;">
+              <h2>Mes Procédures </h2>
               <div class="message-container">
                 <div class="message-icon">
-                  <a mat-list-item [routerLink]="['/home-admin/Procedure']" [ngClass]="'primary-list-item'">
+                  <a mat-list-item [routerLink]="['/home-admin/procedure-agent']" [ngClass]="'primary-list-item'" *ngIf="isAgent">
+                    
+                  <img src="assets/icons/automation.png" class="mat-iconleft" width="30px" height="30px" alt="">
+                </a>
+                   <a mat-list-item [routerLink]="['/home-admin/Procedure']" [ngClass]="'primary-list-item'" *ngIf="isAdmin">
+                    
                   <img src="assets/icons/automation.png" class="mat-iconleft" width="30px" height="30px" alt="">
                 </a>
                 </div>
                 <div class="message-details">
-                  <p>Expéditeur : Maamar Boukerdid</p>
+                  <p>Expéditeur : {{ nom }} {{ prenom }}</p>
                   <p>Objet: </p>
                 </div>
               </div>
@@ -279,5 +279,3 @@
       </div>
     </div>
   </footer>
-  
-  

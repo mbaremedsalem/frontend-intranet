@@ -48,7 +48,6 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatTreeModule} from '@angular/material/tree';
 import { UpdateDirectionComponent } from './update-direction/update-direction.component';
 import { AgentComponent } from './agent/agent.component';
-import { GerantComponent } from './gerant/gerant.component';
 import { ConfirmAgentComponent } from './confirm-agent/confirm-agent.component';
 import { ConfirmGerantComponent } from './confirm-gerant/confirm-gerant.component';
 import { UpdateAgentComponent } from './update-agent/update-agent.component';
@@ -73,7 +72,9 @@ import { PolitiqueBanqueComponent } from './politique-banque/politique-banque.co
 import { AddNoteComponent } from './add-note/add-note.component';
 import { AddDecisionComponent } from './add-decision/add-decision.component';
 import { AddPolitiqueComponent } from './add-politique/add-politique.component';
-
+import { ProcedureAgentComponent } from './procedure-agent/procedure-agent.component';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -97,7 +98,6 @@ import { AddPolitiqueComponent } from './add-politique/add-politique.component';
     ConfirmeDialogDirectionComponent,
     UpdateDirectionComponent,
     AgentComponent,
-    GerantComponent,
     ConfirmAgentComponent,
     ConfirmGerantComponent,
     UpdateAgentComponent,
@@ -116,6 +116,7 @@ import { AddPolitiqueComponent } from './add-politique/add-politique.component';
     AddNoteComponent,
     AddDecisionComponent,
     AddPolitiqueComponent,
+    ProcedureAgentComponent,
     
   ],
   imports: [
@@ -152,6 +153,8 @@ import { AddPolitiqueComponent } from './add-politique/add-politique.component';
     MatNativeDateModule,
     CommonModule,
     CdkTreeModule,
+    MatChipsModule,
+    MatAutocompleteModule
    
   ],
   providers: [

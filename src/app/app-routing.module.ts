@@ -13,7 +13,7 @@ import { SetupPasswordComponent } from './setup-password/setup-password.componen
 import { HomeAgentComponent } from './home-agent/home-agent.component';
 import { DocumentAdminComponent } from './document-admin/document-admin.component';
 import { AgentComponent } from './agent/agent.component';
-import { GerantComponent } from './gerant/gerant.component';
+
 import { UpdateAgentComponent } from './update-agent/update-agent.component';
 import { UpdateGerantComponent } from './update-gerant/update-gerant.component';
 import { HomeManagerComponent } from './home-manager/home-manager.component';
@@ -24,6 +24,7 @@ import { NoteComponent } from './note/note.component';
 import { DesisionComponent } from './desision/desision.component';
 import { TexteGouvernanceComponent } from './texte-gouvernance/texte-gouvernance.component';
 import { PolitiqueBanqueComponent } from './politique-banque/politique-banque.component';
+import { ProcedureAgentComponent } from './procedure-agent/procedure-agent.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -39,6 +40,8 @@ const routes: Routes = [
     path: 'home-admin', // Incluez "home" dans le chemin
     component: HomeComponent,
     children: [
+      
+      { path: 'procedure-agent', component: ProcedureAgentComponent },
       { path: 'direction-admin', component: DirectionComponent },
       { path: 'chart-banque-admin', component: DocumentAdminComponent },
       { path: 'note-admin', component: NoteComponent },
@@ -47,7 +50,7 @@ const routes: Routes = [
       { path: 'politique-banque-admin', component: PolitiqueBanqueComponent },
       { path: 'profile-admin', component: ProfileComponent },
       { path: 'agents', component: AgentComponent },
-      { path: 'gerants', component: GerantComponent },
+
       { path: 'Archive-admin', component: ArchiveComponent },
       { path: 'Avis', component: AvisComponent },
       { path: 'Procedure', component: ProcedurComponent },
@@ -72,7 +75,7 @@ const routes: Routes = [
       { path: 'document-admin', component: DocumentAdminComponent },
       { path: 'profile-admin', component: ProfileComponent },
       { path: 'agents', component: AgentComponent },
-      { path: 'gerants', component: GerantComponent },
+
       { path: 'arcive-gerant', component: ArchiveComponent },
     ],
   },
