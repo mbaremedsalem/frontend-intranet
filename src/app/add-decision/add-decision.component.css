@@ -41,3 +41,10 @@
   .example-chip-list {
     width: 100%;
   } 
+
+  .direction-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Deux colonnes égales */
+    gap: 1px; /* Espacement entre les colonnes */
+  }
+  

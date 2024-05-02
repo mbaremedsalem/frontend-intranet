@@ -37,7 +37,7 @@ export class AddPolitiqueComponent {
   fruits: string[] = ['Lemon'];
   allFruits: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
   usersInDirection: { nom: string, id: number }[] = [];
-
+  selectedDirections: { code: string, nom: string, showUsers: boolean, users: any[] }[] = [];
   // getUsersInDirection
 
   @ViewChild('fruitInput') fruitInput!: ElementRef<HTMLInputElement>;
@@ -91,15 +91,19 @@ export class AddPolitiqueComponent {
       this.selectedUserIds.forEach(id => {
         formData.append('user', id.toString()); 
       });
-      if (this.selectedFile) {
-        formData.append('file', this.selectedFile);
+       if (this.selectedFile) {
+      if (this.selectedFile.size > 3 * 1024 * 1024) {
+        // Afficher un message d'erreur si la taille du fichier est trop grande
+        this.showAlert('error', 'La taille du fichier ne doit pas dépasser 3 MB');
+        return; // Sortir de la fonction onSubmit
       }
+      formData.append('file', this.selectedFile);
+    }
       formData.append('admin', localStorage.getItem('id')!);
       this.loginInProgress = true; 
       // Make a POST request to your API to create the document
       this.documentService.createPolitique(formData).subscribe(response => {
         console.log('Response:', response);
-        
         this.message = response.message;
           if (this.message) {
             this.showErrorAlert(this.message);
@@ -112,7 +116,12 @@ export class AddPolitiqueComponent {
       });
     }
   }
-
+  showAlert(type: string, message: string) {
+    // Customize this function to display the alert as per your design
+    // For example, using a library like Angular Material Snackbar
+    // or Bootstrap alert
+    alert(type + ': ' + message);
+  }
   showErrorAlert(message: string) {
     this.errorMessage = message;
     this._snackBar.open(message, 'Fermer', {
@@ -176,7 +185,13 @@ export class AddPolitiqueComponent {
   getUsersInDirection(directionCode: string) {
     this.documentService.getUsersInDirection(directionCode).subscribe(
       response => {
-        this.usersInDirection = response.users_in_direction;
+        this.selectedDirections.push({
+          code: directionCode,
+          nom: this.directions.find(dir => dir.code === directionCode)?.nom || '',
+          showUsers: true,
+          users: response.users_in_direction
+        });
+        
       },
       error => {
         console.error('Error fetching users:', error);

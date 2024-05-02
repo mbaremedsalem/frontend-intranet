@@ -48,9 +48,8 @@ export class AddAvisComponent {
   usersInDirection: { nom: string, id: number }[] = [];
 
   // getUsersInDirection
-
+  selectedDirections: { code: string, nom: string, showUsers: boolean, users: any[] }[] = [];
   @ViewChild('fruitInput') fruitInput!: ElementRef<HTMLInputElement>;
-  
   announcer = inject(LiveAnnouncer);
   // end 
   constructor(
@@ -66,6 +65,7 @@ export class AddAvisComponent {
       map((fruit: string | null) => (fruit ? this._filter(fruit) : this.directions.slice())),
     );
   }
+
   ngOnInit() {
     const headers = new HttpHeaders({
       'Authorization': `JWT ${localStorage.getItem('access')}`,
@@ -78,8 +78,6 @@ export class AddAvisComponent {
       this.agents = data;
       this.dataSource.data = this.agents; // Set the data for the Material table
     });
-
- 
   }
 
   onCheckboxChange(id: number) {
@@ -111,8 +109,13 @@ export class AddAvisComponent {
         formData.append('user', id.toString()); 
       });
       if (this.selectedFile) {
+        if (this.selectedFile.size > 3 * 1024 * 1024) {
+          // Afficher un message d'erreur si la taille du fichier est trop grande
+          this.showAlert('error', 'La taille du fichier ne doit pas dépasser 3 MB');
+          return; // Sortir de la fonction onSubmit
+        }
         formData.append('file', this.selectedFile);
-      }      
+      }     
       formData.forEach((value, key) => {
         console.log(key, value);
       });
@@ -135,7 +138,12 @@ export class AddAvisComponent {
 
     }
   }
-
+  showAlert(type: string, message: string) {
+    // Customize this function to display the alert as per your design
+    // For example, using a library like Angular Material Snackbar
+    // or Bootstrap alert
+    alert(type + ': ' + message);
+  }
   showErrorAlert(message: string) {
     this.errorMessage = message;
     this._snackBar.open(message, 'Fermer', {
@@ -158,7 +166,7 @@ export class AddAvisComponent {
         return index; // or unique identifier of the item if available
       }
     
-      add(event: MatChipInputEvent): void {
+  add(event: MatChipInputEvent): void {
         const value = (event.value || '').trim();
     
         // Add our fruit
@@ -170,7 +178,7 @@ export class AddAvisComponent {
         event.chipInput!.clear();
     
         this.fruitCtrl.setValue(null);
-      }
+  }
     
       remove(direction: string): void {
         const index = this.directions.indexOf(direction);
@@ -197,16 +205,50 @@ export class AddAvisComponent {
       // end 
 
 
-      getUsersInDirection(directionCode: string) {
-        this.agetService.getUsersInDirection(directionCode).subscribe(
-          response => {
-            this.usersInDirection = response.users_in_direction;
-          },
-          error => {
-            console.error('Error fetching users:', error);
-          }
-        );
-      }
+      // getUsersInDirection(directionCode: string) {
+      //   this.agetService.getUsersInDirection(directionCode).subscribe(
+      //     response => {
+      //       this.usersInDirection = response.users_in_direction;
+      //       console.log('----',this.usersInDirection)
+      //     },
+      //     error => {
+      //       console.error('Error fetching users:', error);
+      //     }
+      //   );
+      // }
+   
+
+
+toggleDirectionSelection(directionCode: string) {
+  const index = this.selectedDirections.findIndex(dir => dir.code === directionCode);
+
+  if (index === -1) {
+    // Si la direction n'est pas déjà sélectionnée, ajoutez-la à la liste des directions sélectionnées
+    this.getUsersInDirection(directionCode);
+  } else {
+    // Si la direction est déjà sélectionnée, supprimez-la de la liste des directions sélectionnées
+    this.selectedDirections.splice(index, 1);
+  }
+}
+
+getUsersInDirection(directionCode: string) {
+  this.agetService.getUsersInDirection(directionCode).subscribe(
+    response => {
+      this.selectedDirections.push({
+        code: directionCode,
+        nom: this.directions.find(dir => dir.code === directionCode)?.nom || '',
+        showUsers: true,
+        users: response.users_in_direction
+      });
       
+    },
+    error => {
+      console.error('Error fetching users:', error);
+    }
+  );
+}
+
+
+
 
 }

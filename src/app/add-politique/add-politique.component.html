@@ -41,15 +41,19 @@
             </mat-form-field>
         
             <!-- start -->
-            <div *ngIf="usersInDirection.length > 0">
-              <h2>Liste des utilisateurs dans la direction sélectionnée :</h2>
-              <ul>
-                <li *ngFor="let user of usersInDirection">
-                  <label>
-                    <input type="checkbox" (change)="onCheckboxChange(user.id)"> {{ user.nom }} 
-                  </label>
-                </li>
-              </ul>
+            <div class="direction-container">
+              <div *ngFor="let direction of selectedDirections">
+                <div *ngIf="direction.showUsers">
+                  <h4>les utilisateurs dans la direction {{ direction.nom }} :</h4>
+                  <ul>
+                    <li *ngFor="let user of direction.users">
+                      <label>
+                        <input type="checkbox" (change)="onCheckboxChange(user.id)" > {{ user.nom }} {{ user.prenom }}
+                      </label>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
             <!-- end  -->
             
