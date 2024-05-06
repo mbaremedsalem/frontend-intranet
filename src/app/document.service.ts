@@ -77,6 +77,13 @@ export class DocumentService {
 
     return this.http.get<any[]>(`${API_BASE_URL}chart-by-user/${localStorage.getItem('id')}/`, { headers });
   }
+
+  getAllAvisUser(): Observable<any[]> {
+    // Vous devez ajouter le jeton d'authentification ici si nécessaire
+    const headers = new HttpHeaders().set('Authorization', 'JWT '+localStorage.getItem('access'));
+
+    return this.http.get<any[]>(`${API_BASE_URL}chart-by-user/${localStorage.getItem('id')}/`, { headers });
+  }
   // getAllNotes(): Observable<any[]> {
   //   // Vous devez ajouter le jeton d'authentification ici si nécessaire
   //   const headers = new HttpHeaders().set('Authorization', 'JWT '+localStorage.getItem('access'));

@@ -1,4 +1,4 @@
-import { Component ,OnInit } from '@angular/core';
+import { Component ,OnInit ,ChangeDetectorRef} from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Chart } from 'angular-highcharts';
 import { API_BASE_URL } from '../base/base_url';
@@ -86,7 +86,7 @@ export class HomeComponent implements OnInit {
   isAgent: boolean = false;
   isAdmin: boolean = false;
 
-  constructor(private router: Router, private route: ActivatedRoute,private http: HttpClient,private documentService: DocumentService,private documentSelectionService: DocumentSelectionService,public dialog: MatDialog,) {
+  constructor(private router: Router,private cdr: ChangeDetectorRef, private route: ActivatedRoute,private http: HttpClient,private documentService: DocumentService,private documentSelectionService: DocumentSelectionService,public dialog: MatDialog,) {
     // Utilisez le routeur pour surveiller les modifications de l'URL
  
     this.router.events.subscribe((event) => {
@@ -97,12 +97,20 @@ export class HomeComponent implements OnInit {
   }
   ngOnInit(): void {
     const role = window.localStorage.getItem('role');
+    this.nom = window.localStorage.getItem('nom');
+    this.prenom = window.localStorage.getItem('prenom');
+
+
     this.isAgent = role === 'Agent';
     this.isAdmin = role === 'Admin';
-    this.updateCharts();
+    // Call the function asynchronously to prevent ExpressionChangedAfterItHasBeenCheckedError
+    setTimeout(() => {
+      this.updateCharts();
+    });
 
   }
   updateCharts(): void {
+
     this.lineChart=new Chart({
       chart: {
         type: 'line'
@@ -169,6 +177,7 @@ export class HomeComponent implements OnInit {
         },
       ],
     })
+    this.cdr.detectChanges(); // Manually trigger change detection
   }
   // lineChart=new Chart({
   //   chart: {

@@ -62,25 +62,7 @@ export class LoginComponent {
            this.router.navigate(['/home-admin']);
           //  this.router.navigate(['/home-agent']);
         }
-          else if(response.role==='Gerant')
-           {
-            // Redirect to the home manager page
-              localStorage.setItem('role', response.role);  
-              localStorage.setItem('access', response.access);   
-              localStorage.setItem('id', response.id.toString());  
-              localStorage.setItem('nom', response.nom);
-              localStorage.setItem('username', response.username);   
-              localStorage.setItem('prenom', response.prenom);
-              localStorage.setItem('email', response.email);
-              localStorage.setItem('address', response.adress);
-              localStorage.setItem('image', response.image);
-              localStorage.setItem('post', response.post);
-
-              this.token = localStorage.getItem('access');
-            
-              this.router.navigate(['/home-admin']);
-            }
-          else 
+        else 
           {
             // Handle the case where response.access is undefined
             console.error('Access token is undefined.');

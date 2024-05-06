@@ -17,6 +17,7 @@ export class ProcedureAgentComponent {
   avisList: any[] = [
     {  isSelected: false },
   ];
+  documents: any[] = [];
   searchTerm: string = '';
   avisListJson: string = '';
   currentPage: number = 1;  // Page actuelle
@@ -35,6 +36,19 @@ export class ProcedureAgentComponent {
     this.my_url = url;
     const role = localStorage.getItem('role');
     this.isAdmin = role === 'Admin';
+
+      this.documentService.getAllDocumentsUser().subscribe((data: any[]) => {
+        this.documents = data;
+        this.dataSource.data = this.documents; // Set the data for the Material table
+  
+        // Désinfecter les URLs
+        this.documents.forEach(document => {
+          document.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${url}${document.file}`);
+        });
+  
+        this.cdRef.detectChanges(); // Trigger change detection
+      });
+  
     this.fetchAvis();
     
   }

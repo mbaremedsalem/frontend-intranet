@@ -98,7 +98,9 @@ export class AddDocumentDialogComponent {
       // formData.append('selectedDirection', this.selectedDirection.id.toString());
       // formData.append('selectedDirection', this.selectedDirection.id.toString());
       this.selectedUserIds.forEach(id => {
-        formData.append('user', id.toString()); 
+        formData.append('user', id.toString());
+        formData.append('user', localStorage.getItem('id')!);
+
       });
       if (this.selectedFile) {
         if (this.selectedFile.size > 3 * 1024 * 1024) {

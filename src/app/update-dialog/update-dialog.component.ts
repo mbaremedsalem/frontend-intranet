@@ -34,20 +34,20 @@ export class UpdateDialogComponent {
   }
 
   ngOnInit() {
-    this.getDocumentDetails(this.data.documentId);
-    this.apiService.getDirection().subscribe((data: any[]) => {
-      this.directions = data;
-    });
+    // this.getDocumentDetails(this.data.documentId);
+    // this.apiService.getDirection().subscribe((data: any[]) => {
+    //   this.directions = data;
+    // });
 
   }
 
-    getDocumentDetails(documentId: number): void {
+  //   getDocumentDetails(documentId: number): void {
     
-    this.apiService.getDocumentById(documentId, ).subscribe((data) => {
-      this.documentDetails = data;
+  //   this.apiService.getDocumentById(documentId, ).subscribe((data) => {
+  //     this.documentDetails = data;
       
-    });
-  }
+  //   });
+  // }
 
   enableEditMode() {
     this.isEditMode = true;
@@ -60,18 +60,13 @@ export class UpdateDialogComponent {
     }
   }
   
-    // Function to handle date change events
-  dateChanged(event: MatDatepickerInputEvent<Date>): void {
-      console.log('Date changed:', event.value);
-      // Do something with the selected date if needed
-    }
+
   saveChanges() {
     const formData: FormData = new FormData();
   
-    formData.append('sujet', this.documentDetails.sujet);
+    formData.append('titre', this.documentDetails.sujet);
     formData.append('description', this.documentDetails.description);
-    formData.append('date_ajout', this.documentDetails.date_ajout);
-    formData.append('direction_nom', this.documentDetails.direction_nom);
+
     
     if (this.selectedFile) {
       formData.append('file', this.selectedFile, this.selectedFile.name);

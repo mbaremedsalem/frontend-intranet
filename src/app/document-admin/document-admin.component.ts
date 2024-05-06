@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component , ChangeDetectorRef} from '@angular/core';
 import { UpdateDialogComponent } from '../update-dialog/update-dialog.component';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -29,7 +29,7 @@ export class DocumentAdminComponent {
   searchTerm: string = '';
   filteredDocuments: any[] = [];
   my_url!:string;
-  constructor(private documentService: DocumentService,private documentSelectionService: DocumentSelectionService,public dialog: MatDialog,private sanitizer: DomSanitizer,private http: HttpClient, private router: Router) { }
+  constructor(private documentService: DocumentService, private cdr: ChangeDetectorRef,private documentSelectionService: DocumentSelectionService,public dialog: MatDialog,private sanitizer: DomSanitizer,private http: HttpClient, private router: Router) { }
 
   // ngOnInit(): void {
   //   this.documentService.getAllDocuments().subscribe((data: any[]) => {
@@ -39,33 +39,28 @@ export class DocumentAdminComponent {
   // }
   
   ngOnInit(): void {
-    this.my_url = url;
+    // First, check the user's role
     const role = window.localStorage.getItem('role');
     this.isAdmin = role === 'Admin';
-    this.isAgent = role === 'Agent';
-    // getAllDocumentsUser
-    if (this.isAdmin) {
-      this.documentService.getAllDocuments().subscribe((data: any[]) => {
-        this.documents = data;
-        this.dataSource.data = this.documents; // Set the data for the Material table
-    
-        // Désinfecter les URLs
-        this.documents.forEach(document => {
-          document.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${url}${document.file}`);
-        });
-      });
-    } else {
+
+    // Set other initializations
+    this.my_url = url;
+  
+
       this.documentService.getAllDocumentsUser().subscribe((data: any[]) => {
         this.documents = data;
         this.dataSource.data = this.documents; // Set the data for the Material table
-    
+  
         // Désinfecter les URLs
         this.documents.forEach(document => {
           document.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${url}${document.file}`);
         });
+  
+        this.cdr.detectChanges(); // Trigger change detection
       });
-    }
+  
   }
+  
 
   openAddDocumentDialog() {
     const dialogRef = this.dialog.open(AddDocumentDialogComponent, {
