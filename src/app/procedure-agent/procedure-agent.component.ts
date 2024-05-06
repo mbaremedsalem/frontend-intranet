@@ -33,14 +33,15 @@ export class ProcedureAgentComponent {
     //   this.avisList = data;
     //   this.dataSource.data = this.avisList; 
     // });
+    console.log('++++++++++++++++++++++')
     this.my_url = url;
     const role = localStorage.getItem('role');
     this.isAdmin = role === 'Admin';
 
-      this.documentService.getAllDocumentsUser().subscribe((data: any[]) => {
+      this.documentService.getAllAvisUser().subscribe((data: any[]) => {
         this.documents = data;
         this.dataSource.data = this.documents; // Set the data for the Material table
-  
+        console.log('------------------',this.documents)
         // Désinfecter les URLs
         this.documents.forEach(document => {
           document.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${url}${document.file}`);
@@ -49,7 +50,7 @@ export class ProcedureAgentComponent {
         this.cdRef.detectChanges(); // Trigger change detection
       });
   
-    this.fetchAvis();
+    // this.fetchAvis();
     
   }
 

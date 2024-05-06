@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { DocumentService } from '../document.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatDialog } from '@angular/material/dialog';
@@ -22,12 +22,26 @@ export class ProcedurComponent {
   searchTerm: string = '';
   isAdmin: boolean = false;
   my_url!:string;
-  constructor(private documentService: DocumentService,private sanitizer: DomSanitizer,public dialog: MatDialog,private http: HttpClient, private router: Router) { }
+  constructor(private cdRef: ChangeDetectorRef,private documentService: DocumentService,private sanitizer: DomSanitizer,public dialog: MatDialog,private http: HttpClient, private router: Router) { }
   ngOnInit(): void {
+    console.log('++++++++++++++++++++++')
     this.my_url = url;
     const role = window.localStorage.getItem('role');
     this.isAdmin = role === 'Admin';
     // this.fetchProcedur();
+
+    this.documentService.getAllAvisUser().subscribe((data: any[]) => {
+      this.ProcedureList = data;
+      this.dataSource.data = this.ProcedureList; // Set the data for the Material table
+      console.log('------------------',this.ProcedureList)
+      // Désinfecter les URLs
+      this.ProcedureList.forEach(document => {
+        document.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${url}${document.file}`);
+      });
+
+      this.cdRef.detectChanges(); // Trigger change detection
+    });
+
     this.documentService.getAllProcedure().subscribe((data: any[]) => {
       this.ProcedureList = data;
       this.dataSource.data = this.ProcedureList; // Set the data for the Material table
