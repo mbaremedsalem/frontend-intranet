@@ -3,6 +3,8 @@ import { DocumentService } from '../document.service';
 import { HttpClient } from '@angular/common/http';
 import { API_BASE_URL } from '../base/base_url';
 import { Router } from '@angular/router';
+import { ChangePass } from '../models/change_pass_model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-setup-password',
@@ -15,11 +17,15 @@ export class SetupPasswordComponent {
   email: string = '';
   old_password: string = '';
   new_password: string = '';
+  message: string | undefined;
+  errorMessage: string | undefined;
+  showErrorMessage: boolean = false;
 
   constructor(
     private apiService:DocumentService,
-    private http: HttpClient
-    ,private router: Router) { }
+    private http: HttpClient,
+    private _snackBar: MatSnackBar,
+    private router: Router) { }
 
 
     onSave() {
@@ -34,17 +40,32 @@ export class SetupPasswordComponent {
       // Remplacez l'URL par l'URL réelle de votre API
       this.http.post(`${API_BASE_URL}change-password/`, user)
         .subscribe(
-          (response) => {
-            console.log('Enregistrement réussi:', response);
-            // Vous pouvez également stocker les autres informations dans le localStorage ici si nécessaire
-            
-            this.router.navigate(['/login']);
-          },
+          (response: any) => {
+            if (response.status === 200) {
+                this.message = response.message;
+                this.router.navigate(['/login']);
+            } else {
+                this.message = response.message;
+                this.showErrorMessage = true;
+                if (this.message) {
+                    this.showErrorAlert(this.message);
+                }
+            }
+            // You can also store other information in localStorage here if necessary
+        },
           (error) => {
-            console.error('Erreur lors de l\'enregistrement:', error);
+            // Login error
+            this.message = 'Informations invalides';
           }
         ).add(() => {
           this.loginInProgress = false; // Set to false after login completes (whether success or error)
         });
+    }
+
+    showErrorAlert(message: string) {
+      this.errorMessage = message;
+      this._snackBar.open(message, 'Fermer', {
+        duration: 8000, // Durée d'affichage de l'alerte (8 secondes)
+      });
     }
 }

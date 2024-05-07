@@ -76,7 +76,7 @@ export class LoginComponent {
           this.message = response.message;
           this.showErrorMessage = true;
           if (this.message) {
-            this.showErrorAlert(this.message.slice(33, 56));
+            this.showErrorAlert(this.message);
           }
         }
       },
