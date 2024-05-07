@@ -1,4 +1,5 @@
 export class LoginResponse {
+    change_password!:boolean;
     message!: string;
     status!: number;
     id!: number ; 

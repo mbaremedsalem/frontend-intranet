@@ -10,33 +10,29 @@ import { Router } from '@angular/router';
   styleUrls: ['./setup-password.component.css']
 })
 export class SetupPasswordComponent {
-  roles: any[] = ['Agent','Gerant','Admin']; 
+  loginInProgress = false;
   selectedRole: number |null =null;
-  password: string = '';
+  email: string = '';
+  old_password: string = '';
+  new_password: string = '';
+
   constructor(
     private apiService:DocumentService,
     private http: HttpClient
     ,private router: Router) { }
 
-    onPasswordChange(newPassword: string) {
-      // Update the password value when it changes
-      this.password = newPassword;
-    }
+
     onSave() {
+      this.loginInProgress = true;
       // Appel de l'API pour enregistrer le mot de passe et le rôle
-   
       const user = {
-        nom: localStorage.getItem('usernom'),
-        prenom: localStorage.getItem('userprenom'),
-        phone: localStorage.getItem('userphone'),
-        email: localStorage.getItem('useremail'),
-        address: localStorage.getItem('useraddress'),
-        password: this.password,
-        role: this.selectedRole,
+        email: this.email,
+        old_password: this.old_password,
+        new_password: this.new_password,
       };
       console.log(user);
       // Remplacez l'URL par l'URL réelle de votre API
-      this.http.post(`${API_BASE_URL}register/`, user)
+      this.http.post(`${API_BASE_URL}change-password/`, user)
         .subscribe(
           (response) => {
             console.log('Enregistrement réussi:', response);
@@ -47,6 +43,8 @@ export class SetupPasswordComponent {
           (error) => {
             console.error('Erreur lors de l\'enregistrement:', error);
           }
-        );
+        ).add(() => {
+          this.loginInProgress = false; // Set to false after login completes (whether success or error)
+        });
     }
 }

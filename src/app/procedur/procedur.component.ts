@@ -42,14 +42,7 @@ export class ProcedurComponent {
       this.cdRef.detectChanges(); // Trigger change detection
     });
 
-    this.documentService.getAllProcedure().subscribe((data: any[]) => {
-      this.ProcedureList = data;
-      this.dataSource.data = this.ProcedureList; // Set the data for the Material table
-      // Désinfecter les URLs
-      this.ProcedureList.forEach(pro => {
-        pro.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`${url}${pro.file}`);
-      });
-    });
+
   }
 
 

@@ -27,7 +27,10 @@ export class LoginComponent {
      this.loginInProgress = true; 
      this.apiService.login(this.credentials).subscribe(
       (response: LoginResponse) => {
-        if (response.status === 200) {
+        if (response.status === 200 && response.change_password==true) {
+          this.router.navigate(['/setup-password']);
+        }
+        else if (response.status === 200) {
           // Login success
           this.message = response.message;
           // Store the access token in local storage or a cookie
