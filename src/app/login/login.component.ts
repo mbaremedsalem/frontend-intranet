@@ -18,11 +18,11 @@ export class LoginComponent {
   token: string | null | undefined;
   errorMessage: string | undefined;
   showErrorMessage: boolean = false;
-
+  showPassword: boolean = false;
+  
   constructor(private _snackBar: MatSnackBar,private apiService: AuthService, private router: Router) {
-
-    
   }
+
   login() {
      this.loginInProgress = true; 
      this.apiService.login(this.credentials).subscribe(
@@ -96,6 +96,14 @@ export class LoginComponent {
   }
   removeToken() {
     this.token = null;
+  }
+
+
+
+  togglePasswordVisibility(inputField: HTMLInputElement): void {
+      const type = inputField.type;
+      inputField.type = type === 'password' ? 'text' : 'password';
+      this.showPassword = !this.showPassword;
   }
 
   logout() {

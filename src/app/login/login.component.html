@@ -14,12 +14,17 @@
 						<span class="focus-input100"></span>
 					</div>
 
-					<div class="wrap-input100 validate-input m-b-18" data-validate = "Password is required">
-						<span class="label-input100">Motdepass</span>
-						<input class="input100" type="password" [(ngModel)]="credentials.password" name="pass" placeholder="Enter password">
+					<div class="wrap-input100 validate-input m-b-18" data-validate="Password is required">
+						<span class="label-input100">Mot de passe</span>
+						<div class="password-input-container">
+							<input class="input100" type="password" [(ngModel)]="credentials.password" name="pass" placeholder="Enter password" #passwordInput>
+							<span class="eye-icon" (click)="togglePasswordVisibility(passwordInput)">
+								<img [src]="showPassword ? 'assets/icons/view.png' : 'assets/icons/hide.png'" class="mat-iconleft" width="25px" height="25px" alt="">
+							</span>
+						</div>
 						<span class="focus-input100"></span>
 					</div>
-
+					
 					<div class="flex-sb-m w-full p-b-30">
 						<div class="contact100-form-checkbox">
 							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">

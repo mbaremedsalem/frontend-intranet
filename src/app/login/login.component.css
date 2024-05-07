@@ -12,6 +12,23 @@
   }
   
   /*---------------------------------------------*/
+
+  .password-input-container {
+    position: relative;
+}
+
+.password-input-container input {
+    padding-right: 30px; /* Ajoutez un espace pour l'icône */
+}
+
+.password-input-container .eye-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px; /* Ajustez la position comme vous le souhaitez */
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
   a {
       font-family: Poppins-Regular;
       font-size: 14px;
