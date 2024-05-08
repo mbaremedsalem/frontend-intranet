@@ -20,6 +20,9 @@ export class SetupPasswordComponent {
   message: string | undefined;
   errorMessage: string | undefined;
   showErrorMessage: boolean = false;
+  showPassword: boolean = false;
+  showPassword1: boolean = false;
+
 
   constructor(
     private apiService:DocumentService,
@@ -61,6 +64,17 @@ export class SetupPasswordComponent {
           this.loginInProgress = false; // Set to false after login completes (whether success or error)
         });
     }
+
+  togglePasswordVisibility(inputField: HTMLInputElement): void {
+      const type = inputField.type;
+      inputField.type = type === 'password' ? 'text' : 'password';
+      this.showPassword = !this.showPassword;
+  }
+  togglePasswordVisibility1(inputField: HTMLInputElement): void {
+    const type1 = inputField.type;
+    inputField.type = type1 === 'password' ? 'text' : 'password';
+    this.showPassword1 = !this.showPassword1;
+}
 
     showErrorAlert(message: string) {
       this.errorMessage = message;
