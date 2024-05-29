@@ -30,6 +30,7 @@ export class ProfileComponent implements AfterViewInit{
     const postInput =  document.getElementById('postInput') as HTMLInputElement;
     const addressInput =  document.getElementById('addressInput') as HTMLInputElement;
     const phoneInput =  document.getElementById('phoneInput') as HTMLInputElement;
+    const prenomInput = document.getElementById('prenomInput') as HTMLInputElement;
 
     this.nom = localStorage.getItem('nom') || '';
     this.prenom = localStorage.getItem('prenom') || '';
@@ -57,7 +58,9 @@ export class ProfileComponent implements AfterViewInit{
     if (phoneInput) {
       phoneInput.value = localStorage.getItem('phone') || '';
     }
-    
+    if (prenomInput) {
+      prenomInput.value = localStorage.getItem('prenom') || '';
+    }
     // Marquer la vue pour une vérification manuelle
     this.cdr.detectChanges();
   }
