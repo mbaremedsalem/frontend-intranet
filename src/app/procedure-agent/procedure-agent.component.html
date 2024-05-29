@@ -1,18 +1,22 @@
-<div class="flex-container">
+<!-- <div class="flex-container">
     <div class="search-bar">
       <input type="text" placeholder="Rechercher" class="search-input" [(ngModel)]="searchTerm" (input)="applyFilter()"/>
     </div>
+</div>
   
 
-  </div>
-  
+
+
+
+
+
   <h1>Liste des Procédures</h1>
   
   <div class="avis" *ngFor="let avis of avisList">
     <div class="actions" *ngIf="avis.isSelected">
       <button mat-icon-button class="example-icon-up" (click)="openConfirmationDialog(avis.id)">
       <span (click)="deleteAvis(avis)"><img src="assets/icons/delete.png" width="20px" height="20px" alt="Supprimer"></span>
-      <!-- Ajoutez d'autres icônes et leurs fonctionnalités ici -->
+ 
     </button>
   </div>
     <div class="avis">
@@ -31,10 +35,57 @@
       <span class="like-btn"><img src="assets/icons/send.png" class="mat-iconleft" width="30px" height="30px" alt=""></span>
     </div>
   </div>
-  <!-- Section de pagination -->
+
   <div class="pagination">
     <button (click)="prevPage()">Précédent</button>
     <span>Page {{ currentPage }} sur {{ totalPages }}</span>
     <button (click)="nextPage()">Suivant</button>
+  </div> -->
+  
+
+
+  <div class="flex-container">
+    <div class="search-bar">
+      <input type="text" placeholder="Rechercher" class="search-input" [(ngModel)]="searchTerm" (input)="applyFilter()"/>
+    </div>
+    <div class="page-content" style="padding-left: 0px; padding-bottom: 10px;" *ngIf="isAdmin">
+      <button style="color: white; background-color: #5538D9; border-radius: 10px; width: 200px; height: 50px;" >
+        <img src="assets/icons/add.png" class="mat-iconleft" width="20px" height="20px" alt="">
+      </button>
+    </div>   
   </div>
   
+<table>
+  <thead>
+      <tr>
+          <th></th>
+          <th>Sujet</th>
+          <th>description</th>
+          <th>date</th>
+          <th>File</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor="let document of dataSource.filteredData">
+          
+              <div class="actions" *ngIf="document.isSelected">
+                <button mat-icon-button class="example-icon-up" (click)="openConfirmationDialog(document.id)">
+                <span><img src="assets/icons/delete.png" width="20px" height="20px" alt="Supprimer"></span>
+              </button>
+
+            </div>
+          
+          <td>
+              <input type="checkbox"  [checked]="document.isSelected" (change)="(document)" (change)="toggleSelection(document)"class="select-checkbox">
+          </td>
+          <td>{{ document.titre }}</td>
+
+          <td>{{ document.description }}</td>
+          <td>{{ document.date | date:'dd/MM/yyyy' }}</td>
+          <td><iframe [src]="document.safeUrl" width="600px" height="200"></iframe>
+            <br>
+            <a href="{{my_url}}{{ document.file }}" target="_blank">cliquer pour consulter</a>
+            </td>
+      </tr>
+  </tbody>
+</table>  

@@ -8,7 +8,7 @@ export class LoginResponse {
     nom!: string ;
     prenom!: string ;
     username!: string;
-    adress!: string ;
+    address!: string ;
     phone!: string ;
     access!: string ;
     image!: string ;

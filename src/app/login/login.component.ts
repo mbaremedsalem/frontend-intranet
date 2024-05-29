@@ -31,6 +31,7 @@ export class LoginComponent {
           this.router.navigate(['/setup-password']);
         }
         else if (response.status === 200) {
+          
           // Login success
           this.message = response.message;
           // Store the access token in local storage or a cookie
@@ -42,9 +43,10 @@ export class LoginComponent {
             localStorage.setItem('nom', response.nom);
             localStorage.setItem('prenom', response.prenom);
             localStorage.setItem('email', response.email);
-            localStorage.setItem('address', response.adress);
+            localStorage.setItem('address', response.address);
             localStorage.setItem('image', response.image);
             localStorage.setItem('post', response.post);
+            localStorage.setItem('phone', response.phone);
             this.token = localStorage.getItem('access');
             this.router.navigate(['/home-admin']);
           }
@@ -58,11 +60,14 @@ export class LoginComponent {
            localStorage.setItem('prenom', response.prenom);
            localStorage.setItem('username', response.username);   
            localStorage.setItem('email', response.email);
-           localStorage.setItem('address', response.adress);
+           localStorage.setItem('address', response.address);
            localStorage.setItem('image', response.image);
            localStorage.setItem('post', response.post);
+           localStorage.setItem('phone', response.phone);
            this.token = localStorage.getItem('access');
            this.router.navigate(['/home-admin']);
+
+
           //  this.router.navigate(['/home-agent']);
         }
         else 
@@ -74,6 +79,7 @@ export class LoginComponent {
         else
         {
           this.message = response.message;
+          console.log(response.message)
           this.showErrorMessage = true;
           if (this.message) {
             this.showErrorAlert(this.message);
@@ -82,7 +88,7 @@ export class LoginComponent {
       },
       (error) => {
         // Login error
-        this.message = 'Informations invalides';
+        this.message = 'Informations invalide';
       }
     ).add(() => {
       this.loginInProgress = false; // Set to false after login completes (whether success or error)

@@ -2,18 +2,11 @@
     <div class="search-bar">
       <input type="text" placeholder="Rechercher" class="search-input" [(ngModel)]="searchTerm" (input)="applyFilter()"/>
     </div>
-    <!-- <div class="page-content" style="padding-left: 0px; padding-bottom: 10px;">
-      <button style="color: white; background-color: #5538D9; border-radius: 10px; width: 200px; height: 50px;" mat-raised-button class="example-icon" (click)="openAddDocumentDialog()">
-        <img src="assets/icons/add.png" class="mat-iconleft" width="20px" height="20px" alt="">
-
-      </button>
-    </div> -->
     <div class="page-content" style="padding-left: 0px; padding-bottom: 10px;" *ngIf="isAdmin">
       <button style="color: white; background-color: #5538D9; border-radius: 10px; width: 200px; height: 50px;" mat-raised-button (click)="openAddDocumentDialog()">
         <img src="assets/icons/add.png" class="mat-iconleft" width="20px" height="20px" alt="">
       </button>
-    </div>
-    
+    </div>   
   </div>
   
 <table>
@@ -48,7 +41,10 @@
           <td>{{ document.description }}</td>
           <td>{{ document.date | date:'dd/MM/yyyy' }}</td>
           <td><iframe [src]="document.safeUrl" width="600px" height="200"></iframe>
+            <br>
             <a href="{{my_url}}{{ document.file }}" target="_blank">{{ document.file || 'N/A' }}</a>
+
+
             </td>
       </tr>
   </tbody>

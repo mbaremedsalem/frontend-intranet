@@ -26,7 +26,10 @@ export class ProfileComponent implements AfterViewInit{
     // Votre code à l'intérieur de l'événement
     const nameInput = document.getElementById('nameInput') as HTMLInputElement;
     const emailInput = document.getElementById('emailInput') as HTMLInputElement;
-    const passInput =  document.getElementById('passInput') as HTMLInputElement;
+    const usernameInput =  document.getElementById('usernameInput') as HTMLInputElement;
+    const postInput =  document.getElementById('postInput') as HTMLInputElement;
+    const addressInput =  document.getElementById('addressInput') as HTMLInputElement;
+    const phoneInput =  document.getElementById('phoneInput') as HTMLInputElement;
 
     this.nom = localStorage.getItem('nom') || '';
     this.prenom = localStorage.getItem('prenom') || '';
@@ -42,10 +45,19 @@ export class ProfileComponent implements AfterViewInit{
     if (emailInput) {
       emailInput.value = localStorage.getItem('email') || '';
     }
-    if (passInput) {
-      passInput.value = localStorage.getItem('username') || '';
+    if (usernameInput) {
+      usernameInput.value = localStorage.getItem('username') || '';
+    }    
+    if (postInput) {
+      postInput.value = localStorage.getItem('post') || '';
     }
-
+    if (addressInput) {
+      addressInput.value = localStorage.getItem('address') || '';
+    }
+    if (phoneInput) {
+      phoneInput.value = localStorage.getItem('phone') || '';
+    }
+    
     // Marquer la vue pour une vérification manuelle
     this.cdr.detectChanges();
   }

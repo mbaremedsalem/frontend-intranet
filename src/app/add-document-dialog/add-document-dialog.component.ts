@@ -38,7 +38,7 @@ export class AddDocumentDialogComponent {
   filteredFruits: Observable<string[]>;
   fruits: string[] = ['Lemon'];
   allFruits: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
-  usersInDirection: { nom: string, id: number }[] = [];
+  usersInDirection: { nom: string, id: number ,prenom: string}[] = [];
   selectedDirections: { code: string, nom: string, showUsers: boolean, users: any[] }[] = [];
   // getUsersInDirection
 

@@ -46,7 +46,6 @@ export class DocumentAdminComponent {
     // Set other initializations
     this.my_url = url;
   
-
       this.documentService.getAllDocumentsUser().subscribe((data: any[]) => {
         this.documents = data;
         this.dataSource.data = this.documents; // Set the data for the Material table
