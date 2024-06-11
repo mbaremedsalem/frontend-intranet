@@ -12,6 +12,11 @@ export class DocumentService {
 
   constructor(private http: HttpClient) { }
 
+  updateProfile(profileData: any): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', 'JWT '+localStorage.getItem('access'));
+    return this.http.put<any>(`${API_BASE_URL}update-profile/`, profileData, { headers });
+  }
+
   getAgentById(id: number): Observable<any> {
     const headers = new HttpHeaders().set('Authorization', 'JWT '+localStorage.getItem('access'));
     return this.http.get<any>(`${API_BASE_URL}agent/${id}/` ,{ headers });

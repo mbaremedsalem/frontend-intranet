@@ -1,83 +1,60 @@
-<div mat-dialog-title>
-    <h1>update Gerant</h1>
-  </div>
-
-  <form (ngSubmit)="saveChanges()">
-    <div mat-dialog-content class="content">
-        <div class="circular-container">
-            <img src="http://127.0.0.1:8000{{ gerantDetails.image }}"
-              alt="Votre Image" class="avatar-image">
-              <label for="fileInput" class="edit-button">
-                <div class="edit-icon">
-                  <mat-icon style="margin: 8px;">camera_alt</mat-icon>
-                </div>
-              </label>
-              <input id="fileInput" type="file" (change)="onFileSelected($event)" style="display: none;">
+<div class="limiter">
+  <div class="container-login100">
+      <div class="wrap-login100">
+          <div class="login100-form-title" style="background-image: url(assets/bg-01.jpg);">
+              <span class="login100-form-title-1">
+                   Setup PAssword
+              </span>
           </div>
-      <div class="row">
-        <mat-form-field appearance="outline" style="width: 100%;">
-          <mat-label>Nom</mat-label>
-          <input matInput type="text" placeholder="Nom" [(ngModel)]="gerantDetails.nom" name="nom" required>
-        </mat-form-field>
-        <mat-form-field appearance="outline" style="width: 100%;">
-            <mat-label>Prenom</mat-label>
-            <input matInput type="text" placeholder="Prenom" [(ngModel)]="gerantDetails.prenom" name="prenom" required>
-          </mat-form-field>
-      </div>
-      <div class="row">
-        <mat-form-field appearance="outline" style="width: 100%;">
-          <mat-label>email</mat-label>
-          <input matInput type="text" placeholder="Email" [(ngModel)]="gerantDetails.email" name="email" required>
-        </mat-form-field>
-        <mat-form-field appearance="outline" style="width: 100%;">
-            <mat-label>Address</mat-label>
-            <input matInput type="text" placeholder="Address" [(ngModel)]="gerantDetails.address" name="address" required>
-          </mat-form-field>
-      </div>
-      <div class="row">
-        <mat-form-field appearance="outline" style="width: 100%;">
-            <mat-label>Role</mat-label>
-            <mat-select placeholder="Select Role" [(ngModel)]="selectedRole" name="selectedRole">
-              <mat-option *ngFor="let role of roles" [value]="role.value">
-                {{ role.value }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>   
-          <mat-form-field appearance="outline" style="width: 100%;">
-            <mat-label>Direction_Nom</mat-label>
-            <mat-select placeholder="Select Direction" [(ngModel)]="selectedDirection" name="selectedDirection">
-              <mat-option *ngFor="let direction of directions" [value]="direction.id">
-                {{ direction.nom }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
 
+          <form class="login100-form validate-form">
+              
+             
+
+              <div  class="container-login100-form-btn">
+                      <div> 
+                      <div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
+                              <span class="label-input100">Email</span>
+                              <input class="input100" type="text" [(ngModel)]="email" name="username" placeholder="Enter Email">
+                              <span class="focus-input100"></span>
+                      </div>
+
+                      <div class="wrap-input100 validate-input m-b-26" data-validate="Tel est requi">
+                          <span class="label-input100">Old Password</span>
+                          <div class="password-input-container">
+                              <input class="input100" type="password" [(ngModel)]="old_password" name="pass" placeholder="Enter password" #passwordInput>
+                              <span class="eye-icon" (click)="togglePasswordVisibility(passwordInput)">
+                                  <img [src]="showPassword ? 'assets/icons/view.png' : 'assets/icons/hide.png'" class="mat-iconleft" width="25px" height="25px" alt="">
+                              </span>
+                          </div>
+                          <span class="focus-input100"></span>
+                      </div>
+
+                      <div class="wrap-input100 validate-input m-b-26" data-validate="Tel est requi">
+                          <span class="label-input100">New Password</span>
+                          <div class="password-input-container">
+                              <input class="input100" type="password" [(ngModel)]="new_password" name="pass" placeholder="Enter password" #passwordInput1>
+                              <span class="eye-icon" (click)="togglePasswordVisibility1(passwordInput1)">
+                                  <img [src]="showPassword1 ? 'assets/icons/view.png' : 'assets/icons/hide.png'" class="mat-iconleft" width="25px" height="25px" alt="">
+                              </span>
+                          </div>
+                          <span class="focus-input100"></span>
+                      </div>
+                      <br>
+
+                      <br>
+                      <div class="container-login100-form-btn">
+                          <button type="submit" (click)="onSave()" class="login100-form-btn" [disabled]="loginInProgress">
+                              <span *ngIf="!loginInProgress">Enregistrer</span>
+                              <mat-progress-spinner *ngIf="loginInProgress" mode="indeterminate" style="width: 20px; height: 20px; margin: auto;"></mat-progress-spinner>
+                          </button>
+                      </div>
+                    </div>
+              </div>
+             
+              
+          </form>
       </div>
+  </div>
+</div>
 
-      <div class="row">
-        <mat-form-field appearance="outline" style="width: 100%;">
-          <mat-label>Post</mat-label>
-          <input matInput type="text" placeholder="Post" [(ngModel)]="gerantDetails.post" name="role" required>
-        </mat-form-field>
-        <mat-form-field style="width: 100%;" appearance="outline">
-            <mat-label>Password</mat-label>
-            <input matInput placeholder="Password" [(ngModel)]="gerantDetails.password" name="password" required>
-          </mat-form-field>
-
-      </div>
-      
-      <section class="example-section" [formGroup]="toppings">
-        <h4>Sélectionnez les permissions et l'accès :</h4>
-        <p><mat-checkbox formControlName="is_superuser" [checked]="gerantDetails.is_superuser">Is_Superuser</mat-checkbox></p>
-        <p><mat-checkbox formControlName="is_active" [checked]="gerantDetails.is_active">Is_Active</mat-checkbox></p>
-        <p><mat-checkbox formControlName="is_blocked" [checked]="gerantDetails.is_blocked">Is_Blocked</mat-checkbox></p>      
-      </section>
-      
-    </div>
-    <div mat-dialog-actions class="action">
-      <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
-      <button mat-raised-button color="primary" type="submit">Enregistrer</button>
-    </div>
-  </form>
-
-  

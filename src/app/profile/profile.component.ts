@@ -1,67 +1,59 @@
-import { Component ,AfterViewInit, ChangeDetectorRef} from '@angular/core';
+import { Component, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { DocumentService } from '../document.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent implements AfterViewInit{
+export class ProfileComponent implements AfterViewInit {
   selectedFile: File | null = null;
-  nom: string | null = null;
-  email: string | null = null;
-  prenom: string | null = null;
-  image: string | null = null;
-  post: string |null = null;
-  username!: string;
-    
-  constructor(private cdr: ChangeDetectorRef) {}
+  profileForm: FormGroup;
 
-  onSubmit() {
-
+  constructor(private fb: FormBuilder, private cdr: ChangeDetectorRef, private profileService: DocumentService) {
+    this.profileForm = this.fb.group({
+      nom: [localStorage.getItem('nom') || '', Validators.required],
+      prenom: [localStorage.getItem('prenom') || '', Validators.required],
+      phone: [localStorage.getItem('phone') || '', Validators.required],
+      email: [localStorage.getItem('email') || '', [Validators.required, Validators.email]],
+      address: [localStorage.getItem('address') || '', Validators.required],
+      post: [localStorage.getItem('post') || '', Validators.required]
+    });
   }
+
+  onSubmit(): void {
+    if (this.profileForm.valid) {
+      this.profileService.updateProfile(this.profileForm.value).subscribe(
+        response => {
+          console.log('Profile updated successfully', response);
+          // Update the form with the response data
+          this.profileForm.patchValue(response);
+        },
+        error => {
+          console.error('Error updating profile', error);
+        }
+      );
+    }
+  }
+
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
   }
+
   ngAfterViewInit(): void {
-    // Votre code à l'intérieur de l'événement
-    const nameInput = document.getElementById('nameInput') as HTMLInputElement;
-    const emailInput = document.getElementById('emailInput') as HTMLInputElement;
-    const usernameInput =  document.getElementById('usernameInput') as HTMLInputElement;
-    const postInput =  document.getElementById('postInput') as HTMLInputElement;
-    const addressInput =  document.getElementById('addressInput') as HTMLInputElement;
-    const phoneInput =  document.getElementById('phoneInput') as HTMLInputElement;
-    const prenomInput = document.getElementById('prenomInput') as HTMLInputElement;
+    // Set the image and other data directly in the component
+    this.profileForm.patchValue({
+      nom: localStorage.getItem('nom') || '',
+      prenom: localStorage.getItem('prenom') || '',
+      email: localStorage.getItem('email') || '',
+      phone: localStorage.getItem('phone') || '',
+      address: localStorage.getItem('address') || '',
+      post: localStorage.getItem('post') || ''
+    });
 
-    this.nom = localStorage.getItem('nom') || '';
-    this.prenom = localStorage.getItem('prenom') || '';
-    this.image = localStorage.getItem('image') || '';
-    this.post = localStorage.getItem('post') || '';
-
-
-    // this.username = localStorage.getItem('username') || ''; 
-
-    if (nameInput) {
-      nameInput.value = this.nom;
-    }
-    if (emailInput) {
-      emailInput.value = localStorage.getItem('email') || '';
-    }
-    if (usernameInput) {
-      usernameInput.value = localStorage.getItem('username') || '';
-    }    
-    if (postInput) {
-      postInput.value = localStorage.getItem('post') || '';
-    }
-    if (addressInput) {
-      addressInput.value = localStorage.getItem('address') || '';
-    }
-    if (phoneInput) {
-      phoneInput.value = localStorage.getItem('phone') || '';
-    }
-    if (prenomInput) {
-      prenomInput.value = localStorage.getItem('prenom') || '';
-    }
-    // Marquer la vue pour une vérification manuelle
+    // Update non-form inputs such as the image
+    // this.image = localStorage.getItem('image') || '';
     this.cdr.detectChanges();
   }
 }

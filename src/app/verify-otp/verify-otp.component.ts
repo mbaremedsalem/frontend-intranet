@@ -43,9 +43,8 @@ export class VerifyOtpComponent {
     this.windowRef.confirmationResult
                   .confirm(this.verificationCode)
                   .then( (result: { user: any; }) => {
-
                     this.user = result.user;
-                    this.router.navigate(['/setup-password']);
+                    this.router.navigate(['/password']);
 
     })
     .catch( (error: any) => console.log(error, "Incorrect code entered?"));

@@ -48,11 +48,11 @@
             
           </a>
 
-          <a mat-list-item (click)="logout()" [ngClass]="'primary-list-item'">
+          <!-- <a mat-list-item (click)="logout()" [ngClass]="'primary-list-item'">
            
             <img src="assets/icons/logout.png" class="mat-iconleft" width="30px" height="30px" alt=""> Logout
             
-          </a>
+          </a> -->
         </div>
         
       </mat-nav-list>
@@ -60,13 +60,13 @@
     </mat-sidenav>
   
     <mat-sidenav-content >
-        <mat-toolbar style="color: white; background-color: #5538D9;" >
+        <mat-toolbar style="color: white; background-color: #1c8244;" >
             <button mat-icon-button (click)="sidenav.toggle()" class="example-icon" aria-label="Example icon-button with menu icon">
 
             <img src="assets/icons/main-menu.png" class="mat-icontop" width="30px" height="30px" alt=""> 
 
             </button>
-            <span>Intranet</span>
+            <span>AUB DOC</span>
             <span class="example-spacer"></span>
 
           <mat-form-field class="search-input" appearance="outline">
@@ -189,7 +189,7 @@
              
             </div>
           
-            <div class="inbox" style="width: 100%;">
+            <div class="inbox" style="width: 100%;" *ngIf="!isAdmin">
               <h2>Mes Procédures </h2>
               <div class="message-container">
                 <div class="message-icon">
@@ -207,6 +207,7 @@
               
             </div>
           </div>
+          
           <div class="charts">
             <div class="pie" [chart]="pieChart">
           
@@ -231,32 +232,33 @@
     <div class="container">
       <div class="footer-content">
         <div class="footer-logo">
-          <img src="assets/intranet.png" class="rounded-image" alt="Logo de votre site" />
+          <img src="assets/aub_logo_text_to_the_side.svg" alt="Logo de votre site" />
         </div>
   
         <div class="footer-contact">
-          <h4>Contactez-nous</h4>
+          <h5>Contactez-nous</h5>
           <input class="sed-mail" type="email" placeholder="Envoyez-nous un e-mail ..." />
         </div>
   
         <div class="footer-links">
-          <h4>Liens utiles</h4>
+          <h5>Liens utiles: www.aub.mr</h5>
           <ul>
-            <li><a href="#">Accueil</a></li>
-            <li><a href="#">À propos</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="#">Accueil:</a></li>
+            <li><a href="#">À propos:</a></li>
+            <li><a href="#">Services:</a></li>
+            <li><a href="#">Contact:</a></li>
           </ul>
         </div>
   
-        <div class="footer-location">
-          <h4>Notre emplacement</h4>
-          <p>Votre adresse ici</p>
-          <p>Votre ville, code postal</p>
+        <div class="footer-logo">
+          <h5>Notre emplacement:</h5>
+          <p>Notre adresse ici:</p>
+          <p>Notre ville:</p>
+          <p>Notre code postal:</p>
         </div>
   
         <div class="footer-social">
-          <h4>Restons connectés</h4>
+          <h5>Restons connectés</h5>
           <ul>
             <li><a href="#">
             <img src="assets/icons/facebook-logo.png" class="mat-icontop" width="30px" height="30px" alt=""> 

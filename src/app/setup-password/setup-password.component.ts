@@ -82,4 +82,5 @@ export class SetupPasswordComponent {
         duration: 8000, // Durée d'affichage de l'alerte (8 secondes)
       });
     }
+    
 }

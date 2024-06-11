@@ -35,7 +35,7 @@ const routes: Routes = [
   { path: 'update/:id', component: UpdateAgentComponent },
   { path: 'update-gerant/:id', component: UpdateGerantComponent },
   { path: 'update-direction/:id', component: UpdateGerantComponent },
-
+  { path: 'password', component: UpdateGerantComponent },
   {
     path: 'home-admin', // Incluez "home" dans le chemin
     component: HomeComponent,
@@ -55,6 +55,7 @@ const routes: Routes = [
       { path: 'Avis', component: AvisComponent },
       { path: 'Procedure', component: ProcedurComponent },
 
+      
     ],
   },
   {

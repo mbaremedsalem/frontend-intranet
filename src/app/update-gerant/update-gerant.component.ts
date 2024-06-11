@@ -1,8 +1,11 @@
-import { Component, Inject } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Component ,Inject} from '@angular/core';
 import { DocumentService } from '../document.service';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { DocumentSelectionService } from '../document-selection.service';
+import { HttpClient } from '@angular/common/http';
+import { API_BASE_URL } from '../base/base_url';
+import { Router } from '@angular/router';
+import { ChangePass } from '../models/change_pass_model';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-update-gerant',
@@ -10,91 +13,74 @@ import { DocumentSelectionService } from '../document-selection.service';
   styleUrls: ['./update-gerant.component.css']
 })
 export class UpdateGerantComponent {
-  selectedFile: File | null = null;
-
-  directions: any[] = []; 
-  selectedDirection: number |null =null;
+  loginInProgress = false;
   selectedRole: number |null =null;
-  roles: any[] = []; 
+  email: string = '';
+  old_password: string = '';
+  new_password: string = '';
+  message: string | undefined;
+  errorMessage: string | undefined;
+  showErrorMessage: boolean = false;
+  showPassword: boolean = false;
+  showPassword1: boolean = false;
 
-  isEditMode = false;
-  gerantDetails: any; 
-  toppings = this._formBuilder.group({
-    is_superuser: false,
-    is_active: false,
-    is_blocked: false,
-  });
-  constructor(private _formBuilder: FormBuilder,
+
+  constructor(
     private apiService:DocumentService,
-    private dialogRef: MatDialogRef<UpdateGerantComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { gerantId: number },
-  ) {}
-  
-  ngOnInit() {
-    console.log(this.data.gerantId)
-    this.getGerantDetails(this.data.gerantId);
+    private http: HttpClient,
+    private _snackBar: MatSnackBar,
+    private router: Router) { }
 
-    this.apiService.getDirection().subscribe((data: any[]) => {
-      this.directions = data;
-    });
 
-    this.apiService.getRoles().subscribe((data: any[]) => {
-      this.roles = data;
-    });
+    onSave() {
+      this.loginInProgress = true;
+      // Appel de l'API pour enregistrer le mot de passe et le rôle
+      const user = {
+        email: this.email,
+        old_password: this.old_password,
+        new_password: this.new_password,
+      };
+      console.log(user);
+      // Remplacez l'URL par l'URL réelle de votre API
+      this.http.post(`${API_BASE_URL}change-password/`, user)
+        .subscribe(
+          (response: any) => {
+            if (response.status === 200) {
+                this.message = response.message;
+                this.router.navigate(['/login']);
+            } else {
+                this.message = response.message;
+                this.showErrorMessage = true;
+                if (this.message) {
+                    this.showErrorAlert(this.message);
+                }
+            }
+            // You can also store other information in localStorage here if necessary
+        },
+          (error) => {
+            // Login error
+            this.message = 'Informations invalides';
+          }
+        ).add(() => {
+          this.loginInProgress = false; // Set to false after login completes (whether success or error)
+        });
+    }
 
+  togglePasswordVisibility(inputField: HTMLInputElement): void {
+      const type = inputField.type;
+      inputField.type = type === 'password' ? 'text' : 'password';
+      this.showPassword = !this.showPassword;
   }
-  getGerantDetails(gerantId: number): void {
-    
-    this.apiService.getGerantById(gerantId).subscribe((data) => {
-      this.gerantDetails = data;
-      this.toppings.patchValue({
-        is_superuser: this.gerantDetails.is_superuser,
-        is_active: this.gerantDetails.is_active,
-        is_blocked: this.gerantDetails.is_blocked,
+  togglePasswordVisibility1(inputField: HTMLInputElement): void {
+    const type1 = inputField.type;
+    inputField.type = type1 === 'password' ? 'text' : 'password';
+    this.showPassword1 = !this.showPassword1;
+}
+
+    showErrorAlert(message: string) {
+      this.errorMessage = message;
+      this._snackBar.open(message, 'Fermer', {
+        duration: 8000, // Durée d'affichage de l'alerte (8 secondes)
       });
-    });
-  }
-
-  enableEditMode() {
-    this.isEditMode = true;
-  }
-
-  onFileSelected(event: any) {
-    const fileList: FileList = event.target.files;
-    if (fileList.length > 0) {
-      this.selectedFile = fileList[0];
     }
-  }
-  
-  saveChanges() {
-    const formData: FormData = new FormData();
-  
-    const isSuperuser = this.toppings.get('is_superuser')?.value;
-    const isActive = this.toppings.get('is_active')?.value;
-    const isBlocked = this.toppings.get('is_blocked')?.value;
-  
-    // Convertir les valeurs en chaînes si nécessaire
-    const isSuperuserString = isSuperuser ? 'true' : 'false';
-    const isActiveString = isActive ? 'true' : 'false';
-    const isBlockedString = isBlocked ? 'true' : 'false';
-    formData.append('nom', this.gerantDetails.nom);
-    formData.append('prenom', this.gerantDetails.prenom);
-    formData.append('phone', this.gerantDetails.phone);
-    formData.append('email', this.gerantDetails.email);
-    formData.append('post', this.gerantDetails.post);
-    formData.append('role', this.gerantDetails.role);
-    formData.append('direction_nom', this.gerantDetails.direction_nom);
-    formData.append('password', this.gerantDetails.password);
-    formData.append('address', this.gerantDetails.adress);
-    formData.append('is_active', isActiveString);
-    formData.append('is_superuser', isSuperuserString);
-    formData.append('is_blocked', isBlockedString);
-  
-    if (this.selectedFile) {
-      formData.append('image', this.selectedFile, this.selectedFile.name);
-    }
-  
-    // Vous pouvez maintenant envoyer formData à la méthode close
-    this.dialogRef.close(formData);
-  }
 }

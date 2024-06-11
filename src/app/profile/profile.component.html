@@ -1,111 +1,90 @@
 
-                        <!-- user profile -->
                         <div class="card-body">
-
-                            <div class="row">
-                                <!-- user profile 1 -->
+                            <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+                              <div class="row">
                                 <div class="col-xxl-6 col-xl-6 col-lg-6">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <!-- user profile 1 -->
-                                            <h4 class="card-title">User Profile</h4>
-                                        </div>
-                                        <div class="card-body">
-                                                <div class="row g-3">
-                                                    <div class="col-xxl-12">
-                                                        <label class="form-label">Your Name</label>
-                                                        <input type="text" class="form-control" value="" id="nameInput" name="name"/>
-                                                    </div>
-                                                    <div class="col-xxl-12">
-                                                        <div class="d-flex align-items-center">
-                                                            <img class="me-3 rounded-circle me-0 me-sm-3" src="http://127.0.0.1:8000{{image}}" width="55" height="55" alt=""/>
-                                                            <div class="media-body">
-                                                                <h4 class="mb-0">{{ nom }} {{ prenom }}</h4>
-                                                                <p class="mb-0">{{post}}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xxl-12">
-                                                        <div class="form-file">
-                                                            <input type="file" class="form-file-input" id="customFile"/>
-                                                            <label class="form-file-label" for="customFile">
-                                                                <span class="form-file-text">Choose file...</span>
-                                                                <span class="form-file-button">Browse</span>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                        </div>
+                                  <div class="card">
+                                    <div class="card-header">
+                                      <h4 class="card-title">User Profile</h4>
                                     </div>
-                                </div>
-                                <!-- end user profile 1 -->
-
-                                <!-- user profile 2 -->
-                                <div class="col-xxl-6 col-xl-6 col-lg-6">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h4 class="card-title">User Profile</h4>
-                                        </div>
-                                        <div class="card-body">
-        
-                                                <div class="row g-3">
-                                                    <div class="col-xxl-12">
-                                                        <label class="form-label">Email</label>
-                                                        <input type="email" class="form-control " value="" id="emailInput" name="email"/>
-                                                    </div>
-                                                    <div class="col-xxl-12">
-                                                        <label class="form-label">Username</label>
-                                                        <input type="text" class="form-control " value="" id="usernameInput" name="password"/>
-                                                        <small class="mt-2 mb-0 d-block">Enable two factor authencation on the security page</small>
-                                                    </div>
-
-                                                </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- end user profile 2 -->
-
-                              
-                            </div>
-                        </div>
-                          <!-- personnal information -->
-                        <div class="col-xxl-12" >
-                                    <div class="card mb-12" >
-                                        <div class="card-header">
-                                            <h4 class="card-title">Personal Information</h4>
-                                        </div>
                                     <div class="card-body">
-                                        
-                                            <div class="row g-4">
-                                                <div class="col-xxl-6 col-xl-6 col-lg-6">
-                                                    <label class="form-label">Post</label>
-                                                    <input type="text" class="form-control " value="" id="postInput" name="name"/>
-                                                </div>
-                                                <div class="col-xxl-6 col-xl-6 col-lg-6">
-                                                    <label class="form-label">Phone</label>
-                                                    <input type="text" class="form-control " value="" id="phoneInput" name="phone"/>
-                                                </div>
-                                                <div class="col-xxl-6 col-xl-6 col-lg-6">
-                                                    <label class="form-label">Address</label>
-                                                    <input type="text" class="form-control hasDatepicker " value="" id="addressInput" name="prenom"/>
-                                                </div>
-                                                <div class="col-xxl-6 col-xl-6 col-lg-6">
-                                                    <label class="form-label">Prenom</label>
-                                                    <input type="text" class="form-control" value="" id="prenomInput" name="prenom"/>
-                                                </div>
-
-                                                <div class="col-12">
-                                                    <button class="btn btn-success pl-5 pr-5 waves-effect">Save</button>
-                                                    
-                                                </div>
+                                      <div class="row g-3">
+                                        <div class="col-xxl-12">
+                                          <label class="form-label"> Name</label>
+                                          <input type="text" class="form-control" id="nameInput" formControlName="nom" />
+                                        </div>
+                                        <div class="col-xxl-12">
+                                          <div class="d-flex align-items-center">
+                                            <img class="me-3 rounded-circle me-0 me-sm-3" src="http://127.0.0.1:8000{{profileForm.value.image}}" width="55" height="55" alt="" />
+                                            <div class="media-body">
+                                              <h4 class="mb-0">{{ profileForm.value.nom }} {{ profileForm.value.prenom }}</h4>
+                                              <p class="mb-0">{{ profileForm.value.post }}</p>
                                             </div>
-                                
+                                          </div>
+                                        </div>
+                                        <div class="col-xxl-12">
+                                          <div class="form-file">
+                                            <input type="file" class="form-file-input" id="customFile" />
+                                            <label class="form-file-label" for="customFile">
+                                              <span class="form-file-text">Choose file...</span>
+                                              <span class="form-file-button">Browse</span>
+                                            </label>
+                                          </div>
+                                        </div>
+                                      </div>
                                     </div>
-                                
+                                  </div>
                                 </div>
-
-                        </div>
-          
-                        <!-- end personnal information -->
-                        <!-- end user profile  -->
+                                <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                  <div class="card">
+                                    <div class="card-header">
+                                      <h4 class="card-title">User Profile</h4>
+                                    </div>
+                                    <div class="card-body">
+                                      <div class="row g-3">
+                                        <div class="col-xxl-12">
+                                          <label class="form-label">Email</label>
+                                          <input type="email" class="form-control" id="emailInput" formControlName="email" />
+                                        </div>
+                                        <div class="col-xxl-12">
+                                          <label class="form-label">Username</label>
+                                          <input type="text" class="form-control" value="{{ profileForm.value.username }}" id="usernameInput" disabled />
+                                          <small class="mt-2 mb-0 d-block">Enable two factor authentication on the security page</small>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-xxl-12">
+                                  <div class="card mb-12">
+                                    <div class="card-header">
+                                      <h4 class="card-title">Personal Information</h4>
+                                    </div>
+                                    <div class="card-body">
+                                      <div class="row g-4">
+                                        <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                          <label class="form-label">Post</label>
+                                          <input type="text" class="form-control"  id="postInput" formControlName="post" />
+                                        </div>
+                                        <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                          <label class="form-label">Phone</label>
+                                          <input type="text" class="form-control" id="phoneInput" formControlName="phone" />
+                                        </div>
+                                        <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                          <label class="form-label">Address</label>
+                                          <input type="text" class="form-control" id="addressInput" formControlName="address" />
+                                        </div>
+                                        <div class="col-xxl-6 col-xl-6 col-lg-6">
+                                          <label class="form-label">Prenom</label>
+                                          <input type="text" class="form-control" id="prenomInput" formControlName="prenom" />
+                                        </div>
+                                        <div class="col-12">
+                                          <button class="btn btn-success pl-5 pr-5 waves-effect" type="submit">Save</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </form>
+                          </div>                        
