@@ -29,8 +29,8 @@
                 <li><a [routerLink]="['/home-admin/politique-banque-admin']">Politique de la Banque </a></li>               
             </ul>
         </div>
-          <a mat-list-item [routerLink]="['/home-admin/direction-admin']" [ngClass]="'primary-list-item'">
-            <img src="assets/icons/notebook-computer.png" class="mat-iconleft" width="30px" height="30px" alt=""> Direction
+          <a mat-list-item [routerLink]="['/home-admin/direction-admin']" [ngClass]="'primary-list-item'" *ngIf="!isAgent">
+            <img src="assets/icons/notebook-computer.png" class="mat-iconleft" width="30px" height="30px" *ngIf="!isAgent" alt=""> Direction
           </a>
 
           <a mat-list-item [routerLink]="['/home-admin/agents']" [ngClass]="'primary-list-item'" *ngIf="!isAgent">
